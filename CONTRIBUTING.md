@@ -4,9 +4,7 @@ This page is your one-stop shop for uncovering how to contribute to our Github!
 
 ## We Want Your Help!
 
-No, really, we do! Please come and participate in our community and lets do science together!
-
-Depending on your level of interaction with the Land Processes Data Active Archive Center (LP DAAC) and the LP DAAC GitHub, visitors to the site can be described as: 
+No, really, we do! Please come and participate in our community and lets do science together! Depending on your level of interaction with the Land Processes Data Active Archive Center (LP DAAC) and the LP DAAC GitHub, visitors to the site can be described as: 
 - A **community member**: anyone in the open science community who visits a LP DAAC site, utilizes LP DAAC online tools, or attends a LP DAAC event.
 - A **participant**: anyone who posts a comment or poses a question in the *GitHub Discussion Space*, reports a site bug or requests a new resource in *GitHub Issues*, or attends a LP DAAC event and utilizes any virtual chat features during that event. 
 - A **contributor**: anyone who forks this GitHub repository and submits pull requests to make additions or changes to the posted content.
