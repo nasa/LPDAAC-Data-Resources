@@ -2,7 +2,7 @@
 
 <img src="img/lpdaac-logo-black.png" width="50%" height="50%">  
 
-This repository is a place to find data use resources that demonstrate how to use LP DAAC tools, services, and data.  
+This repository is a place to find data use resources that demonstrate how to use [LP DAAC](https://lpdaac.usgs.gov/) tools, services, and data.  
 
 | Resource Repository | Summary | Services and Tools |
 |----|-----|----|
