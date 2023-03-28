@@ -1,4 +1,4 @@
-# LP DAAC Data Resources  
+# NASA Land Processes Distribued Active Archive Center (LP DAAC) Data Resources  
 
 <img src="img/lpdaac-logo-black.png" width="50%" height="50%">  
 
