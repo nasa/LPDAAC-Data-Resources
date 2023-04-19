@@ -1,4 +1,4 @@
-# Hands-on Workshop for Accessing, Processing, and Analyzing GEDI Data
+# Hands-on Workshop for Accessing, Processing, and Visualizing GEDI Data
 ---
 
 ## Description:
