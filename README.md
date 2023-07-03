@@ -10,3 +10,6 @@ This repository is a place to find data user resources that demonstrate how to u
 |[EMIT Data](https://github.com/nasa/EMIT-Data-Resources) |How to find, access, and work with EMIT data (Earth Surface Mineral Dust Source Investigation)|Tutorials, Scripts, Direct S3 Access |
 |[GEDI Data](https://github.com/nasa/GEDI-Data-Resources) |How to find, access, and work with GEDI data (Global Ecosystem Dynamics Investigation)|Tutorials |
 |[HLS Data](https://github.com/nasa/HLS-Data-Resources)|How to find, access, and work with HLS data (Harmonized Landsat Sentinel-2)|Tutorials, Scripts, Direct S3 Access|
+|[ECOSTRESS Data](https://github.com/nasa/ECOSTRESS-Data-Resources)|How to find, access, and work with ECOSTRESS data (The ECOsystem Spaceborne Thermal Radiometer Experiment on Space Station)|Tutorials, Scripts, Direct S3 Access|
+
+
