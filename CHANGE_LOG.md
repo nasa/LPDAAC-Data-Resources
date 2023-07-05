@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 _________________________________________________________________________
+## 2023-07-05
+
+> ### Added
+> - [CMR API Data Discovery using Request Package](python/Data_Discovery_CMR_API_Request.ipynb)
 
 ## 2023-06-09
 
