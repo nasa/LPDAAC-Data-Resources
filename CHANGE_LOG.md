@@ -7,7 +7,7 @@ _________________________________________________________________________
 ## 2023-07-05
 
 > ### Added
-> - [CMR API Data Discovery using Request Package](python/Data_Discovery_CMR_API_Request.ipynb)
+> - [CMR API Data Discovery using Request Package](python/tutorials/Data_Discovery_CMR_API_Request.ipynb)
 
 ## 2023-06-09
 
