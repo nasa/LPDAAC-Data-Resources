@@ -2,7 +2,14 @@
 
 <img src="img/lpdaac-logo-black.png" width="50%" height="50%">  
 
-This repository is a place to find data user resources that demonstrate how to use [LP DAAC](https://lpdaac.usgs.gov/) tools, services, and data.  
+This repository is a place to find data user resources that demonstrate how to use [LP DAAC](https://lpdaac.usgs.gov/) tools, services, and data.
+
+Content include in this repository are listed below.
+| Repository Contents | Type | Summary | 
+|----|-----|----|
+| **[Data_Discovery_CMR_API_Request.ipynb](https://github.com/nasa/LPDAAC-Data-Resources/blob/cmr/python/tutorials/Data_Discovery_CMR_API_Request.ipynb)** | Jupyter Notebook | Demonstrates how to search for Earthdata data collections and granules using CMR API and Request Python package
+
+The other guides, tutorials, how-tos and scripts can be accessed in our mission specific repositories. 
 
 | Resource Repository | Summary | Services and Tools |
 |----|-----|----|
@@ -11,5 +18,4 @@ This repository is a place to find data user resources that demonstrate how to u
 |[GEDI Data](https://github.com/nasa/GEDI-Data-Resources) |How to find, access, and work with GEDI data (Global Ecosystem Dynamics Investigation)|Tutorials |
 |[HLS Data](https://github.com/nasa/HLS-Data-Resources)|How to find, access, and work with HLS data (Harmonized Landsat Sentinel-2)|Tutorials, Scripts, Direct S3 Access|
 |[ECOSTRESS Data](https://github.com/nasa/ECOSTRESS-Data-Resources)|How to find, access, and work with ECOSTRESS data (The ECOsystem Spaceborne Thermal Radiometer Experiment on Space Station)|Tutorials, Scripts, Direct S3 Access|
-
 
