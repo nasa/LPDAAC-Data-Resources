@@ -8,10 +8,11 @@ This guide shows how to bulk download [LP DAAC](https://lpdaac.usgs.gov/) data u
 - NASA Earthdata login credentials are required to access data from LP DAAC. You can create an account [here](https://urs.earthdata.nasa.gov/users/new).
 ---
 
+# Method 1: Authenticate using .wgetrc file
 ## Step 1: Save the Download Link(s)  
 
 Save download links of your data as a text file using [Nasa Earthdata Search](https://search.earthdata.nasa.gov/search) or [Common Metadata Repository (CMR)](https://www.earthdata.nasa.gov/eosdis/science-system-description/eosdis-components/cmr) API. Follow the steps in [Earthdata Search guide](https://github.com/nasa/EMIT-Data-Resources/blob/main/guides/Getting_EMIT_Data_using_EarthData_Search.md) to find your data and save the download links. If you prefer to use API to find your data and save the download links tutorial on how to use CMR API can be found [here](https://github.com/nasa/LPDAAC-Data-Resources/blob/main/python/tutorials/Data_Discovery_CMR_API_Request.ipynb). 
----
+
 
 ## Step 2: Set up a .wgetrc file for Authentication
 
@@ -40,11 +41,10 @@ Set up a .wgetrc file in your home directory.
       ```text
       echo http-user=Inser_Your_Username >> .wgetrc | echo http-password=Insert_Your_Password >> .wgetrc
       ```
----
 
 ## Step 3: Download LP DAAC Data
 
-You should now be able to run wget commands to download data directly from the LP DAAC data pool. 
+You should now be able to run wget commands to download data directly from the LP DAAC. 
 - Navigate to the directory you want to save the data using `cd Insert_Your_Directory`.
 - To download a single file, replace the download link and enter the line below in the command line.
   ```text
@@ -64,7 +64,44 @@ You should now be able to run wget commands to download data directly from the L
 
   ```
 
---- 
+---
+# Method 2: Authenticate Manually
+
+If you prefer to not create .wget for authentication, you can make wget command to work by passing authentications manually.
+
+## Step 1: Save the Download Link(s)  
+
+Save download links of your data as a text file using [Nasa Earthdata Search](https://search.earthdata.nasa.gov/search) or [Common Metadata Repository (CMR)](https://www.earthdata.nasa.gov/eosdis/science-system-description/eosdis-components/cmr) API. Follow the steps in [Earthdata Search guide](https://github.com/nasa/EMIT-Data-Resources/blob/main/guides/Getting_EMIT_Data_using_EarthData_Search.md) to find your data and save the download links. If you prefer to use API to find your data and save the download links tutorial on how to use CMR API can be found [here](https://github.com/nasa/LPDAAC-Data-Resources/blob/main/python/tutorials/Data_Discovery_CMR_API_Request.ipynb). 
+
+
+## Step 2: Download LP DAAC Data
+
+To run wget commands to download data directly from the LP DAAC. 
+
+- Navigate to the directory you want to save the data using `cd Insert_Your_Directory`.
+- Replace your Earthdata login username with "Insert_Your_Username" below.
+  - To download a single file, replace the download link and enter the line below in the command line.
+    ```
+    wget --http-user=Insert_Your_Username --ask-password --keep-session-cookies Insert_the_Download_link
+    ```
+     Example:
+    ```
+    wget --http-user=MYUSERNAME --ask-password --keep-session-cookies https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSS30.020/HLS.S30.T12SWF.2023189T175919.v2.0/HLS.S30.T12SWF.2023189T175919.v2.0.B08.tif
+    ```
+  
+  - To download multiple files, use the full path of text file saved previously in step 1 below. You should enter your `password` next and press enter to download your files.  
+  
+    ```
+    wget --http-user=Insert_Your_Username --ask-password --keep-session-cookies -i Insert_the_Full_Path
+    ```
+
+    Example:
+    ```
+    wget --http-user=MYUSERNAME --ask-password --keep-session-cookies -i data/Granule-DownloadLinks.txt
+    ```
+  **Alternatively, you can replace `--ask-password` with `--http-passwd=Insert_Your_Password` and enter your password directly in the command line.** 
+
+---
 
 ## Contact Info:  
 
@@ -72,6 +109,6 @@ Email: LPDAAC@usgs.gov
 Voice: +1-866-573-3222  
 Organization: Land Processes Distributed Active Archive Center (LP DAAC)¹  
 Website: <https://lpdaac.usgs.gov/>  
-Date last modified: 07-11-2023  
+Date last modified: 07-12-2023  
 
 ¹Work performed under USGS contract G15PD00467 for NASA contract NNG14HH33I.  
