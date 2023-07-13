@@ -18,7 +18,7 @@ Save download links of your data as a text file using [Nasa Earthdata Search](ht
 
 Set up a .wgetrc file in your home directory.
 
-- ### Manual set up:
+- ### Manual setup:
   - Download [.wgetrc template file](https://github.com/nasa/LPDAAC-Data-Resources/tree/main/data/.wgetrc) and save it in your home directory.
     - Insert your NASA Earthdata login username (<USERNAME>)
     - Insert your NASA Earthdata login password (<PASSWORD>)
@@ -39,7 +39,7 @@ Set up a .wgetrc file in your home directory.
   - To insert your NASA Earthdata login username and password into the file, enter the following in the Command Prompt and replace your username and password.
 
       ```text
-      echo http-user=Inser_Your_Username >> .wgetrc | echo http-password=Insert_Your_Password >> .wgetrc
+      echo http-user=Insert_Your_Username >> .wgetrc | echo http-password=Insert_Your_Password >> .wgetrc
       ```
 
 ## Step 3: Download LP DAAC Data
