@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 _________________________________________________________________________
 ## 2023-07-12
 > ### Added
-> -[How to bulk download LP DAAC data using Curl](guides/bulk_download_using_curl.md)
+> - [How to bulk download LP DAAC data using Curl](guides/bulk_download_using_curl.md)
 > - [How to bulk download LP DAAC data using wget](guides/bulk_download_using_wget.md)
 
 ## 2023-07-05
