@@ -32,7 +32,7 @@ Set up a .netrc file in your home directory.
       To insert your NASA Earthdata login username and password into the file, enter the following in the Command Prompt and replace your username and password.
 
       ```
-      echo login Inser_Your_Username >> %userprofile%\.netrc | echo password Insert_Your_Password >> %userprofile%\.netrc
+      echo login Insert_Your_Username >> %userprofile%\.netrc | echo password Insert_Your_Password >> %userprofile%\.netrc
       ```
     - #### MacOS:
 
