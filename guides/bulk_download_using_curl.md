@@ -1,10 +1,10 @@
 # How to bulk download LP DAAC data using Curl  
 
-This guide shows how to bulk download [LP DAAC](https://lpdaac.usgs.gov/) data using [cURL](https://curl.se/) from the command line. **cURL** is free and open source software developed under Client for URLs (cURL) project. curl is a command line tool for transfering  data using URL.
+This guide shows how to bulk download [LP DAAC](https://lpdaac.usgs.gov/) data using [cURL](https://curl.se/) from the command line. **cURL** is a free and open source software developed under Client for URLs (cURL) project as a command line tool for transfering data using URLs.
 ---
 
 ## Requirements:
-- You need to [install the latest version of cURL](https://curl.se/download.html). View [installing curl instruction](https://developer.zendesk.com/documentation/api-basics/getting-started/installing-and-using-curl/#installing-curl) for more details.
+- You need to [install the latest version of cURL](https://curl.se/download.html). View [installing curl instructions](https://developer.zendesk.com/documentation/api-basics/getting-started/installing-and-using-curl/#installing-curl) for more details.
 
 - NASA Earthdata login credentials are required to access data from LP DAAC. You can create an account [here](https://urs.earthdata.nasa.gov/users/new).
 ---
@@ -43,11 +43,11 @@ Set up a .netrc file in your home directory.
       To insert your NASA Earthdata login username and password into the file, enter the following in the Command Prompt and replace your username and password.
 
       ```
-      echo login Inser_Your_Username >> ~/.netrc | echo password Insert_Your_Password >> ~/.netrc
+      echo login Insert_Your_Username >> ~/.netrc | echo password Insert_Your_Password >> ~/.netrc
       ```
 
 - ### Programmatically:
-  - Run [Authentication for NASA Earthdata notebook](https://github.com/nasa/LPDAAC-Data-Resources/blob/main/python/how-tos/Earthdata_Authentication__Create_netrc_file.ipynb) to create _.nerc_ file. 
+  - Run [Authentication for NASA Earthdata notebook](https://github.com/nasa/LPDAAC-Data-Resources/blob/main/python/how-tos/Earthdata_Authentication__Create_netrc_file.ipynb) to create _.netrc_ file. 
   - Alternatively, you can run the [EarthdataLoginSetup script](https://github.com/nasa/LPDAAC-Data-Resources/blob/main/python/scripts/EarthdataLoginSetup.py) in an interpreter or in the command line.
 ---
 
