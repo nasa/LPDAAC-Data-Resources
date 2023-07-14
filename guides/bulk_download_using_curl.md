@@ -6,7 +6,7 @@ This guide shows how to bulk download [LP DAAC](https://lpdaac.usgs.gov/) data u
 ## Requirements:
 - You need to [install the latest version of cURL](https://curl.se/download.html). View [installing curl instructions](https://developer.zendesk.com/documentation/api-basics/getting-started/installing-and-using-curl/#installing-curl) for more details.
 
-- NASA Earthdata login credentials are required to access data from LP DAAC. You can create an account [here](https://urs.earthdata.nasa.gov/users/new).
+- NASA Earthdata login credentials are required to access data from all NASA DAACs. You can create an account [here](https://urs.earthdata.nasa.gov/users/new).
 ---
 
 ## Step 1: Save the Download Link(s)  
