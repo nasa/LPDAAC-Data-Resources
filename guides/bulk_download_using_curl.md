@@ -23,7 +23,7 @@ Set up a .netrc file in your home directory.
 
 - ### Create .netrc file from the Command Line
   - Enter the following in Terminal:
-    - #### windows
+    - #### Windows
       To Create a .netrc file, enter the following in the command line. 
       ```
       NUL >> %userprofile%\.netrc | echo machine urs.earthdata.nasa.gov >> %userprofile%\.netrc
