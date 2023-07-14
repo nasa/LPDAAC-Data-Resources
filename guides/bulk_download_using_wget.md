@@ -70,12 +70,10 @@ You should now be able to run wget commands to download data directly from the L
 If you prefer to not create .wgetrc file for authentication, you can make wget command to work by passing authentications manually.
 
 
-Save download links of your data as a text file using [Nasa Earthdata Search](https://search.earthdata.nasa.gov/search) or [Common Metadata Repository (CMR)](https://www.earthdata.nasa.gov/eosdis/science-system-description/eosdis-components/cmr) API. Follow the steps in [Earthdata Search guide](https://github.com/nasa/EMIT-Data-Resources/blob/main/guides/Getting_EMIT_Data_using_EarthData_Search.md) to find your data and save the download links. If you prefer to use API to find your data and save the download links tutorial on how to use CMR API can be found [here](https://github.com/nasa/LPDAAC-Data-Resources/blob/main/python/tutorials/Data_Discovery_CMR_API_Request.ipynb). 
 
 
-## Step 2: Download LP DAAC Data
+## Download LP DAAC Data
 
-To run wget commands to download data directly from the LP DAAC. 
 
 - Navigate to the directory you want to save the data using `cd Insert_Your_Directory`.
 - Replace your Earthdata login username with "Insert_Your_Username" below.
