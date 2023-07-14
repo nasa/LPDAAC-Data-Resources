@@ -56,7 +56,7 @@ You should now be able to run wget commands to download data directly from the L
   ``` 
 - To download multiple files, use the full path of text file saved previously in step 1 below. 
   ```text
-  wget -i Insert_the_Full_Path
+  wget -i Insert_Text_File
   ``` 
   Example:
   ```text
