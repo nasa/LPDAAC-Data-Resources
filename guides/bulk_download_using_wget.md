@@ -92,7 +92,7 @@ To run wget commands to download data directly from the LP DAAC.
   - To download multiple files, replace `Insert_Your_Username` with your Earthdata Login username in the command below. Also, replace `Insert_Text_File` with the full path to the text file saved previously in Step 1. You will be asked to enter your `password` (i.e., you Earthdata Login password) after running the command. You'll press enter again to download your files.  
   
     ```
-    wget --http-user=Insert_Your_Username --ask-password --keep-session-cookies -i Insert_the_Full_Path
+    wget --http-user=Insert_Your_Username --ask-password --keep-session-cookies -i Insert_Text_File
     ```
 
     Example:
