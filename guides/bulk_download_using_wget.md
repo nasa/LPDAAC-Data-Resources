@@ -5,7 +5,7 @@ This guide shows how to bulk download [LP DAAC](https://lpdaac.usgs.gov/) data u
 
 ## Requirements:
 - [Install wget](https://ftp.gnu.org/gnu/wget/). View [Frequently Asked Questions About Downloading GNU Wget](http://wget.addictivecode.org/FrequentlyAskedQuestions.html#download) for more details.
-- NASA Earthdata login credentials are required to access data from LP DAAC. You can create an account [here](https://urs.earthdata.nasa.gov/users/new).
+- NASA Earthdata Login credentials are required to access data from all NASA DAACs. You can create an account [here](https://urs.earthdata.nasa.gov/users/new).
 ---
 
 # Method 1: Authenticate using .wgetrc file
