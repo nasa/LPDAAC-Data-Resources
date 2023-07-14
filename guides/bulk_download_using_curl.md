@@ -63,7 +63,7 @@ You should now be able to run the command to download data directly from the LP 
   ``` 
 - To download multiple files, replace `Insert_Text_File` in the command below with the full path to the text file saved previously in Step 1. 
   ```
-  xargs -n 1 curl -O -b ~/.urs_cookies -c ~/.urs_cookies -L -n < Insert_the_Full_Path
+  xargs -n 1 curl -O -b ~/.urs_cookies -c ~/.urs_cookies -L -n < Insert_Text_File
   ``` 
 
   Example:
