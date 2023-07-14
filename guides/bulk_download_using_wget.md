@@ -19,7 +19,7 @@ Save download links for your data as a text file using [Nasa Earthdata Search](h
 Set up a .wgetrc file in your home directory.
 
 - ### Manual setup:
-  - Download [.wgetrc template file](https://github.com/nasa/LPDAAC-Data-Resources/tree/main/data/.wgetrc) and save it in your home directory.
+  - Download the [.wgetrc template file](https://github.com/nasa/LPDAAC-Data-Resources/tree/main/data/.wgetrc) and save it in your home directory.
     - Insert your NASA Earthdata login username (<USERNAME>)
     - Insert your NASA Earthdata login password (<PASSWORD>)
 
