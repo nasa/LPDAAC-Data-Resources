@@ -21,7 +21,7 @@ Set up a .netrc file in your home directory.
   - Download the [.netrc template file](https://github.com/nasa/LPDAAC-Data-Resources/tree/main/data/.netrc) and save it in your home directory.
     - Open the .netrc file in a text editor and replace `<USERNAME>` with your NASA Earthdata Login username and `<PASSWORD>` with your NASA Earthdata Login password.
 
-- ### Command Line:
+- ### Create .netrc file from the Command Line
   - Enter the following in Terminal:
     - #### windows
       To Create a .netrc file, enter the following in the command line. 
