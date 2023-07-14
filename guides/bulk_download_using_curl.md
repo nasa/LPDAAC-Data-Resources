@@ -47,7 +47,7 @@ Set up a .netrc file in your home directory.
 
 - ### Programmatically:
   - Run [Authentication for NASA Earthdata notebook](https://github.com/nasa/LPDAAC-Data-Resources/blob/main/python/how-tos/Earthdata_Authentication__Create_netrc_file.ipynb) to create _.netrc_ file. 
-  - Alternatively, you can run the [EarthdataLoginSetup script](https://github.com/nasa/LPDAAC-Data-Resources/blob/main/python/scripts/EarthdataLoginSetup.py) in an interpreter or in the command line.
+  - Alternatively, you can run the [EarthdataLoginSetup script](https://github.com/nasa/LPDAAC-Data-Resources/blob/main/python/scripts/EarthdataLoginSetup.py) in a Python interpreter or from the command line.
 ---
 
 ## Step 3: Download LP DAAC Data
