@@ -21,7 +21,7 @@ Set up a .wgetrc file in your home directory.
 - ### Manual setup:
   - Download the [.wgetrc template file](https://github.com/nasa/LPDAAC-Data-Resources/tree/main/data/.wgetrc) and save it in your home directory.
     - Open the .wgetrc file in a text editor and replace `<USERNAME>` with your NASA Earthdata Login username and `<PASSWORD>` with your NASA Earthdata Login password.
-    - Insert your NASA Earthdata login password (<PASSWORD>)
+    
 
 
 - ### Command Line:
