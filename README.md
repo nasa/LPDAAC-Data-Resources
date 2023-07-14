@@ -7,7 +7,9 @@ This repository is a place to find data user resources that demonstrate how to u
 Content include in this repository are listed below.
 | Repository Contents | Type | Summary | 
 |----|-----|----|
-| **[Data_Discovery_CMR_API_Request.ipynb](https://github.com/nasa/LPDAAC-Data-Resources/blob/cmr/python/tutorials/Data_Discovery_CMR_API_Request.ipynb)** | Jupyter Notebook | Demonstrates how to search for Earthdata data collections and granules using CMR API and Request Python package
+| **[Data_Discovery_CMR_API_Request.ipynb](/python/tutorials/Data_Discovery_CMR_API_Request.ipynb)** | Jupyter Notebook | Demonstrates how to search for Earthdata data collections and granules using CMR API and Request Python package
+| **[bulk_download_using_curl.md](/guides/bulk_download_using_curl.md)** | Markdown | Demonstrates how to bulk download LP DAAC data using Curl from command line |
+| **[bulk_download_using_wget.md](/guides/bulk_download_using_wget.md)** | Markdown | Demonstrates how to bulk download LP DAAC data using Wget from command line |
 
 The other guides, tutorials, how-tos and scripts can be accessed in our mission specific repositories. 
 
