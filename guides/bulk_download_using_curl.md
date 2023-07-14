@@ -53,7 +53,7 @@ Set up a .netrc file in your home directory.
 ## Step 3: Download LP DAAC Data
 You should now be able to run the command to download data directly from the LP DAAC. 
 - Navigate to the directory you want to save the data using `cd Insert_Your_Directory`.
-- To download a single file, replace the download link and enter the line below in the command line.
+- To download a single file, replace the `Insert_the_Download_Link`  in the command below with the URL to the data file you wish to download.
   ```
   curl -O -b ~/.urs_cookies -c ~/.urs_cookies -L -n Insert_the_Download_link
   ``` 
