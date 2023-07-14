@@ -30,7 +30,7 @@ Set up a .wgetrc file in your home directory.
       ```text
       NUL >> .wgetrc
       ```
-    - #### MacOS, Linux, Cmder:
+    - #### MacOS or Linux
 
       To Create a .netrc file, enter the following in the command line. 
       ```text
