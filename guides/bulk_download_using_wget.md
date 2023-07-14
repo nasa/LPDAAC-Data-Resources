@@ -54,7 +54,7 @@ You should now be able to run wget commands to download data directly from the L
   ```text
   wget https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSS30.020/HLS.S30.T12SWF.2023189T175919.v2.0/HLS.S30.T12SWF.2023189T175919.v2.0.B08.tif 
   ``` 
-- To download multiple files, use the full path of text file saved previously in step 1 below. 
+- To download multiple files, replace `Insert_Text_File` in the command below with the full path to the text file saved previously in Step 1.
   ```text
   wget -i Insert_Text_File
   ``` 
