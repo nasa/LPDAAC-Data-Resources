@@ -36,7 +36,7 @@ Set up a .wgetrc file in your home directory.
       ```text
       touch .wgetrc | chmod og-rw .wgetrc
       ```
-  - To insert your NASA Earthdata login username and password into the file, enter the following in the Command Prompt and replace your username and password.
+  - To insert your NASA Earthdata Login username and password into the file, enter the following in the Command Prompt and replace your username and password.
 
       ```text
       echo http-user=Insert_Your_Username >> .wgetrc | echo http-password=Insert_Your_Password >> .wgetrc
