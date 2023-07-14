@@ -26,7 +26,7 @@ Set up a .wgetrc file in your home directory.
 
 - ### Command Line:
   - To Create a .wgetrc file, enter the following in Terminal.
-    - #### windows
+    - #### Windows
       ```text
       NUL >> .wgetrc
       ```
