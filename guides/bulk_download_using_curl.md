@@ -17,7 +17,7 @@ Save download links for your data as a text file using [Nasa Earthdata Search](h
 Set up a .netrc file in your home directory.
 
 
-- ### Manual set up:
+- ### Manual set up
   - Download the [.netrc template file](https://github.com/nasa/LPDAAC-Data-Resources/tree/main/data/.netrc) and save it in your home directory.
     - Open the .netrc file in a text editor and replace `<USERNAME>` with your NASA Earthdata Login username and `<PASSWORD>` with your NASA Earthdata Login password.
 
