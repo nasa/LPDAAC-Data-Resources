@@ -89,7 +89,7 @@ To run wget commands to download data directly from the LP DAAC.
     wget --http-user=MYUSERNAME --ask-password --keep-session-cookies https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSS30.020/HLS.S30.T12SWF.2023189T175919.v2.0/HLS.S30.T12SWF.2023189T175919.v2.0.B08.tif
     ```
   
-  - To download multiple files, use the full path of text file saved previously in step 1 below. You should enter your `password` next and press enter to download your files.  
+  - To download multiple files, replace `Insert_Your_Username` with your Earthdata Login username in the command below. Also, replace `Insert_Text_File` with the full path to the text file saved previously in Step 1. You will be asked to enter your `password` (i.e., you Earthdata Login password) after running the command. You'll press enter again to download your files.  
   
     ```
     wget --http-user=Insert_Your_Username --ask-password --keep-session-cookies -i Insert_the_Full_Path
