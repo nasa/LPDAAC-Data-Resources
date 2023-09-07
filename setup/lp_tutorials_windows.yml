@@ -1,0 +1,41 @@
+name: lp_tutorials
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - aiohttp
+  - aiobotocore
+  - boto3
+  - dask
+  - earthaccess
+  - fiona
+  - hvplot
+  - h5py
+  - h5netcdf 
+  - ipykernel
+  - jupyter
+  - jupyterlab-geojson
+  - jupyterlab-git
+  - jupyter-resource-usage
+  - jupyter_bokeh
+  - gdal
+  - geoviews
+  - geopandas
+  - matplotlib-base
+  - numpy
+  - netcdf4
+  - pystac-client
+  - pip
+  - pandas
+  - pyproj
+  - rioxarray
+  - requests
+  - rasterio
+  - ray-default
+  - scikit-image
+  - shapely
+  - spectral
+  - xarray
+  - zarr
+
