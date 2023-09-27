@@ -1,4 +1,4 @@
-name: lp_tutorials
+name: lpdaac
 channels:
   - conda-forge
   - defaults
@@ -38,4 +38,3 @@ dependencies:
   - spectral
   - xarray
   - zarr
-
