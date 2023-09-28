@@ -13,10 +13,10 @@
 version: 1
 metadata:
   content_hash:
-    linux-64: 6327c2f23f95e98ccea69731c1bc1ed074ecb9e4468cb8d1f3f5663e94d9bfeb
-    osx-arm64: b6dadcbf3c21ee8f05a30a5bc5d85e819665366105f7cc6dd39ca5c9079722e4
-    osx-64: fc29bde0f9583269fc7da39a432ff9749307650bc1b31228e0f6c2dfa1980896
-    win-64: 9077e21dc24d04491e4ea402108ce3a153afe303b3b0c5b4f2bbcd2cc4af4d73
+    linux-64: a11541d90857cca26434df765ba2650e925bedc8cbbce06d5fe3582474465e85
+    osx-arm64: 7a89523a195dfff2890453fec8ba85064caaf0e59ea213e42711e8afd468d74d
+    osx-64: 764d7174031811da48dc66fa8765fa0bf17758b5d6a3b0081dbe32eebfb76a09
+    win-64: b104f3fe47fa08478837609524cded5162e5b17ce0d4826f7f0d2ee7b451af33
   channels:
   - url: conda-forge
     used_env_vars: []
@@ -24,8 +24,8 @@ metadata:
     used_env_vars: []
   platforms:
   - linux-64
-  - osx-arm64
   - osx-64
+  - osx-arm64
   - win-64
   sources:
   - lp_tutorials.yml
@@ -4022,6 +4022,19 @@ package:
     sha256: 11057745946a95ee7cc4c98900a60c7362266a4cb28bc97d96cd88e3056eb701
   category: main
   optional: false
+- name: configobj
+  version: 5.0.8
+  manager: conda
+  platform: linux-64
+  dependencies:
+    python: '>=3.6'
+    six: ''
+  url: https://conda.anaconda.org/conda-forge/noarch/configobj-5.0.8-pyhd8ed1ab_0.conda
+  hash:
+    md5: 04c71f400324538d4396407ea2ffb34f
+    sha256: ee523a09a70c4ef71418b12ea3086169b69969dbfa382791dbde5e1a00e41728
+  category: main
+  optional: false
 - name: cytoolz
   version: 0.12.2
   manager: conda
@@ -5716,6 +5729,21 @@ package:
     sha256: 10e7fdc75d4b85633be6b12a70b857053987127a808caa0f88b2cba4b3ce6359
   category: main
   optional: false
+- name: pykdtree
+  version: 1.3.9
+  manager: conda
+  platform: linux-64
+  dependencies:
+    libgcc-ng: '>=12'
+    numpy: '>=1.22.4,<2.0a0'
+    python: '>=3.10,<3.11.0a0'
+    python_abi: 3.10.*
+  url: https://conda.anaconda.org/conda-forge/linux-64/pykdtree-1.3.9-py310h1f7b6fc_1.conda
+  hash:
+    md5: c082bd919ad3f704f7986f3c9b2343a8
+    sha256: a88bf3bf6d1221b7f57f972f1985c49d11956239749276e54080e07fde5b2121
+  category: main
+  optional: false
 - name: pyopenssl
   version: 23.2.0
   manager: conda
@@ -6185,6 +6213,29 @@ package:
   hash:
     md5: 42d91c89bc3993ec88681cffd3c0e326
     sha256: 50af51619db6a35c36e65e8f50c83c722c3358f1f4b5527e87799b8f9935ace0
+  category: main
+  optional: false
+- name: pyresample
+  version: 1.27.1
+  manager: conda
+  platform: linux-64
+  dependencies:
+    configobj: ''
+    importlib-metadata: ''
+    libgcc-ng: '>=12'
+    libstdcxx-ng: '>=12'
+    numpy: '>=1.21.6,<2.0a0'
+    pykdtree: '>=1.3.1'
+    pyproj: '>=3.0'
+    python: '>=3.10,<3.11.0a0'
+    python_abi: 3.10.*
+    pyyaml: ''
+    setuptools: '>=3.2'
+    shapely: ''
+  url: https://conda.anaconda.org/conda-forge/linux-64/pyresample-1.27.1-py310h7cbd5c2_1.conda
+  hash:
+    md5: 9a1adededa34df8ca77a07c0fd7fec77
+    sha256: 15923eea87b65b71ff37b5d671962ea826592f0de0c579d0e45b80dbf6975b25
   category: main
   optional: false
 - name: pystac-client
@@ -10576,6 +10627,19 @@ package:
     sha256: 11057745946a95ee7cc4c98900a60c7362266a4cb28bc97d96cd88e3056eb701
   category: main
   optional: false
+- name: configobj
+  version: 5.0.8
+  manager: conda
+  platform: osx-64
+  dependencies:
+    six: ''
+    python: '>=3.6'
+  url: https://conda.anaconda.org/conda-forge/noarch/configobj-5.0.8-pyhd8ed1ab_0.conda
+  hash:
+    md5: 04c71f400324538d4396407ea2ffb34f
+    sha256: ee523a09a70c4ef71418b12ea3086169b69969dbfa382791dbde5e1a00e41728
+  category: main
+  optional: false
 - name: cytoolz
   version: 0.12.2
   manager: conda
@@ -12409,6 +12473,20 @@ package:
     sha256: 50af51619db6a35c36e65e8f50c83c722c3358f1f4b5527e87799b8f9935ace0
   category: main
   optional: false
+- name: pykdtree
+  version: 1.3.9
+  manager: conda
+  platform: osx-64
+  dependencies:
+    numpy: '>=1.22.4,<2.0a0'
+    python: '>=3.10,<3.11.0a0'
+    python_abi: 3.10.*
+  url: https://conda.anaconda.org/conda-forge/osx-64/pykdtree-1.3.9-py310hf0b6da5_1.conda
+  hash:
+    md5: b032086472fc723a6b085b098e1535a5
+    sha256: f976919e0d947165eb845c4125cc952fe66807328abc762fe21d54a0bea64516
+  category: main
+  optional: false
 - name: pystac-client
   version: 0.7.5
   manager: conda
@@ -12845,6 +12923,28 @@ package:
   hash:
     md5: 65be0f53ea1e58510d4efc62acb1278e
     sha256: 5fd2f88f54361cda6e7c3560fd65181f47b7a2ed1235aec1afc469897dd536d7
+  category: main
+  optional: false
+- name: pyresample
+  version: 1.27.1
+  manager: conda
+  platform: osx-64
+  dependencies:
+    configobj: ''
+    importlib-metadata: ''
+    libcxx: '>=15.0.7'
+    numpy: '>=1.21.6,<2.0a0'
+    pykdtree: '>=1.3.1'
+    pyproj: '>=3.0'
+    python: '>=3.10,<3.11.0a0'
+    python_abi: 3.10.*
+    pyyaml: ''
+    setuptools: '>=3.2'
+    shapely: ''
+  url: https://conda.anaconda.org/conda-forge/osx-64/pyresample-1.27.1-py310h5e4fcda_1.conda
+  hash:
+    md5: 49da6e472015fd9e3de0343d79ab354e
+    sha256: f3adadda5fa0bc93fc42eb8b0e6933d7573483978214fb16fd3f7385b2c70f19
   category: main
   optional: false
 - name: rasterio
@@ -16756,6 +16856,19 @@ package:
     sha256: 11057745946a95ee7cc4c98900a60c7362266a4cb28bc97d96cd88e3056eb701
   category: main
   optional: false
+- name: configobj
+  version: 5.0.8
+  manager: conda
+  platform: osx-arm64
+  dependencies:
+    six: ''
+    python: '>=3.6'
+  url: https://conda.anaconda.org/conda-forge/noarch/configobj-5.0.8-pyhd8ed1ab_0.conda
+  hash:
+    md5: 04c71f400324538d4396407ea2ffb34f
+    sha256: ee523a09a70c4ef71418b12ea3086169b69969dbfa382791dbde5e1a00e41728
+  category: main
+  optional: false
 - name: cytoolz
   version: 0.12.2
   manager: conda
@@ -18473,6 +18586,20 @@ package:
     sha256: 50af51619db6a35c36e65e8f50c83c722c3358f1f4b5527e87799b8f9935ace0
   category: main
   optional: false
+- name: pykdtree
+  version: 1.3.9
+  manager: conda
+  platform: osx-arm64
+  dependencies:
+    numpy: '>=1.22.4,<2.0a0'
+    python: '>=3.10,<3.11.0a0'
+    python_abi: 3.10.*
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/pykdtree-1.3.9-py310h280b8fa_1.conda
+  hash:
+    md5: 3dd2e1636860ffc6581deeab4422d74c
+    sha256: 3967a68ab30b17d80fbe507585695866c3dfeed7e83b7bccf7fbb8aea1dcf224
+  category: main
+  optional: false
 - name: pystac-client
   version: 0.7.5
   manager: conda
@@ -18863,6 +18990,28 @@ package:
   hash:
     md5: 110045214a421ab4bfdd82e90875e150
     sha256: 91c847a6aca6cc15e9e444bcd21dfb9fcedba0a20de16357087cb564f52c76a5
+  category: main
+  optional: false
+- name: pyresample
+  version: 1.27.1
+  manager: conda
+  platform: osx-arm64
+  dependencies:
+    configobj: ''
+    importlib-metadata: ''
+    libcxx: '>=15.0.7'
+    numpy: '>=1.21.6,<2.0a0'
+    pykdtree: '>=1.3.1'
+    pyproj: '>=3.0'
+    python: '>=3.10,<3.11.0a0'
+    python_abi: 3.10.*
+    pyyaml: ''
+    setuptools: '>=3.2'
+    shapely: ''
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/pyresample-1.27.1-py310h1cdf563_1.conda
+  hash:
+    md5: 788db70767965528aa7adc62efeff9dc
+    sha256: c01b8b1099242874fa47243c736746d30d91ef32433cb5667c9ffb901ad7b7b6
   category: main
   optional: false
 - name: rasterio
@@ -22947,6 +23096,19 @@ package:
     sha256: 11057745946a95ee7cc4c98900a60c7362266a4cb28bc97d96cd88e3056eb701
   category: main
   optional: false
+- name: configobj
+  version: 5.0.8
+  manager: conda
+  platform: win-64
+  dependencies:
+    six: ''
+    python: '>=3.6'
+  url: https://conda.anaconda.org/conda-forge/noarch/configobj-5.0.8-pyhd8ed1ab_0.conda
+  hash:
+    md5: 04c71f400324538d4396407ea2ffb34f
+    sha256: ee523a09a70c4ef71418b12ea3086169b69969dbfa382791dbde5e1a00e41728
+  category: main
+  optional: false
 - name: cytoolz
   version: 0.12.2
   manager: conda
@@ -25433,6 +25595,23 @@ package:
     sha256: c0e6b5016e309dde83bb04d0396d6efad71df5305d62ab7012476a6b8e818a86
   category: main
   optional: false
+- name: pykdtree
+  version: 1.3.9
+  manager: conda
+  platform: win-64
+  dependencies:
+    numpy: '>=1.22.4,<2.0a0'
+    python: '>=3.10,<3.11.0a0'
+    python_abi: 3.10.*
+    ucrt: '>=10.0.20348.0'
+    vc: '>=14.2,<15'
+    vc14_runtime: '>=14.29.30139'
+  url: https://conda.anaconda.org/conda-forge/win-64/pykdtree-1.3.9-py310h3e78b6c_1.conda
+  hash:
+    md5: 18a91ca23e9617b12a44fc302fdc7404
+    sha256: 9f774989217bf06858fe76757688cddc3a1fb69aceeff760f75ed6171a889a81
+  category: main
+  optional: false
 - name: pyqt
   version: 5.15.9
   manager: conda
@@ -25776,6 +25955,30 @@ package:
   hash:
     md5: 212fdb952a8a36ae36ce66700391b01d
     sha256: 85212dbb23eab00cf6029ea627663991673db59a90988c273b4ac60d1249240b
+  category: main
+  optional: false
+- name: pyresample
+  version: 1.27.1
+  manager: conda
+  platform: win-64
+  dependencies:
+    configobj: ''
+    importlib-metadata: ''
+    numpy: '>=1.21.6,<2.0a0'
+    pykdtree: '>=1.3.1'
+    pyproj: '>=3.0'
+    python: '>=3.10,<3.11.0a0'
+    python_abi: 3.10.*
+    pyyaml: ''
+    setuptools: '>=3.2'
+    shapely: ''
+    ucrt: '>=10.0.20348.0'
+    vc: '>=14.2,<15'
+    vc14_runtime: '>=14.29.30139'
+  url: https://conda.anaconda.org/conda-forge/win-64/pyresample-1.27.1-py310h1c4a608_1.conda
+  hash:
+    md5: c39b5e97edb98b8880b50bcf365c5eee
+    sha256: d2f420933bf2d5dd4789c2892751ceab08a50d3e1a1916e7cad3d214f91843a6
   category: main
   optional: false
 - name: qtconsole-base

@@ -29,6 +29,7 @@ dependencies:
   - pip
   - pandas
   - pyproj
+  - pyresample
   - rioxarray
   - requests
   - rasterio
