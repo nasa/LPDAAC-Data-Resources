@@ -1,4 +1,4 @@
-name: lpdaac_tutorials1
+name: lpdaac_tutorials
 channels:
   - conda-forge
   - defaults
