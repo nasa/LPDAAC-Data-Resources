@@ -1,4 +1,4 @@
-name: lpdaac
+name: lpdaac_tutorials1
 channels:
   - conda-forge
   - defaults
@@ -7,10 +7,11 @@ dependencies:
   - aiohttp
   - aiobotocore
   - boto3
+  - bokeh
   - dask
   - earthaccess
-  - fiona
   - hvplot
+  - holoviews
   - h5py
   - h5netcdf 
   - ipykernel
@@ -19,7 +20,7 @@ dependencies:
   - jupyterlab-git
   - jupyter-resource-usage
   - jupyter_bokeh
-  - gdal
+  - gdal=3.7
   - geoviews
   - geopandas
   - matplotlib-base

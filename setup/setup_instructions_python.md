@@ -35,24 +35,10 @@ Type the following in the command line and press enter to create a compatible en
 
 **If you are using *conda*, replace the "mamba" with "conda" and be patient.**
 
-To reproducible the exact Python environment that all tutorials are tested with follow the steps below. `conda-lock` and `micromamba` both can be used to generate a conda environments using a lock file. `micromamba` is a tiny version of the mamba package manager and could speed up the installation. 
+To reproducible the exact Python environment that all tutorials are tested with, use the `.yml` file with the versions included.
 
-- To create a Python environment using **conda-lock**:
-  - First, type the following in the command line to install `conda-lock`:
-    > `conda install --channel=conda-forge --name=base conda-lock`
-    - For more details on how to install `conda-lock` visit https://github.com/conda/conda-lock#installation. 
-`   
-  - Next, create the environment using the `conda-lock.yml` file stored in `setup` folder.
-    >  `conda-lock install --name ENV_NAME setup/conda-lock.yml`
-    - make sure to include the 
-
-- To create a Python environment using **micromamba**:
-  - First, type the following in the command line to install `micromamba`:
-    > `conda install -c conda-forge micromamba`
-    - For more details on how to install `micromamba` visit https://mamba.readthedocs.io/en/latest/micromamba-installation.html#. 
-
-  - Next, create the environment using the `conda-lock.yml` file stored in `setup` folder.
-    > `micromamba create -n ENV_NAME -f setup/conda-lock.yml`
+> **For Windows:  
+>   `mamba env create -f setup/lp_tutorials.yml` 
 
 
 ## 3. Opening the notebooks
@@ -63,7 +49,7 @@ If you did the above and already have your environment activated, you can simply
 
 If returning to an already created but inactive environment, using your preferred command line interface (command prompt, terminal, cmder, etc.) navigate to your local copy of the repository, then type the following to activate the Python Environment:
 
-> `mamba activate lpdaac`  
+> `mamba activate lpdaac_tutorials`  
 
 Now you can launch Jupyter Notebook to open the notebooks included.
 
@@ -77,7 +63,7 @@ Email: <LPDAAC@usgs.gov>
 Voice: +1-866-573-3222  
 Organization: Land Processes Distributed Active Archive Center (LP DAAC)¹  
 Website: <https://lpdaac.usgs.gov/>  
-Date last modified: 09-27-2023  
+Date last modified: 11-09-2023  
 
 ¹Work performed under USGS contract G15PD00467 for NASA contract NNG14HH33I.  
 
