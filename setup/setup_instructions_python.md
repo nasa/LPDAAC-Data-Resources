@@ -37,7 +37,7 @@ Type the following in the command line and press enter to create a compatible en
 
 To reproducible the exact Python environment that all tutorials are tested with, use the `.yml` file with the versions included.
 
-> **For Windows:  
+> Windows:  
 >   `mamba env create -f setup/lp_tutorials.yml` 
 
 
