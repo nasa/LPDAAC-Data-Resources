@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 _________________________________________________________________________
+## 2023-09-11
+
+> ## Updated 
+> - [The environment set up instruction](setup/setup_instructions_python.md)
+> ### Added
+> - [The YML file with versioning of Python libraries](setup/lpdaac_windows.yml)
+
 ## 2023-07-12
 > ### Added
 > - [How to bulk download LP DAAC data using Curl](guides/bulk_download_using_curl.md)
