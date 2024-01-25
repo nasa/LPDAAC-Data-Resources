@@ -5,9 +5,10 @@
 This repository is a place to find data user resources that demonstrate how to use [LP DAAC](https://lpdaac.usgs.gov/) tools, services, and data.
 
 Content include in this repository are listed below.
-| Repository Contents | Type | Summary | 
+| Repository Contents | Type | Summary |
 |----|-----|----|
-| **[Data_Discovery_CMR_API_Request.ipynb](/python/tutorials/Data_Discovery_CMR_API_Request.ipynb)** | Jupyter Notebook | Demonstrates how to search for Earthdata data collections and granules using CMR API and Request Python package
+| **[Data_Discovery_CMR_API_Request.ipynb](/python/tutorials/Data_Discovery_CMR_API_Request.ipynb)** | Jupyter Notebook | Demonstrates how to search for Earthdata data collections and granules using CMR API and Request Python package|
+| **[Data_Discovery_CMR_API_Bulk_Query.ipynb](/python/tutorials/Data_Discovery_CMR_API_Bulk_Query.ipynb)** | Jupyter Notebook | Demonstrates how to search and extract data URLs for an entire collection using Python's `asyncio` package|
 | **[bulk_download_using_curl.md](/guides/bulk_download_using_curl.md)** | Markdown | Demonstrates how to bulk download LP DAAC data using Curl from command line |
 | **[bulk_download_using_wget.md](/guides/bulk_download_using_wget.md)** | Markdown | Demonstrates how to bulk download LP DAAC data using Wget from command line |
 
