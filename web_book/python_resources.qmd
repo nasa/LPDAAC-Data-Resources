@@ -1,0 +1,60 @@
+---
+title: Python Resources
+---
+
+The LPDAAC provides several Python scripts and Jupyter Notebooks for working with NASA Earthdata datasets available from the LP DAAC. This page serves as a table of contents organized by mission (i.e. EMIT, ECOSTRESS, GEDI) to direct users to resources within this book, as well as to other Repositories containing dataset specific workflows and use cases. Additionally, there is a separate [web-book](https://nasa.github.io/VITALS/) for the [VSWIR Imaging and Thermal Applications, Learning, and Science (VITALS) Repository](https://github.com/nasa/VITALS), which focuses on the compounded benefits of using VSWIR and TIR data together.
+
+## ECOSTRESS
+
+| Resource | Type | Summary | 
+|----|-----|----|
+| **[ECOSTRESS_Tutorial.ipynb](/python/tutorials/ECOSTRESS_Tutorial.ipynb)** | Jupyter Notebook | Demonstrates how to work with the ECOSTRESS Evapotranspiration PT-JPL Daily L3|
+| **[ECOSTRESS_swath2grid.py](/python/scripts/ecostress_swath2grid/)** | Command line executable | Demonstrates how to converts ECOSTRESS swath data products into projected GeoTIFFs|
+
+## EMIT
+
+|Resource|Type|Summary|
+|:---|:---|:---|
+|[Getting EMIT Data using EarthData Search](guides/Getting_EMIT_Data_using_EarthData_Search.md)|Markdown Guide|A thorough walkthrough for using [EarthData Search](https://search.earthdata.nasa.gov/search) to find and download EMIT data|
+|[Exploring EMIT L2A Reflectance](python/tutorials/Exploring_EMIT_L2A_Reflectance.ipynb)|Jupyter Notebook|Explore EMIT L2A Reflectance data using interactive plots|
+|[Visualizing Methane Plume Timeseries](python/tutorials/Visualizing_Methane_Plume_Timeseries.ipynb)|Jupyter Notebook|Find EMIT L2B CH4 Plume Data and build a timeseries of CH4 plume complexes|
+|[Generating_Methane_Spectral_Fingerprint](python/tutorials/Generating_Methane_Spectral_Fingerprint.ipynb)|Jupyter Notebook|Extract Radiance Spectra and build an in-plume/out-of-plume ratio to compare with CH4 absorption coefficient|
+|[How to find and access EMIT data](python/how-tos/How_to_find_and_access_EMIT_data.ipynb)|Jupyter Notebook|Use the `earthaccess` Python library to find and download or stream EMIT data|
+|[How to Convert to ENVI Format](python/how-tos/How_to_Convert_to_ENVI.ipynb)|Jupyter Notebook|Convert from downloaded netCDF4 (.nc) format to .envi format|
+|[How to Orthorectify](python/how-tos/How_to_Orthorectify.ipynb)|Jupyter Notebook|Use the geometry lookup table (GLT) included with the EMIT netCDF4 file to project on a geospatial grid (EPSG:4326)|
+|[How to Extract Point Data](python/how-tos/How_to_Extract_Points.ipynb)|Jupyter Notebook|Extract spectra using lat/lon coordinates from a .csv and build a dataframe/.csv output|
+|[How to Extract Area Data](python/how-tos/How_to_Extract_Area.ipynb)|Jupyter Notebook|Extract an area defined by a .geojson or shapefile|
+|[How to use EMIT Quality Data](python/how-tos/How_to_use_EMIT_Quality_data.ipynb)|Jupyter Notebook|Build a mask using an EMIT L2A Mask file and apply it to an L2A Reflectance file|
+|[How to use Direct S3 Access with EMIT](python/how-tos/How_to_Direct_S3_Access.ipynb)|Jupyter Notebook|Use S3 from inside AWS us-west2 to access EMIT Data|
+|[How to find EMIT Data using NASA's CMR API](python/how-tos/How_to_find_EMIT_data_using_CMR_API.ipynb)|Jupyter Notebook|Use NASA's CMR API to programmatically find EMIT Data|
+
+## GEDI
+
+| Resource | Summary | Path |
+|----|-----|----|
+| **[GEDI_L1B_V2_Tutorial.ipynb](https://github.com/nasa/GEDI-Data-Resources/blob/main/python/tutorials/GEDI_L1B_V2_Tutorial.ipynb)** | Jupyter Notebook tutorial demonstrating how to work with the Geolocated Waveform GEDI01_B.002 data product using Python | `python\tutorials` |
+| **[GEDI_L2A_V2_Tutorial.ipynb](https://github.com/nasa/GEDI-Data-Resources/blob/main/python/tutorials/GEDI_L2A_V2_Tutorial.ipynb)** | Jupyter Notebook tutorial demonstrating how to work with the Geolocated Waveform GEDI02_A.002 data product using Python | `python\tutorials` |
+| **[GEDI_L2B_V2_Tutorial.ipynb](https://github.com/nasa/GEDI-Data-Resources/blob/main/python/tutorials/GEDI_L2B_V2_Tutorial.ipynb)** | Jupyter Notebook tutorial demonstrating how to how to work with the Geolocated Waveform GEDI02_B.002 data product using Python  | `python\tutorials` |
+| **[GEDI_Finder_Tutorial_Python.ipynb](https://github.com/nasa/GEDI-Data-Resources/blob/main/python/tutorials/GEDI_Finder_Tutorial_Python.ipynb)** | Jupyter Notebook tutorial demonstrating how to perform spatial [bounding box] queries for GEDI V2 L1B, L2A, and L2B data using NASA's CMR, and how to reformat the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool using Python | `python\tutorials` |
+| **[GEDI_Finder_Tutorial_R.Rmd](https://github.com/nasa/GEDI-Data-Resources/blob/main/r/GEDI_Finder_Tutorial_R.rmd)** | R Markdown tutorial demonstrating how to use R to perform spatial [bounding box] queries for GEDI V2 L1B, L2A, and L2B data using NASA's CMR, and how to reformat the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool  | `R` |
+| **[GEDI_Finder.py](https://github.com/nasa/GEDI-Data-Resources/tree/main/python/scripts/GEDI_Finder)** | Command line executable performing spatial [bounding box] and temporal queries for GEDI V2 L1B, L2A, and L2B data using NASA's CMR and reformats the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool.  | `python/scripts/GEDI_Finder` |
+| **[GEDI_Subsetter.py](https://github.com/nasa/GEDI-Data-Resources/tree/main/python/scripts/GEDI_Subsetter)** | Command line executable converting GEDI data products, stored in Hierarchical Data Format version 5 (HDF5, .h5) into GeoJSON files that can be loaded into GIS and Remote Sensing Software | `python/scripts/GEDI_Subsetter` |
+
+## HLS
+
+|Resource|Type/Link|Summary|Services and Tools|
+|----|---------|-------|------------------|
+| HLS Python Tutorial | [Python Notebook](python/tutorials/HLS_Tutorial.ipynb) | Tutorial demonstrating how to search for, access, and process HLS data in Python | [earthaccess](https://github.com/nsidc/earthaccess) |
+| HLS SuPER Script | [Python Script](python/scripts/HLS_SuPER/) | Find, download, and subset HLS data from a command line executable | [CMR API](https://cmr.earthdata.nasa.gov/search/site/docs/search/api.html) |
+| HLS Bulk Download Bash Script | [Bash Script](bash/hls-bulk-download/)| Find and download | [CMR API](https://cmr.earthdata.nasa.gov/search/site/docs/search/api.html) |
+|HLS R Tutorial | [R Markdown](r/HLS_Tutorial.Rmd) | Tutorial demonstrating how to search for, access, and process HLS data in R | [CMR STAC API](https://cmr.earthdata.nasa.gov/stac) |
+
+## Other
+
+| Resource | Type | Summary |
+|----|-----|----|
+| **[Data_Discovery_CMR_API_Request.ipynb](/python/tutorials/Data_Discovery_CMR_API_Request.ipynb)** | Jupyter Notebook | Demonstrates how to search for Earthdata data collections and granules using CMR API and Request Python package|
+| **[Data_Discovery_CMR_API_Bulk_Query.ipynb](/python/tutorials/Data_Discovery_CMR_API_Bulk_Query.ipynb)** | Jupyter Notebook | Demonstrates how to search and extract data URLs for an entire collection using Python's `asyncio` package|
+| **[bulk_download_using_curl.md](/guides/bulk_download_using_curl.md)** | Markdown | Demonstrates how to bulk download LP DAAC data using Curl from command line |
+| **[bulk_download_using_wget.md](/guides/bulk_download_using_wget.md)** | Markdown | Demonstrates how to bulk download LP DAAC data using Wget from command line |
+

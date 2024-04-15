@@ -1,0 +1,32 @@
+---
+title: EMIT Data Tutorial Series 
+---
+
+These workshops are a series hosted by the LP DAAC and the Earth Mineral Dust Source Investigation (EMIT) Science Team from JPL. They focus on introducing users to data available from the EMIT mission. Sessions include detailed explanation of the available products, underlying concepts, and example Python code in Jupyter notebooks that can be used to work with the data. All of the Jupyter Notebooks and modules mentioned have corresponding pages in the [Python Resources Section](emit_resources.qmd), and can also be found in the [EMIT-Data-Resources repository](https://github.com/nasa/EMIT-Data-Resources).
+
+## Intro to EMIT: Mission Overview, Data Types and Formats, How to Access and Download
+February 3, 2023
+
+<iframe width="750" height="418" src="https://www.youtube.com/embed/XzSEqdiS2aE" frameborder="0" allowfullscreen></iframe>
+
+## Working with EMIT Data: Basics
+February 10, 2023
+
+<iframe width="750" height="418" src="https://www.youtube.com/embed/A7ndyecolck" frameborder="0" allowfullscreen></iframe>
+
+## Working with EMIT Data: Advanced
+February 17, 2023
+
+<iframe width="750" height="418" src="https://www.youtube.com/embed/FKvlPP2tG9Y" frameborder="0" allowfullscreen></iframe>
+
+## Working with EMIT Data: Mapping Methane
+March 14, 2024
+
+<iframe width="750" height="418" src="https://www.youtube.com/embed/CmSHuTGZ2W4" frameborder="0" allowfullscreen></iframe>
+
+#### Slides
+
+<iframe src="https://docs.google.com/presentation/d/1-XXW_FkcZuA3jxJN4EX_wpZ8Q8886nZqkhF9LaPhVEU/embed?start=false&loop=false&delayms=3000" frameborder="0" width="750" height="445" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
+### EMIT Mineralogy Webinar
+To be Announced

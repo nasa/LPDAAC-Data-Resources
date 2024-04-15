@@ -1,0 +1,81 @@
+project:
+  type: website
+  output-dir: _site
+
+execute:
+  freeze: true  # never re-execute computational content during project render, needed for .qmd and .rmd since quarto does not render .ipynb by default
+
+website:
+  page-navigation: true
+  page-footer: 
+    center: "NASA Land Processes Distributed Active Archive Center (LP DAAC) | United States Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center"
+
+  title: "LP DAAC Data Resources"
+  site-url: https://nasa.github.io/LPDAAC-Data-Resources/
+  repo-url: https://github.com/nasa/LPDAAC-Data-Resources
+
+  sidebar:
+    title: "Data Resources"
+    logo: img/lpdaac-logo-black.png
+    pinned: true
+    align: center
+    tools: 
+      - icon: globe
+        href: https://nasa.github.io/LPDAAC-Data-Resources/
+        text: "LP DAAC Data Resources Website"
+      - icon: github
+        href: https://github.com/nasa/LPDAAC-Data-Resources
+        text: "LP DAAC Data Resources Repository"
+        
+    style: "floating"
+    search: true
+    collapse-level: 1
+    contents:
+      - text: "Welcome"
+        href: lpdaac.qmd
+      - section: "Webinars and Workshops"
+        contents:
+          - text: "LP/JPL EMIT Tutorial Series"
+            href: web_book/emit_workshops.qmd
+          - text: "AGU Fall 2023 - VITALS"
+            href: web_book/vitals.qmd
+      - section: "Python Resources"
+        contents:
+        - text: "Overview"
+          href: web_book/python_resources.qmd
+        - text: "Cloud Workspace Setup"
+          href: setup/workshop_setup_instructions_python.md
+        - text: "Local Python Setup"
+          href: setup/setup_instructions_python.md
+        - section: "EMIT"
+          contents:
+          - text: "Background"
+            href: web_book/emit_resources.qmd
+          - text: "1. Finding and Accessing Data"
+            href: external/How_to_find_and_access_EMIT_data.ipynb
+          - text: "2. Exploring EMIT L2A Reflectance"
+            href: external/Exploring_EMIT_L2A_Reflectance.ipynb
+          - text: "3. Converting to ENVI format"
+            href: external/How_to_Convert_to_ENVI.ipynb
+          - text: "4. Extracting Points"
+            href: external/How_to_Extract_Points.ipynb
+          - text: "5. Extracting Area"
+            href: external/How_to_Extract_Area.ipynb
+          - text: "6. Using Quality Data"
+            href: external/How_to_use_EMIT_Quality_data.ipynb
+          - text: "7. Generating Methane Spectral Fingerprint"
+            href: external/Generating_Methane_Spectral_Fingerprint.ipynb
+          - text: "8. Visualizing Methane Plume Timeseries"
+            href: external/Visualizing_Methane_Plume_Timeseries.ipynb
+        - text: "Contributing"
+          href: CONTRIBUTING.md
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: [cosmo,theme-dark.scss]
+    code-background: true
+    code-copy: true
+    css: styles.css
+    toc: true
