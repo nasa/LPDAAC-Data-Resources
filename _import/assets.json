@@ -1,0 +1,66 @@
+[
+    {
+        "title": "Generating Methane Spectral Fingerprint",
+        "preamble": "This notebook is from EMIT-Data-Resources",
+        "source": "https://github.com/nasa/EMIT-Data-Resources",
+        "url": "https://raw.githubusercontent.com/nasa/EMIT-Data-Resources/main/python/tutorials/Generating_Methane_Spectral_Fingerprint.ipynb",
+        "target": "Generating_Methane_Spectral_Fingerprint.ipynb",
+        "process": false
+    },
+    {
+        "title": "Visualizing Methane Plume Timeseries",
+        "preamble": "This notebook is from EMIT-Data-Resources",
+        "source": "https://github.com/nasa/EMIT-Data-Resources",
+        "url": "https://raw.githubusercontent.com/nasa/EMIT-Data-Resources/main/python/tutorials/Visualizing_Methane_Plume_Timeseries.ipynb",
+        "target": "Visualizing_Methane_Plume_Timeseries.ipynb",
+        "process": false
+    },
+    {
+        "title": "Exploring EMIT L2A Reflectance",
+        "preamble": "This notebook is from EMIT-Data-Resources",
+        "source": "https://github.com/nasa/EMIT-Data-Resources",
+        "url": "https://raw.githubusercontent.com/nasa/EMIT-Data-Resources/main/python/tutorials/Exploring_EMIT_L2A_Reflectance.ipynb",
+        "target": "Exploring_EMIT_L2A_Reflectance.ipynb",
+        "process": false
+    },
+    {
+        "title": "How to Find and Access EMIT Data",
+        "preamble": "This notebook is from EMIT-Data-Resources",
+        "source": "https://github.com/nasa/EMIT-Data-Resources",
+        "url": "https://raw.githubusercontent.com/nasa/EMIT-Data-Resources/main/python/how-tos/How_to_find_and_access_EMIT_data.ipynb",
+        "target": "How_to_find_and_access_EMIT_data.ipynb",
+        "process": false
+    },
+    {
+        "title": "How to Convert to ENVI Format",
+        "preamble": "This notebook is from EMIT-Data-Resources",
+        "source": "https://github.com/nasa/EMIT-Data-Resources",
+        "url": "https://raw.githubusercontent.com/nasa/EMIT-Data-Resources/main/python/how-tos/How_to_Convert_to_ENVI.ipynb",
+        "target": "How_to_Convert_to_ENVI.ipynb",
+        "process": false
+    },
+    {
+        "title": "How to Extract Points",
+        "preamble": "This notebook is from EMIT-Data-Resources",
+        "source": "https://github.com/nasa/EMIT-Data-Resources",
+        "url": "https://raw.githubusercontent.com/nasa/EMIT-Data-Resources/main/python/how-tos/How_to_Extract_Points.ipynb",
+        "target": "How_to_Extract_Points.ipynb",
+        "process": false
+    },
+    {
+        "title": "How to Extract Area",
+        "preamble": "This notebook is from EMIT-Data-Resources",
+        "source": "https://github.com/nasa/EMIT-Data-Resources",
+        "url": "https://raw.githubusercontent.com/nasa/EMIT-Data-Resources/main/python/how-tos/How_to_Extract_Area.ipynb",
+        "target": "How_to_Extract_Area.ipynb",
+        "process": false
+    },
+    {
+        "title": "How to use EMIT Quality Data",
+        "preamble": "This notebook is from EMIT-Data-Resources",
+        "source": "https://github.com/nasa/EMIT-Data-Resources",
+        "url": "https://raw.githubusercontent.com/nasa/EMIT-Data-Resources/main/python/how-tos/How_to_use_EMIT_Quality_data.ipynb",
+        "target": "How_to_use_EMIT_Quality_data.ipynb",
+        "process": false
+    }
+]
