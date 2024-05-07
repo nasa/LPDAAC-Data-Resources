@@ -21,4 +21,4 @@ The other guides, tutorials, how-tos and scripts can be accessed in our mission 
 |[GEDI Data](https://github.com/nasa/GEDI-Data-Resources) |How to find, access, and work with GEDI data (Global Ecosystem Dynamics Investigation)|Tutorials |
 |[HLS Data](https://github.com/nasa/HLS-Data-Resources)|How to find, access, and work with HLS data (Harmonized Landsat Sentinel-2)|Tutorials, Scripts, Direct S3 Access|
 |[ECOSTRESS Data](https://github.com/nasa/ECOSTRESS-Data-Resources)|How to find, access, and work with ECOSTRESS data (The ECOsystem Spaceborne Thermal Radiometer Experiment on Space Station)|Tutorials, Scripts, Direct S3 Access|
-
+|[VITALS](https://github.com/nasa/VITALS)|How to find and work with EMIT and ECOSTRESS data together |Tutorials|
