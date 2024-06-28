@@ -6,7 +6,13 @@ To recreate LPDAAC web-book, a local external folder is created and the files sp
 and processed. When published with quarto, these documents will be added to the gh-pages branch. Use the environment.yml
 in the _import directory to create a suitable environment for this script.
 
-Last updated: 2024-04-02
+Change directories to _import and run the following command to build the local files for deploying the github pages:
+
+python quarto_import.py -f assets.json
+
+Afterwards, be sure to run any notebook you want to generate outputs for.
+
+Last updated: 2024-06-26
 """
 
 #!/usr/bin/env python
@@ -45,14 +51,12 @@ def inject_content(content, notebook):
 def create_preamble_cell(document):
     target = document["target"]
     url = document["url"]
-    source_link = f"[{document['source']}]({document['source']})"
+    source_link = f"Source: [{document['title']}]({document['source']})"
     import_date = date.today().strftime("%Y-%m-%d")
-    cell_content = "\n\n".join(
+    cell_content = "\n".join(
         [
-            f"# {document['title']}",
-            f"imported on: **{import_date}**",
-            f"{markdown.markdown(document['preamble'])}",
-            f"> The original source for this document is {source_link}",
+            f"> {markdown.markdown(document['preamble'])}{markdown.markdown(source_link)}",
+            f"> Imported on: **{import_date}**",
         ]
     )
     return cell_content

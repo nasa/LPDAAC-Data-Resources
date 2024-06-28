@@ -32,25 +32,41 @@ website:
     collapse-level: 1
     contents:
       - text: "Welcome"
-        href: lpdaac.qmd
-      - section: "Webinars and Workshops"
+        href: web_book/lpdaac.qmd
+      - section: "2024 IGARSS Workshop"
         contents:
-          - text: "LP/JPL EMIT Tutorial Series"
-            href: web_book/emit_workshops.qmd
-          - text: "AGU Fall 2023 - VITALS"
+          - text: "Overview"
+            href: web_book/igarss_2024.qmd
+          - section: "Setup Instructions"
+            contents:
+            - text: "Prerequisites"
+              href: external/prerequisites.md
+            - text: "Cloud Workspace Setup"
+              href: external/workshop_setup.md
+            - text: "Local Python Environment Setup"
+              href: external/setup_instructions.md
+          - section: "Tutorials"
+            contents:
+            - text: "1. Finding EMIT L2B Data"
+              href: external/Finding_EMIT_L2B_Data.ipynb
+            - text: "2. Working with EMIT L2B Mineralogy"
+              href: external/Working_with_EMIT_L2B_Mineralogy.ipynb
+      - section: "Past Workshops"
+        contents:
+          - text: "2023/2024 VITALS Workshop"
             href: web_book/vitals.qmd
+          - text: "LP/JPL EMIT Tutorial Series"
+            href: web_book/emit_tutorial_series.qmd
       - section: "Python Resources"
         contents:
         - text: "Overview"
           href: web_book/python_resources.qmd
         - text: "Cloud Workspace Setup"
-          href: setup/workshop_setup_instructions_python.md
+          href: external/workshop_setup.md
         - text: "Local Python Setup"
-          href: setup/setup_instructions_python.md
+          href: external/setup_instructions.md
         - section: "EMIT"
           contents:
-          - text: "Background"
-            href: web_book/emit_resources.qmd
           - text: "1. Finding and Accessing Data"
             href: external/How_to_find_and_access_EMIT_data.ipynb
           - text: "2. Exploring EMIT L2A Reflectance"
@@ -67,8 +83,10 @@ website:
             href: external/Generating_Methane_Spectral_Fingerprint.ipynb
           - text: "8. Visualizing Methane Plume Timeseries"
             href: external/Visualizing_Methane_Plume_Timeseries.ipynb
-        - text: "Contributing"
-          href: CONTRIBUTING.md
+      - section: "Contributing"
+        contents:
+          - href: CONTRIBUTING.md
+          - href: CODE_OF_CONDUCT.md
 
 format:
   html:

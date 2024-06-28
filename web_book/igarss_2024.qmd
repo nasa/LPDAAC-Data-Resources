@@ -1,0 +1,42 @@
+---
+title: Mapping Minerals with Space-Based Imaging Spectroscopy
+---
+
+**7 July, 2024 12:30 - 15:30 UTC +3**
+
+The Earth Surface Mineral Dust Source Investigation (EMIT) instrument aboard the International Space Station (ISS) measures visible to short-wave infrared (VSWIR) wavelengths and can be used to map Earth’s surface mineralogy in detail. Here we explore the science behind the EMIT mineralogy products and apply them in a repeatable scientific workflow. We will introduce imaging spectroscopy concepts and sensor specific considerations for exploring variation in surface mineralogy. Participants will learn the basics of VSWIR imaging spectroscopy, how minerals are identified and band depths are calculated, and how band depths are translated into mineral abundances. Participants will also learn how to find, access, and apply EMIT mineralogical data using open source resources.
+
+## Agenda
+
+| Time | Description | Leads/Instructors |  
+|------|---------------------|-------------| 
+|12:30|Introduction to EMIT |Phil Brodrick|  
+|12:45|Cloud Environment |Erik Bolch|
+|13:00|Notebook 1: Finding EMIT L2B Data|Erik Bolch|
+|13:30|Break||
+|13:40|Understanding Mineralogy Data|Phil Brodrick|
+|14:00|Notebook 2: Working with EMIT L2B Mineralogy|Erik Bolch|  
+|14:45|Break||
+|14:55|Questions and Research Discussion|All|
+ 
+## Slides
+
+<iframe src="https://docs.google.com/presentation/d/1XrdG9P5rLNR8C1TeLpf80YZUCtqdmUev/embed?start=false&loop=false&delayms=3000" frameborder="0" width="750" height="445" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
+## Learning Outcomes
+
+In this tutorial, we will explain some of the nuance regarding the spectral library and methods used for mineral identification, show how to orthorectify the data, explain how to interpret band depth, aggregate the targets identified by the classification into the EMIT 10 minerals related to surface dust, and translate band depth into spectral abundance. The EMIT Level 2B Estimated Mineral Identification and Band Depth and Uncertainty (EMITL2BMIN) Version 1 data product provides estimated mineral identification and band depths in a spatially raw, non-orthocorrected format. Mineral identification is performed on two spectral groups, which correspond to different regions of the spectra but often co-occur on the landscape. These estimates are generated using the Tetracorder system(code) and are based on EMITL2ARFL reflectance values. The EMIT_L2B_MINUNCERT file provides band depth uncertainty estimates calculated using surface Reflectance Uncertainty values from the EMITL2ARFL data product. The band depth uncertainties are presented as standard deviations. The fit score for each mineral identification is also provided as the coefficient of determination (r2) of the match between the continuum normalized library reference and the continuum normalized observed spectrum. Associated metadata indicates the name and reference information for each identified mineral, and additional information about aggregating minerals into different categories is available in the emit-sds-l2b repository and will be available as subsequent data products.
+
+## Prerequisites
+
+The prerequisites for this tutorial include: a basic familiarity with remote sensing and python, an [Earthdata Login account](https://urs.earthdata.nasa.gov/users/new), a [GitHub account](https://github.com/join). All participants need to bring their laptop on the day of event.
+
+## Contact Info  
+
+Email: <LPDAAC@usgs.gov>  
+Voice: +1-866-573-3222  
+Organization: Land Processes Distributed Active Archive Center (LP DAAC)¹  
+Website: <https://lpdaac.usgs.gov/>  
+Date last modified: 06-26-2024
+
+¹Work performed under USGS contract 140G0121D0001 for NASA contract NNG14HH33I.

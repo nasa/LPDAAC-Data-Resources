@@ -2,4 +2,5 @@
 title: EMIT Data Resources
 ---
 
-Placeholder
+All of the content in this section can be found in the EMIT-Data-Resources repository.
+
