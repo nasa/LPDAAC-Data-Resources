@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.47">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>visualizing_methane_plume_timeseries – LP DAAC Data Resources</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../CONTRIBUTING.html" rel="next">
+<link href="../external/Generating_Methane_Spectral_Fingerprint.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../web_book/python_resources.html">Python Resources</a></li><li class="breadcrumb-item"><a href="../external/How_to_find_and_access_EMIT_data.html">EMIT</a></li><li class="breadcrumb-item"><a href="../external/Visualizing_Methane_Plume_Timeseries.html">8. Visualizing Methane Plume Timeseries</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-center sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../img/lpdaac-logo-black.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Data Resources</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://nasa.github.io/LPDAAC-Data-Resources/" title="LP DAAC Data Resources Website" class="quarto-navigation-tool px-1" aria-label="LP DAAC Data Resources Website"><i class="bi bi-globe"></i></a>
+    <a href="https://github.com/nasa/LPDAAC-Data-Resources" title="LP DAAC Data Resources Repository" class="quarto-navigation-tool px-1" aria-label="LP DAAC Data Resources Repository"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">2024 IGARSS Workshop</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../web_book/igarss_2024.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Setup Instructions</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../external/prerequisites.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prerequisites</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../external/workshop_setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cloud Workspace Setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../external/setup_instructions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Local Python Environment Setup</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Tutorials</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../external/Finding_EMIT_L2B_Data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Finding EMIT L2B Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../external/Working_with_EMIT_L2B_Mineralogy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Working with EMIT L2B Mineralogy</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Past Workshops</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../web_book/vitals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2023/2024 VITALS Workshop</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../web_book/emit_tutorial_series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">LP/JPL EMIT Tutorial Series</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Python Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../web_book/python_resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../external/workshop_setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cloud Workspace Setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../external/setup_instructions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Local Python Setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">EMIT</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../external/How_to_find_and_access_EMIT_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Finding and Accessing Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../external/Exploring_EMIT_L2A_Reflectance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Exploring EMIT L2A Reflectance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../external/How_to_Convert_to_ENVI.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Converting to ENVI format</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../external/How_to_Extract_Points.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4. Extracting Points</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../external/How_to_Extract_Area.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5. Extracting Area</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../external/How_to_use_EMIT_Quality_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6. Using Quality Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../external/Generating_Methane_Spectral_Fingerprint.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7. Generating Methane Spectral Fingerprint</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../external/Visualizing_Methane_Plume_Timeseries.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">8. Visualizing Methane Plume Timeseries</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Contributing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../CONTRIBUTING.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Contributing to this Repository</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../CODE_OF_CONDUCT.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Contributor Code of Conduct</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#visualizing-methane-plume-timeseries" id="toc-visualizing-methane-plume-timeseries" class="nav-link active" data-scroll-target="#visualizing-methane-plume-timeseries">Visualizing Methane Plume Timeseries</a>
+  <ul class="collapse">
+  <li><a href="#set-up" id="toc-set-up" class="nav-link" data-scroll-target="#set-up">1. Set up</a><a id="setup" class="nav-link" data-scroll-target="undefined"></a></li>
+  <li><a href="#search-for-emit-l2b-estimated-methane-plume-complexes" id="toc-search-for-emit-l2b-estimated-methane-plume-complexes" class="nav-link" data-scroll-target="#search-for-emit-l2b-estimated-methane-plume-complexes">2. Search for EMIT L2B Estimated Methane Plume Complexes</a><a id="search" class="nav-link" data-scroll-target="undefined"></a></li>
+  <li><a href="#creating-a-timeseries-from-plume-data" id="toc-creating-a-timeseries-from-plume-data" class="nav-link" data-scroll-target="#creating-a-timeseries-from-plume-data">3. Creating a Timeseries from Plume Data</a><a id="plume-timeseries" class="nav-link" data-scroll-target="undefined"></a></li>
+  <li><a href="#calculating-the-ime-for-each-plume" id="toc-calculating-the-ime-for-each-plume" class="nav-link" data-scroll-target="#calculating-the-ime-for-each-plume">4. Calculating the IME for each plume</a><a id="ime" class="nav-link" data-scroll-target="undefined"></a></li>
+  <li><a href="#further-investigation-into-plume-detection" id="toc-further-investigation-into-plume-detection" class="nav-link" data-scroll-target="#further-investigation-into-plume-detection">5. Further investigation into plume detection</a><a id="plume-detection" class="nav-link" data-scroll-target="undefined"></a></li>
+  <li><a href="#contact-info" id="toc-contact-info" class="nav-link" data-scroll-target="#contact-info">Contact Info:</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+
+<blockquote class="blockquote">
+<p>
+This notebook is from <a href="https://github.com/nasa/EMIT-Data-Resources">EMIT-Data-Resources</a>
+</p>
+<p>
+Source: <a href="https://github.com/nasa/EMIT-Data-Resources/blob/main/python/tutorials/Visualizing_Methane_Plume_Timeseries.ipynb">Visualizing Methane Plume Timeseries</a>
+</p>
+<p>Imported on: <strong>2024-07-07</strong></p>
+</blockquote>
+<section id="visualizing-methane-plume-timeseries" class="level1">
+<h1>Visualizing Methane Plume Timeseries</h1>
+<p><strong>Summary</strong></p>
+<p>In this notebook, we’ll conduct a search and visualize the available methane plume complex observations detected by the Earth Mineral Dust Source Investigation (EMIT) instrument, then select a region of interest (ROI) that shows several plumes that appear to be from the same source. We will then visualize a time series of plume data for the ROI, calculate the integrated methane enhancement, or mass of methane observed in each plume. Lastly, to add more context to the plume timeseries, we will look at all EMIT observations over the target regions and determine if there were factors such as clouds limiting plume detection, or simply no methane emissions during additional overpasses.</p>
+<blockquote class="blockquote">
+<p>Throughout this notebook, several complex functions and workflows are used to process and visualize data. These can be found in the <code>emit_tools.py</code> and <code>tutorial_utils.py</code> modules.</p>
+</blockquote>
+<p><strong>Background</strong></p>
+<p>Methane is major contributor to atmospheric radiative forcing because its more efficient at trapping radiation than other greenhouse gases, like carbon dioxide. Because the lifetime of methane in the atmosphere is only about 10 years, reducing methane emissions offers an effective way to curb anthropogenic contributions to atmospheric radiative forcing.</p>
+<p>The EMIT instrument is an imaging spectrometer that measures light in visible and infrared wavelengths. These measurements display unique spectral signatures that correspond to chemical composition. Although the primary mission focuses on mapping the mineral composition of Earth’s surface, the EMIT instrument has also been used to successfully map methane point source emissions within its target mask using the unique spectral fingerprint of methane. More details about EMIT and its associated products can be found in the <strong>README.md</strong> and on the <a href="https://earth.jpl.nasa.gov/emit/">EMIT website</a>.</p>
+<p>The L2B Estimated Methane Plume Complexes (<a href="https://lpdaac.usgs.gov/products/emitl2bch4plmv001/">EMITL2BCH4PLM</a>) product provides delineated methane plume complexes in parts per million meter (ppm m) along with associated uncertainties. This product is a plume specific subset of the EMIT L2B Methane Enhancement Data (<a href="https://lpdaac.usgs.gov/products/emitl2bch4enhv001/">EMITL2BCH4ENH</a>) product. Each EMITL2BCH4PLM granule is sized to a specific plume complex but may cross multiple EMITL2BCH4ENH granules. A list of source EMITL2BCH4ENH granules is included in the GeoTIFF file metadata as well as the GeoJSON file. Each EMITL2BCH4PLM granule contains two files: one Cloud Optimized GeoTIFF (COG) file at a spatial resolution of 60 meters (m) and one GeoJSON file. The EMITL2BCH4PLM COG file contains a raster image of a methane plume complex extracted from EMITL2BCH4ENH v001 data. The EMITL2BCH4PLM GeoJSON file contains a vector outline of the plume complex, a list of source scenes, coordinates of the maximum enhancement values with associated uncertainties.</p>
+<p>The EMITL2BCH4ENH product only includes granules where methane plume complexes have been identified. To reduce the risk of false positives, all EMITL2BCH4ENH data undergo a manual review (or identification and confirmation) process before being designated as a plume complex. For more information on the manual review process, see Section 4.2.2 of the <a href="https://lpdaac.usgs.gov/documents/1696/EMIT_GHG_ATBD_V1.pdf">EMIT GHG Algorithm Theoretical Basis Document (ATBD)</a>.</p>
+<p><strong>References</strong></p>
+<p>Andrew K. Thorpe et al., Attribution of individual methane and carbon dioxide emission sources using EMIT observations from space. Sci. Adv.9, eadh2391 (2023). DOI:<a href="https://www.science.org/doi/10.1126/sciadv.adh2391">10.1126/sciadv.adh2391</a></p>
+<p><strong>Requirements</strong> - Set up Python Environment - See <strong>setup_instructions.md</strong> in the <code>/setup/</code> folder - NASA Earthdata Login Account. <a href="https://urs.earthdata.nasa.gov/users/new">Sign Up</a></p>
+<p><strong>Data Used</strong> - <a href="https://lpdaac.usgs.gov/products/emitl2bch4plmv001/">EMIT L2B Estimated Methane Plume Complexes (EMITL2BCH4PLM)</a> - <a href="https://lpdaac.usgs.gov/products/emitl2arflv001/">EMIT L2A Estimated Surface Reflectance and Uncertainty and Masks (EMITL2ARFL)</a></p>
+<p><strong>Learning Objectives</strong> - Search for EMIT L2B Estimated Methane Plume Complexes - Visualize search results on a map - Retrieve and visualize the EMIT L2B Estimated Methane Plume Complexes Metadata - Select a region of interest and build a timeseries of plume data - Further investigate plume detection by looking at browse images and quality information</p>
+<p><strong>Tutorial Outline</strong></p>
+<ol type="1">
+<li><a href="#setup"><strong>Setup</strong></a></li>
+<li><a href="#search"><strong>Search for EMIT L2B Estimated Methane Plume Complexes</strong></a></li>
+<li><a href="#plume-timeseries"><strong>Creating a Timeseries from Plume Data</strong></a></li>
+<li><a href="#plume-detection"><strong>Further investigation into plume detection</strong></a></li>
+<li><a href="#ime"><strong>Calculating the Integrated Mass Enhancement for Plumes</strong></a></li>
+</ol>
+<section id="set-up" class="level2">
+<h2 class="anchored" data-anchor-id="set-up">1. Set up<a id="setup"></a></h2>
+<p>Import the necessary Python libraries.</p>
+<div id="cell-3" class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import required libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> glob</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> osgeo <span class="im">import</span> gdal</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> earthaccess</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium.plugins</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> rioxarray <span class="im">as</span> rxr</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hvplot.xarray</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hvplot.pandas</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> branca.element <span class="im">import</span> Figure</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> shapely.geometry.polygon <span class="im">import</span> orient</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> shapely.geometry <span class="im">import</span> Point</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>sys.path.append(<span class="st">'../modules/'</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> emit_tools <span class="im">import</span> emit_xarray, ortho_xr, ortho_browse</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tutorial_utils <span class="im">import</span> list_metadata_fields, results_to_geopandas, convert_bounds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Log into <code>earthaccess</code> and create a <code>.netrc</code> file if necessary. This file will store your NASA Earthdata Login credentials and use them to authenticate when necessary.</p>
+<div id="cell-5" class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>earthaccess.login(persist<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>All of the data we use or save will go into the <code>methane_tutorial</code> directory, so we can go ahead and define that filepath now, relative to this notebook.</p>
+<div id="cell-7" class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>methane_dir <span class="op">=</span> <span class="st">'../../data/methane_tutorial/'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="search-for-emit-l2b-estimated-methane-plume-complexes" class="level2">
+<h2 class="anchored" data-anchor-id="search-for-emit-l2b-estimated-methane-plume-complexes">2. Search for EMIT L2B Estimated Methane Plume Complexes<a id="search"></a></h2>
+<p>Use <code>earthaccess</code> to find all EMIT L2B Estimated Methane Plume Complexes (EMITL2BCH4PLM) data available from 2023. Define the date range, and concept-ids (unique product identifier) for the EMIT products that we want to search for, but leave the spatial arguments like <code>polygon</code> and <code>bbox</code> empty so we can preview detected methane plumes globally.</p>
+<div id="cell-10" class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data Collections for our search, using a dictionary</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>concept_ids <span class="op">=</span> {<span class="st">'plumes'</span>:<span class="st">'C2748088093-LPCLOUD'</span>, <span class="st">'reflectance'</span>:<span class="st">'C2408750690-LPCLOUD'</span>}</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define Date Range</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>date_range <span class="op">=</span> (<span class="st">'2023-01-01'</span>,<span class="st">'2023-12-31'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-11" class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> earthaccess.search_data(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    concept_id<span class="op">=</span>concept_ids[<span class="st">'plumes'</span>],</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    temporal<span class="op">=</span>date_range,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    count<span class="op">=</span><span class="dv">2000</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Convert the results to a <code>geopandas.GeoDataFrame</code> using a function from our <code>tutorial_utils</code> module. This gives a nice way to organize and visualize the search results.</p>
+<div id="cell-13" class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>gdf <span class="op">=</span> results_to_geopandas(results)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>gdf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>By default this function includes some fields, but you can add fields with a <code>fields</code> argument. To see all of the metadata available use the <code>list_metadata_fields</code> function imported from the <code>tutorial_utils.py</code> module.</p>
+<div id="cell-15" class="cell" data-jupyter="{&quot;outputs_hidden&quot;:true,&quot;source_hidden&quot;:true}">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>list_metadata_fields(results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Add an index column to the dataframe to include it in the tooltips for our visualization.</p>
+<div id="cell-17" class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify index so we can reference it with gdf.explore()</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>gdf[<span class="st">'index'</span>]<span class="op">=</span>gdf.index</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-18" class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up Figure and Basemap tiles</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> Figure(width<span class="op">=</span><span class="st">"1080px"</span>,height<span class="op">=</span><span class="st">"540"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>map1 <span class="op">=</span> folium.Map(tiles<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>folium.TileLayer(tiles<span class="op">=</span><span class="st">'https://mt1.google.com/vt/lyrs=y&amp;x=</span><span class="sc">{x}</span><span class="st">&amp;y=</span><span class="sc">{y}</span><span class="st">&amp;z=</span><span class="sc">{z}</span><span class="st">'</span>,name<span class="op">=</span><span class="st">'Google Satellite'</span>, attr<span class="op">=</span><span class="st">'Google'</span>, overlay<span class="op">=</span><span class="va">True</span>).add_to(map1)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>folium.TileLayer(tiles<span class="op">=</span><span class="st">'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/</span><span class="sc">{z}</span><span class="st">/</span><span class="sc">{y}</span><span class="st">/</span><span class="sc">{x}</span><span class="st">.png'</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                name<span class="op">=</span><span class="st">'ESRI World Imagery'</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                attr<span class="op">=</span><span class="st">'Tiles &amp;copy; Esri &amp;mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                overlay<span class="op">=</span><span class="st">'True'</span>).add_to(map1)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>fig.add_child(map1)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Add Search Results gdf</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>gdf.explore(<span class="st">"_single_date_time"</span>,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>            categorical<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>            style_kwds<span class="op">=</span>{<span class="st">"fillOpacity"</span>:<span class="fl">0.1</span>,<span class="st">"width"</span>:<span class="dv">2</span>},</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>            name<span class="op">=</span><span class="st">"EMIT L2B CH4PLM"</span>,</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>            tooltip<span class="op">=</span>[</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>                <span class="st">"index"</span>,</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>                <span class="st">"native-id"</span>,</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>                <span class="st">"_single_date_time"</span>,</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>            ],</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>            m<span class="op">=</span>map1,</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>            legend<span class="op">=</span><span class="va">False</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Zoom to Data</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>map1.fit_bounds(bounds<span class="op">=</span>convert_bounds(gdf.unary_union.bounds))</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Add Layer controls</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>map1.add_child(folium.LayerControl(collapsed<span class="op">=</span><span class="va">False</span>))</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>display(fig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In this example we’ve chosen a region that looks like it has a several plumes being emitted from the same source, a landfill in Jordan. To create a simple bounding box around our target region, we can use the plumes that extend furthest in the cardinal directions to generate a bounding box around the region that we can use in our upcoming analysis.</p>
+<p>Instead of this we will import an existing <code>geojson</code> as a <code>GeoDataFrame</code> with a bounding box around this region because the plume indices may change, which results in inconsistent outputs. A commented out cell below as included as an example of how the <code>GeoDataFrame</code> was created before being written to <code>geojson</code>.</p>
+<div id="cell-20" class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # Select a list of plumes to create geometry we can use for a spatial subset</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># plumes = [146,198,243]</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># bbox = gdf.loc[plumes].geometry.unary_union.envelope</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># bbox = orient(bbox, sign=1)</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plume_bbox = gpd.GeoDataFrame({"name":['plume_bbox'], "geometry":[bbox]},crs=gdf.crs)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Open the predefined <code>geojson</code> of our plume bounding box as a <code>GeoDataFrame</code> then visualize on our <code>folium</code> figure.</p>
+<div id="cell-22" class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Open the geojson with our plume bbox</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plume_bbox <span class="op">=</span> gpd.read_file(<span class="ss">f'</span><span class="sc">{</span>methane_dir<span class="sc">}</span><span class="ss">/plume_bbox.geojson'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-23" class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up Figure and Basemap tiles</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> Figure(width<span class="op">=</span><span class="st">"1080px"</span>,height<span class="op">=</span><span class="st">"540"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>map1 <span class="op">=</span> folium.Map(tiles<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>folium.TileLayer(tiles<span class="op">=</span><span class="st">'https://mt1.google.com/vt/lyrs=y&amp;x=</span><span class="sc">{x}</span><span class="st">&amp;y=</span><span class="sc">{y}</span><span class="st">&amp;z=</span><span class="sc">{z}</span><span class="st">'</span>,name<span class="op">=</span><span class="st">'Google Satellite'</span>, attr<span class="op">=</span><span class="st">'Google'</span>, overlay<span class="op">=</span><span class="va">True</span>).add_to(map1)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>folium.TileLayer(tiles<span class="op">=</span><span class="st">'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/</span><span class="sc">{z}</span><span class="st">/</span><span class="sc">{y}</span><span class="st">/</span><span class="sc">{x}</span><span class="st">.png'</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                name<span class="op">=</span><span class="st">'ESRI World Imagery'</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                attr<span class="op">=</span><span class="st">'Tiles &amp;copy; Esri &amp;mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                overlay<span class="op">=</span><span class="st">'True'</span>).add_to(map1)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>fig.add_child(map1)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Add Search Results gdf</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>plume_bbox.explore(<span class="st">"name"</span>,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>                   name<span class="op">=</span><span class="st">'Plume BBox'</span>,</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>                   style_kwds<span class="op">=</span>{<span class="st">"fillOpacity"</span>:<span class="dv">0</span>,<span class="st">"width"</span>:<span class="dv">2</span>},</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>                   m<span class="op">=</span>map1,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>                   legend<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>gdf.explore(<span class="st">"_single_date_time"</span>,</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>            categorical<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>            style_kwds<span class="op">=</span>{<span class="st">"fillOpacity"</span>:<span class="fl">0.1</span>,<span class="st">"width"</span>:<span class="dv">2</span>},</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>            name<span class="op">=</span><span class="st">"EMIT L2B CH4PLM"</span>,</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>            tooltip<span class="op">=</span>[</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>                <span class="st">"index"</span>,</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>                <span class="st">"native-id"</span>,</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>                <span class="st">"_single_date_time"</span>,</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>            ],</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>            m<span class="op">=</span>map1,</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>            legend<span class="op">=</span><span class="va">False</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Zoom to Data</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>map1.fit_bounds(bounds<span class="op">=</span>convert_bounds(plume_bbox.unary_union.bounds))</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Add Layer controls</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>map1.add_child(folium.LayerControl(collapsed<span class="op">=</span><span class="va">False</span>))</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>display(fig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Subset our geodataframe of plumes to only those that intersect our bounding box.</p>
+<div id="cell-25" class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plm_gdf <span class="op">=</span> gdf[gdf.geometry.intersects(plume_bbox.geometry[<span class="dv">0</span>])]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>plm_gdf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If we look at an example of the <code>_related_urls</code> column in our geodataframe, we can see it contains the various links to assets associated with that plume.</p>
+<div id="cell-27" class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>plm_gdf[<span class="st">'_related_urls'</span>].iloc[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can write a function to return the asset <code>URL</code> for a given asset and row in our dataframe.</p>
+<div id="cell-29" class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_asset_url(row,asset, key<span class="op">=</span><span class="st">'Type'</span>,value<span class="op">=</span><span class="st">'GET DATA'</span>):</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Retrieve a url from the list of dictionaries for a row in the _related_urls column.</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Asset examples: CH4PLM, CH4PLMMETA, RFL, MASK, RFLUNCERT </span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add _ to asset so string matching works</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    asset <span class="op">=</span> <span class="ss">f"_</span><span class="sc">{</span>asset<span class="sc">}</span><span class="ss">_"</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Retrieve URL matching parameters</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _dict <span class="kw">in</span> row[<span class="st">'_related_urls'</span>]:</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> _dict.get(key) <span class="op">==</span> value <span class="kw">and</span> asset <span class="kw">in</span> _dict[<span class="st">'URL'</span>].split(<span class="st">'/'</span>)[<span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> _dict[<span class="st">'URL'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Write another function to make a request to retrieve the json metadata for a given plume, using our <code>get_asset_url</code> function to select the correct URL from the dataframe.</p>
+<div id="cell-31" class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to fetch CH4 Plume Metadata</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Speed could be improved here by using asyncio/aiohttp</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fetch_ch4_metadata(row):</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> requests.get(get_asset_url(row, <span class="st">'CH4PLMMETA'</span>))</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    json <span class="op">=</span> response.json()</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> json[<span class="st">'features'</span>][<span class="dv">0</span>][<span class="st">'properties'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-32" class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>fetch_ch4_metadata(plm_gdf.iloc[<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Retrieve additional plume metadata contained in the EMIT L2B Estimated Methane Plume Complexes (EMITL2BCH4PLM) data product, which contains the maximum enhancement value, the uncertainty of the plume complex, and the list of source scenes.</p>
+<div id="cell-34" class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the function to each row and convert the result to a DataFrame</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>plm_meta <span class="op">=</span> plm_gdf.<span class="bu">apply</span>(fetch_ch4_metadata, axis<span class="op">=</span><span class="dv">1</span>).<span class="bu">apply</span>(pd.Series)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-35" class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plm_meta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can add the points with highest methane concentration to our visualization.</p>
+<p>Create an index column, as we did for the plumes, then convert the latitude and longitude of max concentration to a shapely <code>Point</code> object and add it to our <code>GeoDataFrame</code>.</p>
+<div id="cell-37" class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify index so we can reference it with gdf.explore()</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>plm_meta[<span class="st">'index'</span>] <span class="op">=</span> plm_meta.index</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add Geometry and convert to geodataframe</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>plm_meta[<span class="st">'geometry'</span>] <span class="op">=</span> plm_meta.<span class="bu">apply</span>(<span class="kw">lambda</span> row: Point(row[<span class="st">'Longitude of max concentration'</span>], row[<span class="st">'Latitude of max concentration'</span>]), axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>plm_meta <span class="op">=</span> gpd.GeoDataFrame(plm_meta, geometry<span class="op">=</span><span class="st">'geometry'</span>, crs<span class="op">=</span><span class="st">'EPSG:4326'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-38" class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>plm_meta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now add this to our visualization.</p>
+<div id="cell-40" class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up Figure and Basemap tiles</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> Figure(width<span class="op">=</span><span class="st">"1080px"</span>,height<span class="op">=</span><span class="st">"540"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>map1 <span class="op">=</span> folium.Map(tiles<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>folium.TileLayer(tiles<span class="op">=</span><span class="st">'https://mt1.google.com/vt/lyrs=y&amp;x=</span><span class="sc">{x}</span><span class="st">&amp;y=</span><span class="sc">{y}</span><span class="st">&amp;z=</span><span class="sc">{z}</span><span class="st">'</span>,name<span class="op">=</span><span class="st">'Google Satellite'</span>, attr<span class="op">=</span><span class="st">'Google'</span>, overlay<span class="op">=</span><span class="va">True</span>).add_to(map1)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>folium.TileLayer(tiles<span class="op">=</span><span class="st">'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/</span><span class="sc">{z}</span><span class="st">/</span><span class="sc">{y}</span><span class="st">/</span><span class="sc">{x}</span><span class="st">.png'</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>                name<span class="op">=</span><span class="st">'ESRI World Imagery'</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>                attr<span class="op">=</span><span class="st">'Tiles &amp;copy; Esri &amp;mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'</span>,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>                overlay<span class="op">=</span><span class="st">'True'</span>).add_to(map1)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>fig.add_child(map1)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Add Search Results gdf</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>plume_bbox.explore(<span class="st">"name"</span>,</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>                   name<span class="op">=</span><span class="st">'Plume BBox'</span>,</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>                   style_kwds<span class="op">=</span>{<span class="st">"fillOpacity"</span>:<span class="dv">0</span>,<span class="st">"width"</span>:<span class="dv">2</span>},</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>                   m<span class="op">=</span>map1,</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>                   legend<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>plm_gdf.explore(<span class="st">"index"</span>,</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>            categorical<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>            style_kwds<span class="op">=</span>{<span class="st">"fillOpacity"</span>:<span class="fl">0.1</span>,<span class="st">"width"</span>:<span class="dv">2</span>},</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>            name<span class="op">=</span><span class="st">"EMIT L2B CH4PLM"</span>,</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>            tooltip<span class="op">=</span>[</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>                <span class="st">"index"</span>,</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>                <span class="st">"native-id"</span>,</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>                <span class="st">"_single_date_time"</span>,</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>            ],</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>            m<span class="op">=</span>map1,</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>            legend<span class="op">=</span><span class="va">False</span></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>plm_meta.explore(<span class="st">"index"</span>,</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>            categorical<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>            style_kwds<span class="op">=</span>{<span class="st">"fillOpacity"</span>:<span class="fl">0.1</span>,<span class="st">"width"</span>:<span class="dv">2</span>},</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>            name<span class="op">=</span><span class="st">"Location of Max Concentration (ppm m)"</span>,</span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>            tooltip<span class="op">=</span>[</span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>                <span class="st">"DAAC Scene Names"</span>,</span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>                <span class="st">"UTC Time Observed"</span>,</span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Max Plume Concentration (ppm m)"</span>,</span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Concentration Uncertainty (ppm m)"</span>,</span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Orbit"</span></span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>            ],</span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a>            m<span class="op">=</span>map1,</span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a>            legend<span class="op">=</span><span class="va">False</span></span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Zoom to Data</span></span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>map1.fit_bounds(bounds<span class="op">=</span>convert_bounds(plume_bbox.unary_union.bounds))</span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Add Layer controls</span></span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a>map1.add_child(folium.LayerControl(collapsed<span class="op">=</span><span class="va">False</span>))</span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a>display(fig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="creating-a-timeseries-from-plume-data" class="level2">
+<h2 class="anchored" data-anchor-id="creating-a-timeseries-from-plume-data">3. Creating a Timeseries from Plume Data<a id="plume-timeseries"></a></h2>
+<p>We can visualize a timeseries of these plumes that appear to be from the same source. To do this we’ll generate a list of the COG urls for the plumes, then use rioxarray to stream the data and build a timeseries dataset based on the timestamps in the filenames.</p>
+<p>Use the <code>get_asset_url</code> function to retrieve the CH4PLM asset URLs by applying it to our dataframe and converting the output to a list.</p>
+<div id="cell-44" class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterate over rows in the plm_gdf and get the CH4PLM urls and store them in a list</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>plm_urls <span class="op">=</span> plm_gdf.<span class="bu">apply</span>(<span class="kw">lambda</span> row: get_asset_url(row, asset<span class="op">=</span><span class="st">'CH4PLM'</span>), axis<span class="op">=</span><span class="dv">1</span>).tolist()</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>plm_urls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now that we have a list of COG urls we can set our <code>gdal</code> configuration options to pass our NASA Earthdata login credentials when we access each COG.</p>
+<div id="cell-46" class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GDAL configurations used to successfully access LP DAAC Cloud Assets via vsicurl </span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>gdal.SetConfigOption(<span class="st">'GDAL_HTTP_COOKIEFILE'</span>,<span class="st">'~/cookies.txt'</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>gdal.SetConfigOption(<span class="st">'GDAL_HTTP_COOKIEJAR'</span>, <span class="st">'~/cookies.txt'</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>gdal.SetConfigOption(<span class="st">'GDAL_DISABLE_READDIR_ON_OPEN'</span>,<span class="st">'EMPTY_DIR'</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>gdal.SetConfigOption(<span class="st">'CPL_VSIL_CURL_ALLOWED_EXTENSIONS'</span>,<span class="st">'TIF'</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>gdal.SetConfigOption(<span class="st">'GDAL_HTTP_UNSAFESSL'</span>, <span class="st">'YES'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To build our timeseries we will start by opening all the necessary data. Loop over our list of urls, open each plume, merge plumes acquired at the same time, and store them in a dictionary where keys correspond to the acquisition time and values are the plume data in an <code>xarray.DataArray</code>.</p>
+<div id="cell-48" class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>plm_ts_dict <span class="op">=</span> {}</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set max retries for vsicurl errors</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>max_retries<span class="op">=</span><span class="dv">5</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterate over plm urls</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> url <span class="kw">in</span> plm_urls:</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># retrieve acquisition time from url</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    acquisition_time <span class="op">=</span> url.split(<span class="st">'/'</span>)[<span class="op">-</span><span class="dv">1</span>].split(<span class="st">'.'</span>)[<span class="op">-</span><span class="dv">2</span>].split(<span class="st">'_'</span>)[<span class="op">-</span><span class="dv">2</span>]</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># list plumes identified in same scene if there are any</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    same_scene <span class="op">=</span> [url <span class="cf">for</span> url <span class="kw">in</span> plm_urls <span class="cf">if</span> acquisition_time <span class="kw">in</span> url.split(<span class="st">'/'</span>)[<span class="op">-</span><span class="dv">1</span>].split(<span class="st">'.'</span>)[<span class="op">-</span><span class="dv">2</span>].split(<span class="st">'_'</span>)[<span class="op">-</span><span class="dv">2</span>]]</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    to_merge <span class="op">=</span> []</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># prevent duplicate processing of plumes from the same scene</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> acquisition_time <span class="kw">not</span> <span class="kw">in</span> <span class="bu">list</span>(plm_ts_dict.keys()):</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Open and merge plumes identified from each scene</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> _plm <span class="kw">in</span> same_scene:</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Opening </span><span class="sc">{</span>_plm<span class="sc">.</span>split(<span class="st">'/'</span>)[<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Try loop for vsicurl/unrecongnized format error</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> retry <span class="kw">in</span> <span class="bu">range</span>(max_retries):</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>                <span class="cf">try</span>:</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Open COG and squeeze band dimension</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>                    plm <span class="op">=</span> rxr.open_rasterio(_plm).squeeze(<span class="st">'band'</span>, drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">break</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>                <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>e<span class="sc">}</span><span class="ss"> Retrying...'</span>)</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f"Failed to process </span><span class="sc">{</span>url<span class="sc">}</span><span class="ss"> after </span><span class="sc">{</span>max_retries<span class="sc">}</span><span class="ss"> retries. Please check to see you're authenticated with earthaccess."</span>)</span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Add to list of plumes to merge</span></span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>            to_merge.append(plm)</span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Merge plumes and add to timeseries</span></span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>            plm_ts_dict[acquisition_time] <span class="op">=</span> rxr.merge.merge_arrays(to_merge)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now that we have a plume object for each date in our timeseries, we need to put them all on a common grid so they are spatially aligned before we can stack them along the time dimension.</p>
+<p>To do this, we will find the minimum and maximum bounds of each dataarray in our dictionary, then create a common grid to reproject to.</p>
+<div id="cell-50" class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_common_grid(data_arrays: List[xr.DataArray]) <span class="op">-&gt;</span> xr.DataArray:</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Create a common grid for a list of xarray DataArrays, matching the resolution of the first data array.</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initial Bounds for common grid</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    minx <span class="op">=</span> miny <span class="op">=</span> <span class="bu">float</span>(<span class="st">'inf'</span>)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    maxx <span class="op">=</span> maxy <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> array <span class="kw">in</span> data_arrays:</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>        left, bottom, right, top <span class="op">=</span> array.rio.bounds()</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>        minx <span class="op">=</span> <span class="bu">min</span>(minx, left)</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>        miny <span class="op">=</span> <span class="bu">min</span>(miny, bottom)</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>        maxx <span class="op">=</span> <span class="bu">max</span>(maxx, right)</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>        maxy <span class="op">=</span> <span class="bu">max</span>(maxy, top)</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>    bounds <span class="op">=</span> (minx, miny, maxx, maxy)</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> data_arrays[<span class="dv">0</span>].rio.resolution()</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>    crs <span class="op">=</span> data_arrays[<span class="dv">0</span>].rio.crs</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>    nodata <span class="op">=</span> data_arrays[<span class="dv">0</span>].rio.nodata</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># # Calculate new raster shape using the new extent, maintaining the original resolution</span></span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>    height <span class="op">=</span> <span class="bu">int</span>(np.ceil((bounds[<span class="dv">3</span>] <span class="op">-</span> bounds[<span class="dv">1</span>]) <span class="op">/</span> <span class="bu">abs</span>(res[<span class="dv">1</span>])))</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>    width <span class="op">=</span> <span class="bu">int</span>(np.ceil((bounds[<span class="dv">2</span>] <span class="op">-</span> bounds[<span class="dv">0</span>]) <span class="op">/</span> <span class="bu">abs</span>(res[<span class="dv">0</span>])))</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> np.full((height,width),nodata)</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>    coords <span class="op">=</span> {<span class="st">'y'</span>:([<span class="st">'y'</span>],np.arange(bounds[<span class="dv">1</span>], bounds[<span class="dv">3</span>], <span class="bu">abs</span>(res[<span class="dv">1</span>]))),</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>              <span class="st">'x'</span>:([<span class="st">'x'</span>],np.arange(bounds[<span class="dv">0</span>], bounds[<span class="dv">2</span>], <span class="bu">abs</span>(res[<span class="dv">0</span>])))}</span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>    common_grid <span class="op">=</span> xr.DataArray(data, coords<span class="op">=</span>coords)</span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>    common_grid.rio.write_crs(crs, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(common_grid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-51" class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>common_grid <span class="op">=</span> create_common_grid(<span class="bu">list</span>(plm_ts_dict.values()))</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>common_grid</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Reproject each of the plume dataarrays to the common grid.</p>
+<div id="cell-53" class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>plm_ts_dict <span class="op">=</span> {key: value.rio.reproject_match(common_grid) <span class="cf">for</span> key, value <span class="kw">in</span> plm_ts_dict.items()}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now that we have all of our plumes on a standard grid, we can concatenate them along a time dimension to create a timeseries. Create an xarray variable called ‘time’ from our dictionary keys, then use <code>xarray.concat</code> to concatenate all of our plumes along the time dimension.</p>
+<div id="cell-55" class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>plm_time <span class="op">=</span> xr.Variable(<span class="st">'time'</span>, [datetime.strptime(t,<span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">T%H%M%S'</span>) <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">list</span>(plm_ts_dict.keys())])</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>plm_time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-56" class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>plm_ts_ds <span class="op">=</span> xr.concat(<span class="bu">list</span>(plm_ts_dict.values()), dim<span class="op">=</span>plm_time)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>plm_ts_ds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Set our no_data values to <code>np.nan</code> to make sure they are transparent for improved visualization.</p>
+<div id="cell-58" class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>plm_ts_ds.data[plm_ts_ds.data <span class="op">==</span> <span class="op">-</span><span class="dv">9999</span>] <span class="op">=</span> np.nan</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Plot the plume time series.</p>
+<div id="cell-60" class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>plm_ts_plot <span class="op">=</span> plm_ts_ds.hvplot.image(x<span class="op">=</span><span class="st">'x'</span>,y<span class="op">=</span><span class="st">'y'</span>,geo<span class="op">=</span><span class="va">True</span>, tiles<span class="op">=</span><span class="st">'ESRI'</span>, crs<span class="op">=</span><span class="st">'EPGS:4326'</span>, cmap<span class="op">=</span><span class="st">'inferno'</span>,clim<span class="op">=</span>(<span class="dv">0</span>,np.nanmax(plm_ts_ds.data)),clabel<span class="op">=</span><span class="ss">f'Methane Concentation (</span><span class="sc">{</span>plm_ts_ds<span class="sc">.</span>Units<span class="sc">}</span><span class="ss">)'</span>, frame_width<span class="op">=</span><span class="dv">600</span>, frame_height<span class="op">=</span><span class="dv">600</span>, rasterize<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-61" class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>plm_ts_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="calculating-the-ime-for-each-plume" class="level2">
+<h2 class="anchored" data-anchor-id="calculating-the-ime-for-each-plume">4. Calculating the IME for each plume<a id="ime"></a></h2>
+<p>The integrated mass enhancement (IME), a sum of the mass of methane present in each plume is calculated by summing the mass of methane present in all plume pixels. The IME in kilograms (kg) can be estimated by using the equation below which includes the mixing ratio length per pixel (ppmm), the area of the pixel (m^2), where 22.4 is the volume of 1 mole of gas at standard temperature and pressure (STP) in liters, and 0.01604 is the molar mass of methane in kg/mol.</p>
+<p>The IME can be combined with a plume length and windspeed to estimate emissions in units of kg per hour, but in this tutorial, we will not calculate emissions, rather keep things simple and calculate the IME for each plume and observe how these values change over time.</p>
+<p><span class="math display">\[\ kg\ \ (per \ \ pixel) = \frac{pixel \ \ value \ \ ppm \cdot m}{1} \frac{1}{1 \cdot 10^6 \ \ ppm} \frac {60 \ \ m \cdot 60 \ \ m} {1} \frac {1000 \ \ L} {m^3} \frac {1 \ \ mol} {22.4 \ \ L} \frac {0.01604 \ \ kg} {1 \ \ mol}\]</span></p>
+<p>We can write this as a function for each pixel, then apply it to the entire timeseries to calculate the IME for each plume.</p>
+<div id="cell-66" class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calc_ime(plume_da):</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    molar_volume <span class="op">=</span> <span class="fl">22.4</span> <span class="co"># L/mol at STP</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    molar_mass_ch4 <span class="op">=</span> <span class="fl">0.01604</span> <span class="co">#kg/mol</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    kg <span class="op">=</span> plume_da <span class="op">*</span> (<span class="dv">1</span><span class="op">/</span><span class="fl">1e6</span>) <span class="op">*</span> (<span class="dv">60</span><span class="op">*</span><span class="dv">60</span>) <span class="op">*</span> (<span class="dv">1000</span>) <span class="op">*</span> (<span class="dv">1</span><span class="op">/</span>molar_volume) <span class="op">*</span> molar_mass_ch4</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    ime <span class="op">=</span> np.nansum(kg)</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ime</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-67" class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the function along the 'x' and 'y' dimensions</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>ime_ts <span class="op">=</span> xr.apply_ufunc(calc_ime, plm_ts_ds, input_core_dims<span class="op">=</span>[[<span class="st">'y'</span>, <span class="st">'x'</span>]], vectorize<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>ime_ts.name <span class="op">=</span> <span class="st">'value'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-68" class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>ime_plot <span class="op">=</span> ime_ts.hvplot.scatter(x<span class="op">=</span><span class="st">'time'</span>,y<span class="op">=</span><span class="st">'value'</span>, title<span class="op">=</span><span class="st">'Observed Methane IME over 2023'</span>, color<span class="op">=</span><span class="st">'black'</span>, xticks<span class="op">=</span><span class="bu">list</span>(ime_ts.time.data), rot<span class="op">=</span><span class="dv">90</span>, grid<span class="op">=</span><span class="va">True</span>, xlabel<span class="op">=</span><span class="st">'Date Observed'</span>, ylabel<span class="op">=</span><span class="st">'kg'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-69" class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>ime_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="further-investigation-into-plume-detection" class="level2">
+<h2 class="anchored" data-anchor-id="further-investigation-into-plume-detection">5. Further investigation into plume detection<a id="plume-detection"></a></h2>
+<p>The timeseries shown above doesn’t necessarily give us a full a full picture methane emissions at the landfill. In addition to cases where no emissions were observed, gaps in data can result from absence of observations due the variable revisit period of the ISS, or clouds. To add more context to this plume timeseries, we will look at all EMIT acquisitions over the target regions and try to determine if there were factors affecting plume detection, or simply no methane emissions during those for any other overpass.</p>
+<p>For this search we’ll want to restrict our search to a smaller ROI than our bounding box. We want to pick something smaller more centered around the source of the emission, so we avoid retrieving irrelevant data, for example an overpass barely crossing the corner of our large bounding box. To do this we will use the maximum concentration points from our plumes to create a smaller ROI that is likely to include a methane plume if one is present.</p>
+<p>Create a new polygon using the maximum concentration points from our plumes as vertices, then orienting the points in counter-clockwise order so they are compatible with an <code>earthaccess</code> search. This is just a simple example approach, there are several ways we could define a smaller ROI using the plume data or ancillary information.</p>
+<div id="cell-71" class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>max_conc_poly <span class="op">=</span> plm_meta.geometry.unary_union.envelope</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>max_conc_poly <span class="op">=</span> orient(max_conc_poly, sign<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>max_conc_gdf <span class="op">=</span> gpd.GeoDataFrame({<span class="st">"name"</span>:[<span class="st">'max_points'</span>], <span class="st">"geometry"</span>:[max_conc_poly]},crs<span class="op">=</span>plm_meta.crs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-72" class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>roi <span class="op">=</span> <span class="bu">list</span>(max_conc_gdf.geometry[<span class="dv">0</span>].exterior.coords)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>roi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now conduct a search for reflectance data over our ROI and convert the results to a <code>geopandas.GeoDataFrame</code>.</p>
+<div id="cell-74" class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>rfl_results <span class="op">=</span> earthaccess.search_data(</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    concept_id<span class="op">=</span>concept_ids[<span class="st">'reflectance'</span>],</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    polygon<span class="op">=</span>roi,</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    temporal<span class="op">=</span> date_range, <span class="co">#('2023-03-01','2023-03-31')</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    count<span class="op">=</span><span class="dv">2000</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>rfl_gdf <span class="op">=</span> results_to_geopandas(rfl_results)</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>rfl_gdf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>From the results we can see we have 20 scenes that intersect our ROI. We can visualize the footprints of these scenes to gain some insight into coverage over our ROI.</p>
+<div id="cell-76" class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up Figure and Basemap tiles</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> Figure(width<span class="op">=</span><span class="st">"1080px"</span>,height<span class="op">=</span><span class="st">"540"</span>)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>map1 <span class="op">=</span> folium.Map(tiles<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>folium.TileLayer(tiles<span class="op">=</span><span class="st">'https://mt1.google.com/vt/lyrs=y&amp;x=</span><span class="sc">{x}</span><span class="st">&amp;y=</span><span class="sc">{y}</span><span class="st">&amp;z=</span><span class="sc">{z}</span><span class="st">'</span>,name<span class="op">=</span><span class="st">'Google Satellite'</span>, attr<span class="op">=</span><span class="st">'Google'</span>, overlay<span class="op">=</span><span class="va">True</span>).add_to(map1)</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>folium.TileLayer(tiles<span class="op">=</span><span class="st">'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/</span><span class="sc">{z}</span><span class="st">/</span><span class="sc">{y}</span><span class="st">/</span><span class="sc">{x}</span><span class="st">.png'</span>,</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>                name<span class="op">=</span><span class="st">'ESRI World Imagery'</span>,</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>                attr<span class="op">=</span><span class="st">'Tiles &amp;copy; Esri &amp;mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'</span>,</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>                overlay<span class="op">=</span><span class="st">'True'</span>).add_to(map1)</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>fig.add_child(map1)</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Add Search Reflectance Scenes with no CH4</span></span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>rfl_gdf.explore(color<span class="op">=</span><span class="st">'red'</span>,</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>               style_kwds<span class="op">=</span>{<span class="st">"fillOpacity"</span>:<span class="dv">0</span>,<span class="st">"width"</span>:<span class="dv">2</span>},</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>               name<span class="op">=</span><span class="st">"Scenes with no CH4 Plumes"</span>,</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>               tooltip<span class="op">=</span>[</span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>                <span class="st">"native-id"</span>,</span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>                <span class="st">"_beginning_date_time"</span>,</span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>                ],</span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>                m<span class="op">=</span>map1,</span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a>                legend<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Add Plume BBox to Map</span></span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a>max_conc_gdf.explore(m<span class="op">=</span>map1,</span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a>                   name<span class="op">=</span><span class="st">'Plumes Bounding Box'</span>,</span>
+<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a>                   legend<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb41-26"><a href="#cb41-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-27"><a href="#cb41-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Zoom to Data</span></span>
+<span id="cb41-28"><a href="#cb41-28" aria-hidden="true" tabindex="-1"></a>map1.fit_bounds(bounds<span class="op">=</span>convert_bounds(rfl_gdf.unary_union.bounds))</span>
+<span id="cb41-29"><a href="#cb41-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Add Layer controls</span></span>
+<span id="cb41-30"><a href="#cb41-30" aria-hidden="true" tabindex="-1"></a>map1.add_child(folium.LayerControl(collapsed<span class="op">=</span><span class="va">False</span>))</span>
+<span id="cb41-31"><a href="#cb41-31" aria-hidden="true" tabindex="-1"></a>display(fig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>From this we can see that there are several scenes that intersect with our ROI, but likely have no relevant information since they only cover a small portion or corner of the ROI.</p>
+<p>We can use a similar process as with the methane product to construct a time series to better understand the data gathered on each overpass. To do this, we will use the browse imagery and the masks included in the EMITL2ARFL product. The by default the mask files and browse images are not orthorectified, so we must do that as part of our workflow.</p>
+<p>First, get the urls for the browse images and masks for each scene in our <code>rfl_gdf</code> search results using the <code>get_asset_urls</code> function.</p>
+<div id="cell-79" class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>png_urls <span class="op">=</span> rfl_gdf.<span class="bu">apply</span>(<span class="kw">lambda</span> row: get_asset_url(row, asset<span class="op">=</span><span class="st">'RFL'</span>, value<span class="op">=</span><span class="st">'GET RELATED VISUALIZATION'</span>), axis<span class="op">=</span><span class="dv">1</span>).tolist()</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>png_urls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-80" class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>mask_urls <span class="op">=</span> rfl_gdf.<span class="bu">apply</span>(<span class="kw">lambda</span> row: get_asset_url(row, asset<span class="op">=</span><span class="st">'MASK'</span>), axis<span class="op">=</span><span class="dv">1</span>).tolist()</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>mask_urls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can write these as a text file so we don’t need to search again, although we will use the <code>rfl_gdf</code> GeoDataFrame later in the tutorial.</p>
+<div id="cell-82" class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # Save URL List</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># with open(f'{methane_dir}rfl_mask_urls.txt', 'w') as f:</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     for line in mask_urls:</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co">#         f.write(f"{line}\n")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Since the mask files are not chunked, its quicker to download them to do the processing.</p>
+<p>Login with <code>earthaccess</code> and download these files.</p>
+<div id="cell-84" class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>earthaccess.login(persist<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Get requests https Session using Earthdata Login Info</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>fs <span class="op">=</span> earthaccess.get_requests_https_session()</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve granule asset ID from URL (to maintain existing naming convention)</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> url <span class="kw">in</span> mask_urls:</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>    granule_asset_id <span class="op">=</span> url.split(<span class="st">'/'</span>)[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define Local Filepath</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>    fp <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>methane_dir<span class="sc">}{</span>granule_asset_id<span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Download the Granule Asset if it doesn't exist</span></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> os.path.isfile(fp):</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> fs.get(url,stream<span class="op">=</span><span class="va">True</span>) <span class="im">as</span> src:</span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">with</span> <span class="bu">open</span>(fp,<span class="st">'wb'</span>) <span class="im">as</span> dst:</span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> chunk <span class="kw">in</span> src.iter_content(chunk_size<span class="op">=</span><span class="dv">64</span><span class="op">*</span><span class="dv">1024</span><span class="op">*</span><span class="dv">1024</span>):</span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>                    dst.write(chunk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For each of these scenes we want to open EMIT L2A Mask data, then subset spatially and select only the variable we want, in this case we’ll use the <code>Cloud flag</code> from the <code>masks</code> dataarray. There are other flags, such as a cirrus mask, dilated cloud flag, spacecraft flag, water flag, and and aerosol optical depth. We could potentially use some of these as well to inform our decisions about plume detection, but will stick to the <code>Cloud flag</code> in this example for simplicity.</p>
+<p>As we do this, we will also use the GLT included in the mask file to orthorectify our RGB browse image. We can do this because the browse png files are in the native resolution and can be broadcast onto an orthorectified grid using the GLT. We will use the <code>reproject_match</code> function to reproject the data on a <code>common_grid</code>, which will automatically clip the data to the <code>common_grid</code> extent.</p>
+<p>First, get the filepaths for our downloaded mask data.</p>
+<div id="cell-86" class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># List the downloaded files</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>fps <span class="op">=</span> glob.glob(<span class="ss">f'</span><span class="sc">{</span>methane_dir<span class="sc">}</span><span class="ss">*.nc'</span>)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>fns <span class="op">=</span> [os.path.basename(fp) <span class="cf">for</span> fp <span class="kw">in</span> fps]</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>fns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Create a function to loop through our files, orthorectifying the mask and browse image, clipping and reprojecting to our predefined <code>common_grid</code>, and finally saving outputs as a COG.</p>
+<div id="cell-88" class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> process_scenes(fns, outdir, common_grid):</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co">    This function will process a list of EMIT Mask scenes, selecting the cloud flag, orthorectifying the mask and browse image, then reprojecting both to a common grid and saving an output.</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> fn <span class="kw">in</span> fns:</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get Granule Asset ID for First Adjacent Scene (may only be one)</span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>        granule_asset_id <span class="op">=</span> fn.split(<span class="st">'.'</span>)[<span class="op">-</span><span class="dv">2</span>]</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Set Output Path</span></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>        outpath_mask <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>outdir<span class="sc">}{</span>granule_asset_id<span class="sc">}</span><span class="ss">_cloud_flag.tif"</span></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>        outpath_browse <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>outdir<span class="sc">}{</span>granule_asset_id<span class="sc">}</span><span class="ss">_ortho_browse.tif"</span></span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Check if the file exists</span></span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> os.path.isfile(outpath_mask):</span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Open Mask Dataset</span></span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>            emit_ds <span class="op">=</span> emit_xarray(<span class="ss">f'</span><span class="sc">{</span>methane_dir<span class="sc">}{</span>fn<span class="sc">}</span><span class="ss">'</span>, ortho<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Retrieve GLT, spatial_ref, and geotransform to use on browse image</span></span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a>            glt <span class="op">=</span> np.nan_to_num(np.stack([emit_ds[<span class="st">"glt_x"</span>].data, emit_ds[<span class="st">"glt_y"</span>].data], axis<span class="op">=-</span><span class="dv">1</span>),nan<span class="op">=</span><span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a>            spatial_ref <span class="op">=</span> emit_ds.spatial_ref</span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a>            gt <span class="op">=</span> emit_ds.geotransform</span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Select browse image url corresponding to the scene</span></span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a>            png_url <span class="op">=</span> [url <span class="cf">for</span> url <span class="kw">in</span> png_urls <span class="cf">if</span> fn.split(<span class="st">'.'</span>)[<span class="op">-</span><span class="dv">2</span>].split(<span class="st">'_'</span>)[<span class="op">-</span><span class="dv">3</span>] <span class="kw">in</span> url][<span class="dv">0</span>]</span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Orthorectify browse and mask</span></span>
+<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a>            rgb <span class="op">=</span> ortho_browse(png_url, glt, spatial_ref, gt, white_background<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a>            emit_ds <span class="op">=</span> ortho_xr(emit_ds)</span>
+<span id="cb47-24"><a href="#cb47-24" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Select only mask array and desired quality flag and reproject to match our chosen extent</span></span>
+<span id="cb47-25"><a href="#cb47-25" aria-hidden="true" tabindex="-1"></a>            mask_da <span class="op">=</span> emit_ds[<span class="st">'mask'</span>].sel(mask_bands<span class="op">=</span><span class="st">'Cloud flag'</span>)</span>
+<span id="cb47-26"><a href="#cb47-26" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Drop elevation</span></span>
+<span id="cb47-27"><a href="#cb47-27" aria-hidden="true" tabindex="-1"></a>            mask_da <span class="op">=</span> mask_da.drop_vars(<span class="st">'elev'</span>)</span>
+<span id="cb47-28"><a href="#cb47-28" aria-hidden="true" tabindex="-1"></a>            mask_da.name <span class="op">=</span> <span class="st">'Cloud flag'</span></span>
+<span id="cb47-29"><a href="#cb47-29" aria-hidden="true" tabindex="-1"></a>            mask_da.data <span class="op">=</span> np.nan_to_num(mask_da.data, nan<span class="op">=-</span><span class="dv">9999</span>)</span>
+<span id="cb47-30"><a href="#cb47-30" aria-hidden="true" tabindex="-1"></a>            mask_da <span class="op">=</span> mask_da.rio.reproject_match(common_grid, nodata<span class="op">=-</span><span class="dv">9999</span>)</span>
+<span id="cb47-31"><a href="#cb47-31" aria-hidden="true" tabindex="-1"></a>            <span class="co">#mask_da.rio.write_nodata(np.nan, inplace=True)</span></span>
+<span id="cb47-32"><a href="#cb47-32" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Reproject rgb</span></span>
+<span id="cb47-33"><a href="#cb47-33" aria-hidden="true" tabindex="-1"></a>            rgb <span class="op">=</span> rgb.rio.reproject_match(common_grid, nodata<span class="op">=</span><span class="dv">255</span>) <span class="co"># 255 for white background</span></span>
+<span id="cb47-34"><a href="#cb47-34" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Write cog outputs        </span></span>
+<span id="cb47-35"><a href="#cb47-35" aria-hidden="true" tabindex="-1"></a>            mask_da.rio.to_raster(outpath_mask,driver<span class="op">=</span><span class="st">"COG"</span>)</span>
+<span id="cb47-36"><a href="#cb47-36" aria-hidden="true" tabindex="-1"></a>            rgb.rio.to_raster(outpath_browse,driver<span class="op">=</span><span class="st">"COG"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Run the function.</p>
+<div id="cell-90" class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>process_scenes(fns, methane_dir, common_grid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Create a list of the processed files to use in creation of a timeseries. We’ll use a similar process to what we did for the plumes, adding a <code>time</code> variable to our datasets and concatenating.</p>
+<div id="cell-92" class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>mask_files <span class="op">=</span> <span class="bu">sorted</span>(glob.glob(<span class="ss">f'</span><span class="sc">{</span>methane_dir<span class="sc">}</span><span class="ss">*cloud_flag.tif'</span>))</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>mask_files</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-93" class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>rgb_files <span class="op">=</span> <span class="bu">sorted</span>(glob.glob(<span class="ss">f'</span><span class="sc">{</span>methane_dir<span class="sc">}</span><span class="ss">*ortho_browse.tif'</span>))</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>rgb_files</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Build a time index from the filenames.</p>
+<div id="cell-95" class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> time_index_from_filenames(file_names,datetime_pos):</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Helper function to create a pandas DatetimeIndex</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [datetime.strptime(f.split(<span class="st">'_'</span>)[datetime_pos], <span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">T%H%M%S'</span>) <span class="cf">for</span> f <span class="kw">in</span> file_names]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-96" class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>mask_time <span class="op">=</span> xr.Variable(<span class="st">'time'</span>, time_index_from_filenames(mask_files, <span class="op">-</span><span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Open and concatenate our datasets along the time dimension, then assign fill_values to <code>np.nan</code> to make those sections of the data transparent in our visualization.</p>
+<div id="cell-98" class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>quality_ts_da <span class="op">=</span> xr.concat([rxr.open_rasterio(f).squeeze(<span class="st">'band'</span>, drop<span class="op">=</span><span class="va">True</span>).rio.reproject_match(common_grid) <span class="cf">for</span> f <span class="kw">in</span> mask_files], dim<span class="op">=</span>mask_time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Create a plot object for the quality timeseries, first setting the quality mask values representing no clouds (0) or no data (-9999) to <code>np.nan</code> so they will be transparent in our visualization.</p>
+<div id="cell-100" class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>quality_ts_da.data[quality_ts_da.data <span class="op">&lt;</span> <span class="dv">1</span>] <span class="op">=</span> np.nan</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>quality_ts_map <span class="op">=</span> quality_ts_da.hvplot.image(x<span class="op">=</span><span class="st">'x'</span>,y<span class="op">=</span><span class="st">'y'</span>,cmap<span class="op">=</span><span class="st">'greys'</span>,groupby<span class="op">=</span><span class="st">'time'</span>,clim<span class="op">=</span>(<span class="dv">0</span>,<span class="dv">1</span>),geo<span class="op">=</span><span class="va">True</span>,frame_height<span class="op">=</span><span class="dv">400</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>RGB images are a good way to add something more visually understandable than just the mask layers. Follow the same process as above to build an RGB timeseries, then plot it with the bounding box and plume extents.</p>
+<div id="cell-102" class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>rgb_ts_ds <span class="op">=</span> xr.concat([rxr.open_rasterio(f).rio.reproject_match(common_grid) <span class="cf">for</span> f <span class="kw">in</span> rgb_files], dim<span class="op">=</span>mask_time)</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>rgb_ts_ds.data[rgb_ts_ds.data <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> <span class="dv">255</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-103" class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>rgb_ts_map <span class="op">=</span> rgb_ts_ds.hvplot.rgb(x<span class="op">=</span><span class="st">'x'</span>,y<span class="op">=</span><span class="st">'y'</span>, bands<span class="op">=</span><span class="st">'band'</span>,groupby<span class="op">=</span><span class="st">'time'</span>,geo<span class="op">=</span><span class="va">True</span>, frame_height<span class="op">=</span><span class="dv">400</span>, crs<span class="op">=</span><span class="st">'EPSG:4326'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Lastly, add a new column to our plume geodataframe named <code>time</code> so we are using the same naming convention and can layer our plume polygons from our filtered search on top of our quality data.</p>
+<div id="cell-105" class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>plm_gdf[<span class="st">'time'</span>] <span class="op">=</span> pd.to_datetime(plm_gdf.loc[:,<span class="st">'_single_date_time'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Because we’ve set our RGB to display as white where there is no data, and our cloud mask where no clouds are present as transparent, we can identify any areas with no data over our ROI by white/transparent, and cloudy areas as black. The larger black lines/rectangles are representative of onboard cloud masking, where no data was downlinked due to a high volume of clouds detected.</p>
+<div id="cell-107" class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>rgb_ts_map<span class="op">*</span>quality_ts_map<span class="op">*</span>plm_gdf.hvplot(groupby<span class="op">=</span><span class="st">'time'</span>, geo<span class="op">=</span><span class="va">True</span>, line_color<span class="op">=</span><span class="st">'red'</span>, fill_color<span class="op">=</span><span class="va">None</span>)<span class="op">*</span>max_conc_gdf.hvplot(color<span class="op">=</span><span class="st">'red'</span>,crs<span class="op">=</span><span class="st">'EPSG:4326'</span>,fill_color<span class="op">=</span><span class="va">None</span>, line_color<span class="op">=</span><span class="st">'yellow'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>With this information, we can build a dataframe assigning a category to each of the dates where there was no plume detected and add this information to our IME timeseries figure.</p>
+<p>Create a dataframe of dates where no plume was detected by finding the dates where there are no plumes in our <code>mask_time</code> arrays by removing timestamps from our <code>plm_time</code> array.</p>
+<div id="cell-109" class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>no_plm_time <span class="op">=</span> np.setdiff1d(mask_time.data,plm_time.data)</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>no_plm_time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Build a dataframe out of these dates where there were no plumes detected</p>
+<div id="cell-111" class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build a dataframe</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>no_plm_df <span class="op">=</span> pd.DataFrame({<span class="st">'time'</span>:no_plm_time})</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>no_plm_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, categorize them based on the visualizations we made and remove any times where there wasn’t a good observation of our area of interest.</p>
+<div id="cell-113" class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add a category column to describe the observation </span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>no_plm_df[<span class="st">'category'</span>] <span class="op">=</span> <span class="st">'no_data'</span></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>no_plm_df.loc[[<span class="dv">0</span>,<span class="dv">4</span>],<span class="st">'category'</span>] <span class="op">=</span> <span class="st">'cloud'</span></span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>no_plm_df.loc[<span class="dv">7</span>,<span class="st">'category'</span>] <span class="op">=</span> <span class="st">'no_plume'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-114" class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>no_plm_df <span class="op">=</span> no_plm_df[<span class="op">~</span>no_plm_df[<span class="st">'category'</span>].<span class="bu">str</span>.contains(<span class="st">'no_data'</span>)]</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>no_plm_df[<span class="st">'time'</span>] <span class="op">=</span> pd.to_datetime(no_plm_df[<span class="st">'time'</span>])</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>no_plm_df.reset_index(drop<span class="op">=</span><span class="va">True</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>no_plm_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can now merge our IME timeseries dataframe with this one, along the time column to add these observations with different categories to our timeseries.</p>
+<div id="cell-116" class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>ime_df <span class="op">=</span> pd.merge(ime_ts.to_dataframe(), no_plm_df, on<span class="op">=</span>[<span class="st">'time'</span>], how<span class="op">=</span><span class="st">'outer'</span>)</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>ime_df <span class="op">=</span> ime_df.sort_values(by<span class="op">=</span><span class="st">'time'</span>)</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>ime_df[<span class="st">'category'</span>]<span class="op">=</span>ime_df[<span class="st">'category'</span>].fillna(<span class="st">'plume'</span>)</span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>ime_df[<span class="st">'value'</span>] <span class="op">=</span> ime_df[<span class="st">'value'</span>].fillna(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-117" class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>ime_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can now plot this IME timeseries alongside our plume timeseries.</p>
+<div id="cell-119" class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>ime_timeline <span class="op">=</span> ime_df.hvplot.scatter(x<span class="op">=</span><span class="st">'time'</span>,y<span class="op">=</span><span class="st">'value'</span>, by<span class="op">=</span><span class="st">'category'</span>, size<span class="op">=</span><span class="dv">100</span>, xlabel<span class="op">=</span><span class="st">'Date Observed'</span>, ylabel<span class="op">=</span><span class="st">'kg'</span>, title<span class="op">=</span><span class="st">'Observed Methane IME over 2023'</span>, rot<span class="op">=</span><span class="dv">90</span>,</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>                                     grid<span class="op">=</span><span class="va">True</span>, frame_height<span class="op">=</span><span class="dv">400</span>, frame_width<span class="op">=</span><span class="dv">800</span>, ylim<span class="op">=</span>(<span class="dv">0</span>,<span class="dv">11000</span>),xticks<span class="op">=</span><span class="bu">list</span>(ime_df.time))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-120" class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>ime_timeline.opts(legend_position<span class="op">=</span><span class="st">'bottom'</span>) <span class="op">+</span> plm_ts_plot.opts(title<span class="op">=</span><span class="st">'Methane Plumes Observed'</span>, frame_height<span class="op">=</span><span class="dv">400</span>, frame_width<span class="op">=</span><span class="dv">400</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="contact-info" class="level2">
+<h2 class="anchored" data-anchor-id="contact-info">Contact Info:</h2>
+<p>Email: LPDAAC@usgs.gov<br>
+Voice: +1-866-573-3222<br>
+Organization: Land Processes Distributed Active Archive Center (LP DAAC)¹<br>
+Website: https://lpdaac.usgs.gov/<br>
+Date last modified: 03-22-2024</p>
+<p>¹Work performed under USGS contract G15PD00467 for NASA contract NNG14HH33I.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/nasa\.github\.io\/LPDAAC-Data-Resources\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../external/Generating_Methane_Spectral_Fingerprint.html" class="pagination-link" aria-label="7. Generating Methane Spectral Fingerprint">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">7. Generating Methane Spectral Fingerprint</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../CONTRIBUTING.html" class="pagination-link" aria-label="Contributing to this Repository">
+        <span class="nav-page-text">Contributing to this Repository</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>NASA Land Processes Distributed Active Archive Center (LP DAAC) | United States Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

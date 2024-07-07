@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.47">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Data Discovery with NASA’s CMR Using Request Python Package – LP DAAC Data Resources</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body>
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#what-is-cmr" id="toc-what-is-cmr" class="nav-link" data-scroll-target="#what-is-cmr">What is CMR</a></li>
+  <li><a href="#what-is-the-cmr-api" id="toc-what-is-the-cmr-api" class="nav-link" data-scroll-target="#what-is-the-cmr-api">What is the CMR API</a></li>
+  <li><a href="#getting-started-how-to-search-cmr-from-python" id="toc-getting-started-how-to-search-cmr-from-python" class="nav-link" data-scroll-target="#getting-started-how-to-search-cmr-from-python">Getting Started: How to search CMR from Python</a></li>
+  <li><a href="#searching-for-collections" id="toc-searching-for-collections" class="nav-link" data-scroll-target="#searching-for-collections">Searching for Collections</a>
+  <ul class="collapse">
+  <li><a href="#query-cmr-for-cloud-hosted-collections" id="toc-query-cmr-for-cloud-hosted-collections" class="nav-link" data-scroll-target="#query-cmr-for-cloud-hosted-collections">Query CMR for Cloud Hosted Collections</a></li>
+  <li><a href="#query-cmr-using-provider" id="toc-query-cmr-using-provider" class="nav-link" data-scroll-target="#query-cmr-using-provider">Query CMR Using Provider</a></li>
+  <li><a href="#query-cmr-using-project" id="toc-query-cmr-using-project" class="nav-link" data-scroll-target="#query-cmr-using-project">Query CMR Using Project</a></li>
+  </ul></li>
+  <li><a href="#searching-for-granules" id="toc-searching-for-granules" class="nav-link" data-scroll-target="#searching-for-granules">Searching for Granules</a>
+  <ul class="collapse">
+  <li><a href="#get-urls-to-cloud-data-assets" id="toc-get-urls-to-cloud-data-assets" class="nav-link" data-scroll-target="#get-urls-to-cloud-data-assets">Get URLs to cloud data assets</a></li>
+  <li><a href="#contact-info" id="toc-contact-info" class="nav-link" data-scroll-target="#contact-info">Contact Info:</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Data Discovery with NASA’s CMR Using Request Python Package</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>In this notebook, we will walk through how to search for Earthdata data collections and granules. Along the way we will explore the available search parameters, information return, and specific contrains when using the CMR API. Our object is to identify assets to access that we would downloaded, or perform S3 direct access, within an analysis workflow</p>
+</section>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<ul>
+<li>Understand what CMR/CMR API is and what CMR/CMR API can be used for</li>
+<li>How to use the <code>requests</code> package to search data collections and granules</li>
+<li>How to parse the results of these searches.</li>
+</ul>
+</section>
+<section id="what-is-cmr" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-cmr">What is CMR</h2>
+<p>CMR is the Common Metadata Repository. It catalogs all data for NASA’s Earth Observing System Data and Information System (EOSDIS). It is the backend of <a href="https://search.earthdata.nasa.gov/search">Earthdata Search</a>, the GUI search interface. More information about CMR can be found <a href="https://earthdata.nasa.gov/eosdis/science-system-description/eosdis-components/cmr">here</a>.</p>
+<p>Unfortunately, the GUI for Earthdata Search is not accessible from a cloud instance - at least not without some work. Earthdata Search is also not immediately reproducible. What I mean by that is if you create a search using the GUI you would have to note the search criteria (date range, search area, collection name, etc), take a screenshot, copy the search url, or save the list of data granules returned by the search, in order to recreate the search. This information would have to be re-entered each time you or someone else wanted to do the search. You could make typos or other mistakes. A cleaner, reproducible solution is to search CMR programmatically using the CMR API.</p>
+</section>
+<section id="what-is-the-cmr-api" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-the-cmr-api">What is the CMR API</h2>
+<p>API stands for Application Programming Interface. It allows applications (software, services, etc) to send information to each other. A helpful analogy is a waiter in a restaurant. The waiter takes your drink or food order that you select from the menu, often translated into short-hand, to the bar or kitchen, and then returns (hopefully) with what you ordered when it is ready.</p>
+<p>The CMR API accepts search terms such as collection name, keywords, datetime range, and location, queries the CMR database and returns the results.</p>
+<hr>
+</section>
+<section id="getting-started-how-to-search-cmr-from-python" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started-how-to-search-cmr-from-python">Getting Started: How to search CMR from Python</h2>
+<p>The first step is to import python packages. We will use:<br>
+- <code>requests</code> This package does most of the work for us accessing the CMR API using HTTP methods. - <code>pprint</code> to <em>pretty print</em> the results of the search.</p>
+<p>A more in-depth tutorial on <code>requests</code> is <a href="https://realpython.com/python-requests/">here</a></p>
+<div id="prime-hierarchy" class="cell" data-tags="[]" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pprint <span class="im">import</span> pprint</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To conduct a search using the CMR API, <code>requests</code> needs the url for the root CMR search endpoint. We’ll assign this url to a python variable as a <em>string</em>.</p>
+<div id="existing-concert" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>CMR_OPS <span class="op">=</span> <span class="st">'https://cmr.earthdata.nasa.gov/search'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="searching-for-collections" class="level1">
+<h1>Searching for Collections</h1>
+<p>CMR allows search by <strong>collections</strong>, which are datasets, and <strong>granules</strong>, which are files that contain data. Many of the same search parameters can be used for collections and granules but the type of results returned differ. Search parameters can be found in the <a href="https://cmr.earthdata.nasa.gov/search/site/docs/search/api.html">API Documentation</a>.</p>
+<p>Whether we search <strong>collections</strong> or <strong>granules</strong> is distinguished by adding <code>"collections"</code> or <code>"granules"</code> to the end of the CMR endpoint URL.</p>
+<p>We are going to search collections first, so we add <code>"collections"</code> to the URL. We are using a <code>python</code> format string in the examples below.</p>
+<div id="floating-defensive" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>CMR_OPS<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span><span class="st">"collections"</span><span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>url</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>'https://cmr.earthdata.nasa.gov/search/collections'</code></pre>
+</div>
+</div>
+<section id="query-cmr-for-cloud-hosted-collections" class="level2">
+<h2 class="anchored" data-anchor-id="query-cmr-for-cloud-hosted-collections">Query CMR for Cloud Hosted Collections</h2>
+<p>In this tutorial, we use different search parameters to search for collections in different ways. Below, we want to retrieve the collections that are hosted in the cloud (<code>'cloud_hosted': 'True'</code>) that has granules availble (<code>'has_granules': 'True'</code>). We also want to get the content in <code>json</code> (pronounced “jason”) format, so I pass a dictionary to the header keyword argument to say that I want results returned as <code>json</code> (<code>'Accept': 'application/json'</code>).</p>
+<p>The <code>.get()</code> method is used to send this information to the CMR API. <code>get()</code> calls the HTTP method <strong>GET</strong>.</p>
+<div id="suited-wrestling" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(url,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                        params<span class="op">=</span>{</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'cloud_hosted'</span>: <span class="st">'True'</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'has_granules'</span>: <span class="st">'True'</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                        },</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                        headers<span class="op">=</span>{</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'Accept'</span>: <span class="st">'application/json'</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                        }</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The request returns a <code>Response</code> object.</p>
+<p>To check that our request was successful we can print the <code>response</code> variable we saved the request to.</p>
+<div id="ongoing-progressive" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>response</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>&lt;Response [200]&gt;</code></pre>
+</div>
+</div>
+<p>A <strong>200</strong> response is what we want. This means that the requests was successful. For more information on HTTP status codes see <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" class="uri">https://en.wikipedia.org/wiki/List_of_HTTP_status_codes</a></p>
+<p>A more explict way to check the status code is to use the <code>status_code</code> attribute. Both methods return a HTTP status code.</p>
+<div id="printable-determination" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>response.status_code</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>200</code></pre>
+</div>
+</div>
+<p>The response from <code>requests.get</code> returns the results of the search and metadata about those results in the <code>headers</code>.</p>
+<p>More information about the <code>response</code> object can be found by typing <code>help(response)</code>.</p>
+<p><code>headers</code> contains useful information in a case-insensitive dictionary. We requested (above) that the information be return in json which means the object return is a dictionary in our Python environment. We’ll iterate through the returned dictionary, looping throught each field (<code>k</code>) and its associated value (<code>v</code>). For more on interating through dictionary object click <a href="https://realpython.com/iterate-through-dictionary-python/">here</a>.</p>
+<div id="driving-vintage" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k, v <span class="kw">in</span> response.headers.items():</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>k<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>v<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Content-Type: application/json;charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Date: Wed, 05 Jul 2023 21:47:57 GMT
+X-Frame-Options: SAMEORIGIN
+Access-Control-Allow-Origin: *
+X-XSS-Protection: 1; mode=block
+CMR-Request-Id: 6a23e6cd-89b8-4acb-9ce8-932e1028f7c3
+Strict-Transport-Security: max-age=31536000
+CMR-Search-After: [0.0,10400.0,"VNP03IMG","2",2105092163,2]
+CMR-Hits: 2772
+Access-Control-Expose-Headers: CMR-Hits, CMR-Request-Id, X-Request-Id, CMR-Scroll-Id, CMR-Search-After, CMR-Timed-Out, CMR-Shapefile-Original-Point-Count, CMR-Shapefile-Simplified-Point-Count
+X-Content-Type-Options: nosniff
+CMR-Took: 1418
+X-Request-Id: D4zM66TwPjOtdYSk2YmXO74wtETxxxDNDE_ItkfC5JUVmLglIpN6ig==
+Vary: Accept-Encoding, User-Agent
+Content-Encoding: gzip
+Server: ServerTokens ProductOnly
+X-Cache: Miss from cloudfront
+Via: 1.1 7cc224be3664680df186a12039cdc424.cloudfront.net (CloudFront)
+X-Amz-Cf-Pop: MSP50-P2
+X-Amz-Cf-Id: D4zM66TwPjOtdYSk2YmXO74wtETxxxDNDE_ItkfC5JUVmLglIpN6ig==</code></pre>
+</div>
+</div>
+<p>Each item in the dictionary can be accessed in the normal way you access a <code>python</code> dictionary but the keys uniquely case-<strong>in</strong>sensitive. Let’s take a look at the commonly used <code>CMR-Hits</code> key.</p>
+<div id="entertaining-blend" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>response.headers[<span class="st">'CMR-Hits'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>'2772'</code></pre>
+</div>
+</div>
+<p>Note that “cmr-hits” works as well!</p>
+<div id="unsigned-january" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>response.headers[<span class="st">'cmr-hits'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>'2772'</code></pre>
+</div>
+</div>
+</section>
+<section id="query-cmr-using-provider" class="level2">
+<h2 class="anchored" data-anchor-id="query-cmr-using-provider">Query CMR Using Provider</h2>
+<p>In some situations the response to your query can return a very large number of result, some of which may not be relevant. We can add additional <a href="https://cmr.earthdata.nasa.gov/search/site/docs/search/api.html">query parameters</a> to restrict the information returned. We’re going to restrict the search by the <code>provider</code> parameter.</p>
+<p>You can modify the code below to explore all Earthdata data products hosted by the various providers. When searching by provider, use <em>Cloud Provider</em> to search for cloud-hosted datasets and <em>On-Premises Provider</em> to search for datasets archived at the DAACs. A partial list of providers is given below.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 46%">
+<col style="width: 17%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>DAAC</th>
+<th>Short Name</th>
+<th>Cloud Provider</th>
+<th>On-Premises Provider</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>NSIDC</td>
+<td>National Snow and Ice Data Center</td>
+<td>NSIDC_CPRD</td>
+<td>NSIDC_ECS</td>
+</tr>
+<tr class="even">
+<td>GHRC DAAC</td>
+<td>Global Hydrometeorology Resource Center</td>
+<td>GHRC_DAAC</td>
+<td>GHRC_DAAC</td>
+</tr>
+<tr class="odd">
+<td>PO DAAC</td>
+<td>Physical Oceanography Distributed Active Archive Center</td>
+<td>POCLOUD</td>
+<td>PODAAC</td>
+</tr>
+<tr class="even">
+<td>ASF</td>
+<td>Alaska Satellite Facility</td>
+<td>ASF</td>
+<td>ASF</td>
+</tr>
+<tr class="odd">
+<td>ORNL DAAC</td>
+<td>Oak Ridge National Laboratory</td>
+<td>ORNL_CLOUD</td>
+<td>ORNL_DAAC</td>
+</tr>
+<tr class="even">
+<td>LP DAAC</td>
+<td>Land Processes Distributed Active Archive Center</td>
+<td>LPCLOUD</td>
+<td>LPDAAC_ECS</td>
+</tr>
+<tr class="odd">
+<td>GES DISC</td>
+<td>NASA Goddard Earth Sciences (GES) Data and Information Services Center (DISC)</td>
+<td>GES_DISC</td>
+<td>GES_DISC</td>
+</tr>
+<tr class="even">
+<td>OB DAAC</td>
+<td>NASA’s Ocean Biology Distributed Active Archive Center</td>
+<td></td>
+<td>OB_DAAC</td>
+</tr>
+<tr class="odd">
+<td>SEDAC</td>
+<td>NASA’s Socioeconomic Data and Applications Center</td>
+<td></td>
+<td>SEDAC</td>
+</tr>
+</tbody>
+</table>
+<p>We’ll assign the provider to a variable as a <em>string</em> and insert the variable into the parameter argument in the request.</p>
+<div id="77daf931-54d6-40b0-823b-a36c352fd06c" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>provider <span class="op">=</span> <span class="st">'LPCLOUD'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="economic-airfare" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(url,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                        params<span class="op">=</span>{</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'cloud_hosted'</span>: <span class="st">'True'</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'has_granules'</span>: <span class="st">'True'</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'provider'</span>: provider,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                        },</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>                        headers<span class="op">=</span> {</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'Accept'</span>: <span class="st">'application/json'</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>                            }</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>                       )</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>response</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>&lt;Response [200]&gt;</code></pre>
+</div>
+</div>
+<p>Let’s see how many collections are available through <code>LPCOUD</code> provider.</p>
+<div id="imperial-congo" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>response.headers[<span class="st">'cmr-hits'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>'209'</code></pre>
+</div>
+</div>
+<p>Search results are contained in the <strong>content</strong> part of the Response object. However, <code>response.content</code> returns information in bytes.</p>
+<div id="hawaiian-honolulu" class="cell" data-tags="[]" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>response.content</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>b'{"feed":{"updated":"2023-07-05T21:47:59.100Z","id":"https://cmr.earthdata.nasa.gov:443/search/collections.json?cloud_hosted=True&amp;has_granules=True&amp;provider=LPCLOUD","title":"ECHO dataset metadata","entry":[{"processing_level_id":"3","cloud_hosted":true,"boxes":["-90 -180 90 180"],"time_start":"2013-04-11T00:00:00.000Z","version_id":"2.0","updated":"2015-12-03T10:57:07.000Z","dataset_id":"HLS Landsat Operational Land Imager Surface Reflectance and TOA Brightness Daily Global 30m v2.0","has_spatial_subsetting":false,"has_transforms":false,"associations":{"tools":["TL1860232272-LPDAAC_ECS"]},"has_variables":false,"data_center":"LPCLOUD","short_name":"HLSL30","organizations":["LP DAAC","NASA/IMPACT"],"title":"HLS Landsat Operational Land Imager Surface Reflectance and TOA Brightness Daily Global 30m v2.0","coordinate_system":"CARTESIAN","summary":"The Harmonized Landsat Sentinel-2 (HLS) project provides consistent surface reflectance (SR) and top of atmosphere (TOA) brightness data from a virtual constellation of satellite sensors. The Operational Land Imager (OLI) is housed aboard the joint NASA/USGS Landsat 8 and Landsat 9 satellites, while the Multi-Spectral Instrument (MSI) is mounted aboard Europe\xe2\x80\x99s Copernicus Sentinel-2A and Sentinel-2B satellites. The combined measurement enables global observations of the land every 2\xe2\x80\x933 days at 30-meter (m) spatial resolution. The HLS project uses a set of algorithms to obtain seamless products from OLI and MSI that include atmospheric correction, cloud and cloud-shadow masking, spatial co-registration and common gridding, illumination and view angle normalization, and spectral bandpass adjustment.\\r\\n\\r\\nThe HLSL30 product provides 30-m Nadir Bidirectional Reflectance Distribution Function (BRDF)-Adjusted Reflectance (NBAR) and is derived from Landsat 8/9 OLI data products. The HLSS30 and HLSL30 products are gridded to the same resolution and Military Grid Reference System (MGRS)(https://hls.gsfc.nasa.gov/products-description/tiling-system/) tiling system, and thus are \xe2\x80\x9cstackable\xe2\x80\x9d for time series analysis.\\r\\n\\r\\nThe HLSL30 product is provided in Cloud Optimized GeoTIFF (COG) format, and each band is distributed as a separate file. There are 11 bands included in the HLSL30 product along with one quality assessment (QA) band and four angle bands. See the User Guide for a more detailed description of the individual bands provided in the HLSL30 product.","service_features":{"opendap":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false},"esi":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false},"harmony":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false}},"orbit_parameters":{},"id":"C2021957657-LPCLOUD","has_formats":false,"consortiums":["GEOSS","EOSDIS"],"original_format":"UMM_JSON","collection_data_type":"SCIENCE_QUALITY","archive_center":"LP DAAC","has_temporal_subsetting":false,"browse_flag":true,"platforms":["LANDSAT-8","LANDSAT-9"],"association_details":{"tools":[{"concept_id":"TL1860232272-LPDAAC_ECS"}]},"online_access_flag":true,"links":[{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://search.earthdata.nasa.gov/search?q=C2021957657-LPCLOUD"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/metadata#","hreflang":"en-US","href":"https://doi.org/10.5067/HLS/HLSL30.002"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/metadata#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/documents/1326/HLS_User_Guide_V2.pdf"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/documents/769/HLS_ATBD_V15_provisional.pdf"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/documents/1117/HLS_Quick_Guide_v02.pdf"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://git.earthdata.nasa.gov/projects/LPDUR/repos/hls-tutorial/browse"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://git.earthdata.nasa.gov/projects/LPDUR/repos/hls-super-script/browse"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/browse#","hreflang":"en-US","href":"https://cmr.earthdata.nasa.gov/browse-scaler/browse_images/granules/G2095313663-LPCLOUD?h=512&amp;w=512"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://git.earthdata.nasa.gov/projects/LPDUR/repos/hls-bulk-download/browse"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/resources/e-learning/getting-started-with-cloud-native-harmonized-landsat-sentinel-2-hls-data-in-r/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://appeears.earthdatacloud.nasa.gov/"}]},{"processing_level_id":"3","cloud_hosted":true,"boxes":["-90 -180 90 180"],"time_start":"2015-11-28T00:00:00.000Z","version_id":"2.0","updated":"2020-03-04T07:19:53.396Z","dataset_id":"HLS Sentinel-2 Multi-spectral Instrument Surface Reflectance Daily Global 30m v2.0","has_spatial_subsetting":false,"has_transforms":false,"associations":{"tools":["TL1860232272-LPDAAC_ECS"]},"has_variables":false,"data_center":"LPCLOUD","short_name":"HLSS30","organizations":["LP DAAC","NASA/IMPACT"],"title":"HLS Sentinel-2 Multi-spectral Instrument Surface Reflectance Daily Global 30m v2.0","coordinate_system":"CARTESIAN","summary":"The Harmonized Landsat Sentinel-2 (HLS) project provides consistent surface reflectance data from the Operational Land Imager (OLI) aboard the joint NASA/USGS Landsat 8 satellite and the Multi-Spectral Instrument (MSI) aboard Europe\xe2\x80\x99s Copernicus Sentinel-2A and Sentinel-2B satellites. The combined measurement enables global observations of the land every 2\xe2\x80\x933 days at 30-meter (m) spatial resolution. The HLS project uses a set of algorithms to obtain seamless products from OLI and MSI that include atmospheric correction, cloud and cloud-shadow masking, spatial co-registration and common gridding, illumination and view angle normalization, and spectral bandpass adjustment. \\r\\n\\r\\nThe HLSS30 product provides 30-m Nadir Bidirectional Reflectance Distribution Function (BRDF)-Adjusted Reflectance (NBAR) and is derived from Sentinel-2A and Sentinel-2B MSI data products. The HLSS30 and HLSL30 products are gridded to the same resolution and Military Grid Reference System (MGRS) (https://hls.gsfc.nasa.gov/products-description/tiling-system/) tiling system, and thus are \xe2\x80\x9cstackable\xe2\x80\x9d for time series analysis.\\r\\n\\r\\nThe HLSS30 product is provided in Cloud Optimized GeoTIFF (COG) format, and each band is distributed as a separate COG. There are 13 bands included in the HLSS30 product along with four angle bands and a quality assessment (QA) band. See the User Guide for a more detailed description of the individual bands provided in the HLSS30 product.\\r\\n","service_features":{"opendap":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false},"esi":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false},"harmony":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false}},"orbit_parameters":{},"id":"C2021957295-LPCLOUD","has_formats":false,"consortiums":["GEOSS","EOSDIS"],"original_format":"UMM_JSON","collection_data_type":"SCIENCE_QUALITY","archive_center":"LP DAAC","has_temporal_subsetting":false,"browse_flag":true,"platforms":["Sentinel-2A","Sentinel-2B"],"association_details":{"tools":[{"concept_id":"TL1860232272-LPDAAC_ECS"}]},"online_access_flag":true,"links":[{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://search.earthdata.nasa.gov/search?q=C2021957295-LPCLOUD"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/metadata#","hreflang":"en-US","href":"https://doi.org/10.5067/HLS/HLSS30.002"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/metadata#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/documents/1326/HLS_User_Guide_V2.pdf"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/documents/769/HLS_ATBD_V15_provisional.pdf"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/documents/1117/HLS_Quick_Guide_v02.pdf"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://git.earthdata.nasa.gov/projects/LPDUR/repos/hls-tutorial/browse"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://git.earthdata.nasa.gov/projects/LPDUR/repos/hls-super-script/browse"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/browse#","hreflang":"en-US","href":"https://cmr.earthdata.nasa.gov/browse-scaler/browse_images/granules/G2095548655-LPCLOUD?h=512&amp;w=512"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://git.earthdata.nasa.gov/projects/LPDUR/repos/hls-bulk-download/browse"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/resources/e-learning/getting-started-with-cloud-native-harmonized-landsat-sentinel-2-hls-data-in-r/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://appeears.earthdatacloud.nasa.gov/"}]},{"processing_level_id":"3","cloud_hosted":true,"boxes":["-83 -180 82 180"],"time_start":"2000-03-01T00:00:00.000Z","version_id":"003","updated":"2015-09-30T10:42:35.418Z","dataset_id":"ASTER Global Digital Elevation Model V003","has_spatial_subsetting":false,"has_transforms":false,"has_variables":false,"data_center":"LPCLOUD","short_name":"ASTGTM","organizations":["LP DAAC","NASA/JPL/ASTER"],"title":"ASTER Global Digital Elevation Model V003","coordinate_system":"CARTESIAN","summary":"The ASTER Global Digital Elevation Model (GDEM) Version 3 (ASTGTM) provides a global digital elevation model (DEM) of land areas on Earth at a spatial resolution of 1 arc second (approximately 30 meter horizontal posting at the equator).\\r\\n\\r\\nThe development of the ASTER GDEM data products is a collaborative effort between National Aeronautics and Space Administration (NASA) and Japan\xe2\x80\x99s Ministry of Economy, Trade, and Industry (METI). The ASTER GDEM data products are created by the Sensor Information Laboratory Corporation (SILC) in Tokyo. \\r\\n\\r\\nThe ASTER GDEM Version 3 data product was created from the automated processing of the entire ASTER Level 1A (https://doi.org/10.5067/ASTER/AST_L1A.003) archive of scenes acquired between March 1, 2000, and November 30, 2013. Stereo correlation was used to produce over one million individual scene based ASTER DEMs, to which cloud masking was applied. All cloud screened DEMs and non-cloud screened DEMs were stacked. Residual bad values and outliers were removed. In areas with limited data stacking, several existing reference DEMs were used to supplement ASTER data to correct for residual anomalies. Selected data were averaged to create final pixel values before partitioning the data into 1 degree latitude by 1 degree longitude tiles with a one pixel overlap. To correct elevation values of water body surfaces, the ASTER Global Water Bodies Database (ASTWBD) (https://doi.org/10.5067/ASTER/ASTWBD.001) Version 1 data product was also generated. \\r\\n\\r\\nThe geographic coverage of the ASTER GDEM extends from 83\xc2\xb0 North to 83\xc2\xb0 South. Each tile is distributed in GeoTIFF format and projected on the 1984 World Geodetic System (WGS84)/1996 Earth Gravitational Model (EGM96) geoid. Each of the 22,912 tiles in the collection contain at least 0.01% land area. \\r\\n\\r\\nProvided in the ASTER GDEM product are layers for DEM and number of scenes (NUM). The NUM layer indicates the number of scenes that were processed for each pixel and the source of the data.\\r\\n\\r\\nWhile the ASTER GDEM Version 3 data products offer substantial improvements over Version 2, users are advised that the products still may contain anomalies and artifacts that will reduce its usability for certain applications. \\r\\n\\r\\nImprovements/Changes from Previous Versions \\r\\n\xe2\x80\xa2 Expansion of acquisition coverage to increase the amount of cloud-free input scenes from about 1.5 million in Version 2 to about 1.88 million scenes in Version 3.\\r\\n\xe2\x80\xa2 Separation of rivers from lakes in the water body processing. \\r\\n\xe2\x80\xa2 Minimum water body detection size decreased from 1 km2 to 0.2 km2. ","time_end":"2013-11-30T23:59:59.999Z","service_features":{"opendap":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false},"esi":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false},"harmony":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false}},"orbit_parameters":{},"id":"C1711961296-LPCLOUD","has_formats":false,"consortiums":["GEOSS","EOSDIS"],"original_format":"UMM_JSON","collection_data_type":"SCIENCE_QUALITY","archive_center":"LP DAAC","has_temporal_subsetting":false,"browse_flag":true,"platforms":["Terra"],"online_access_flag":true,"links":[{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://search.earthdata.nasa.gov/search?q= C1711961296-LPCLOUD"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/metadata#","hreflang":"en-US","href":"https://doi.org/10.5067/ASTER/ASTGTM.003"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/metadata#","hreflang":"en-US","href":"https://lpdaac.usgs.gov"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/metadata#","hreflang":"en-US","href":"https://asterweb.jpl.nasa.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/documents/434/ASTGTM_User_Guide_V3.pdf"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/browse#","hreflang":"en-US","href":"https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-public/ASTGTM.003/ASTGTMV003_N03E021.1.jpg"}]},{"processing_level_id":"3","cloud_hosted":true,"boxes":["-90 -180 90 180"],"time_start":"2002-07-04T00:00:00.000Z","version_id":"061","updated":"2016-01-20T09:38:26.775Z","dataset_id":"MODIS/Aqua Land Surface Temperature/Emissivity Daily L3 Global 1km SIN Grid V061","has_spatial_subsetting":false,"has_transforms":false,"has_variables":false,"data_center":"LPCLOUD","short_name":"MYD11A1","organizations":["LP DAAC","NASA/GSFC/SED/ESD/TISL/MODAPS"],"title":"MODIS/Aqua Land Surface Temperature/Emissivity Daily L3 Global 1km SIN Grid V061","coordinate_system":"CARTESIAN","summary":"The MYD11A1 Version 6.1 product provides daily per-pixel Land Surface Temperature and Emissivity (LST&amp;E) with 1 kilometer (km) spatial resolution in a 1,200 by 1,200 km grid. The pixel temperature value is derived from the MYD11_L2 (https://doi.org/10.5067/MODIS/MYD11_L2.061) swath product. Above 30 degrees latitude, some pixels may have multiple observations where the criteria for clear-sky are met. When this occurs, the pixel value is a result of the average of all qualifying observations. Provided along with the daytime and nighttime surface temperature bands are associated quality control assessments, observation times, view zenith angles, and clear-sky coverages along with bands 31 and 32 emissivities from land cover types. Validation at stage 2 (https://modis-land.gsfc.nasa.gov/MODLAND_val.html) has been achieved for all MODIS Land Surface Temperature and Emissivity products. Further details regarding MODIS land product validation for the MYD11 data products are available from the MODIS Land Team Validation site (https://modis-land.gsfc.nasa.gov/ValStatus.php?ProductID=MOD11). Improvements/Changes from Previous Versions * The Version 6.1 Level-1B (L1B) products have been improved by undergoing various calibration changes that include: changes to the response-versus-scan angle (RVS) approach that affects reflectance bands for Aqua and Terra MODIS, corrections to adjust for the optical crosstalk in Terra MODIS infrared (IR) bands, and corrections to the Terra MODIS forward look-up table (LUT) update for the period 2012 - 2017. * A polarization correction has been applied to the L1B Reflective Solar Bands (RSB). ","service_features":{"opendap":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false},"esi":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false},"harmony":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false}},"orbit_parameters":{},"id":"C1748046084-LPCLOUD","has_formats":false,"consortiums":["GEOSS","EOSDIS"],"original_format":"UMM_JSON","collection_data_type":"SCIENCE_QUALITY","archive_center":"LP DAAC","has_temporal_subsetting":false,"browse_flag":true,"platforms":["Aqua"],"online_access_flag":true,"links":[{"rel":"http://esipfed.org/ns/fedsearch/1.1/metadata#","hreflang":"en-US","href":"https://doi.org/10.5067/MODIS/MYD11A1.061"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/metadata#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://e4ftl01.cr.usgs.gov/MOLA/MYD11A1.061/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://search.earthdata.nasa.gov/search/granules?p=C1748046084-LPCLOUD"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://appeears.earthdatacloud.nasa.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://earthexplorer.usgs.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/service#","hreflang":"en-US","href":"https://opendap.cr.usgs.gov/opendap/hyrax/DP128/MOLA/MYD11A1.061/contents.html"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/documents/119/MOD11_ATBD.pdf"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/documents/715/MOD11_User_Guide_V61.pdf"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://ladsweb.modaps.eosdis.nasa.gov/filespec/MODIS/61/MYD11A1"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://modis-land.gsfc.nasa.gov/ValStatus.php?ProductID=MOD11"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://modis-land.gsfc.nasa.gov/MODLAND_val.html"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://landweb.modaps.eosdis.nasa.gov/cgi-bin/QA_WWW/qaFlagPage.cgi?sat=aqua&amp;ver=C6"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/browse#","hreflang":"en-US","href":"https://cmr.earthdata.nasa.gov/browse-scaler/browse_images/granules/G2357187151-LPCLOUD?h=500&amp;w=500"}]},{"processing_level_id":"3","cloud_hosted":true,"boxes":["-90 -180 90 180"],"time_start":"2000-02-18T00:00:00.000Z","version_id":"061","updated":"2015-09-30T10:47:59.761Z","dataset_id":"MODIS/Terra Vegetation Indices 16-Day L3 Global 250m SIN Grid V061","has_spatial_subsetting":false,"has_transforms":false,"has_variables":false,"data_center":"LPCLOUD","short_name":"MOD13Q1","organizations":["LP DAAC","NASA/GSFC/SED/ESD/TISL/MODAPS"],"title":"MODIS/Terra Vegetation Indices 16-Day L3 Global 250m SIN Grid V061","coordinate_system":"CARTESIAN","summary":"The Terra Moderate Resolution Imaging Spectroradiometer (MODIS) Vegetation Indices (MOD13Q1) Version 6.1 data are generated every 16 days at 250 meter (m) spatial resolution as a Level 3 product. The MOD13Q1 product provides two primary vegetation layers. The first is the Normalized Difference Vegetation Index (NDVI) which is referred to as the continuity index to the existing National Oceanic and Atmospheric Administration-Advanced Very High Resolution Radiometer (NOAA-AVHRR) derived NDVI. The second vegetation layer is the Enhanced Vegetation Index (EVI), which has improved sensitivity over high biomass regions. The algorithm chooses the best available pixel value from all the acquisitions from the 16 day period. The criteria used is low clouds, low view angle, and the highest NDVI/EVI value.\\n\\nAlong with the vegetation layers and the two quality layers, the HDF file will have MODIS reflectance bands 1 (red), 2 (near-infrared), 3 (blue), and 7 (mid-infrared), as well as four observation layers. \\n\\nValidation at stage 3 (https://landweb.modaps.eosdis.nasa.gov/cgi-bin/QA_WWW/newPage.cgi?fileName=maturity) has been achieved for all MOD13 vegetation products. Further details regarding product validation for the MOD13Q1 data product is available from the MODIS land team validation site (https://landval.gsfc.nasa.gov/ProductStatus.php?ProductID=MOD13).\\n\\nImprovements/Changes from Previous Versions\\n\\n* The Version 6.1 Level-1B (L1B) products have been improved by undergoing various calibration changes that include: changes to the response-versus-scan angle (RVS) approach that affects reflectance bands for Aqua and Terra MODIS, corrections to adjust for the optical crosstalk in Terra MODIS infrared (IR) bands, and corrections to the Terra MODIS forward look-up table (LUT) update for the period 2012 - 2017.\\n* A polarization correction has been applied to the L1B Reflective Solar Bands (RSB).","service_features":{"opendap":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false},"esi":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false},"harmony":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false}},"orbit_parameters":{},"id":"C1748066515-LPCLOUD","has_formats":false,"consortiums":["GEOSS","EOSDIS"],"original_format":"UMM_JSON","collection_data_type":"SCIENCE_QUALITY","archive_center":"LP DAAC","has_temporal_subsetting":false,"browse_flag":true,"platforms":["Terra"],"online_access_flag":true,"links":[{"rel":"http://esipfed.org/ns/fedsearch/1.1/metadata#","hreflang":"en-US","href":"https://doi.org/10.5067/MODIS/MOD13Q1.061"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/metadata#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://e4ftl01.cr.usgs.gov/MOLT/MOD13Q1.061/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://search.earthdata.nasa.gov/search/granules?p=C1748066515-LPCLOUD"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://appeears.earthdatacloud.nasa.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://earthexplorer.usgs.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/service#","hreflang":"en-US","href":"https://opendap.cr.usgs.gov/opendap/hyrax/MOD13Q1.061/contents.html"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/documents/104/MOD13_ATBD.pdf"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/documents/621/MOD13_User_Guide_V61.pdf"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://ladsweb.modaps.eosdis.nasa.gov/filespec/MODIS/61/MOD13Q1"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://modis-land.gsfc.nasa.gov/ValStatus.php?ProductID=MOD13Q1"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://modis-land.gsfc.nasa.gov/MODLAND_val.html"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://landweb.modaps.eosdis.nasa.gov/cgi-bin/QA_WWW/qaFlagPage.cgi?sat=terra&amp;ver=C6"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/browse#","hreflang":"en-US","href":"https://cmr.earthdata.nasa.gov/browse-scaler/browse_images/granules/G2346280125-LPCLOUD?h=500&amp;w=500"}]},{"processing_level_id":"2G","cloud_hosted":true,"boxes":["-90 -180 90 180"],"time_start":"2000-02-24T00:00:00.000Z","version_id":"061","updated":"2015-09-30T10:47:32.717Z","dataset_id":"MODIS/Terra Surface Reflectance Daily L2G Global 1km and 500m SIN Grid V061","has_spatial_subsetting":false,"has_transforms":false,"has_variables":false,"data_center":"LPCLOUD","short_name":"MOD09GA","organizations":["LP DAAC","NASA/GSFC/SED/ESD/TISL/MODAPS"],"title":"MODIS/Terra Surface Reflectance Daily L2G Global 1km and 500m SIN Grid V061","coordinate_system":"CARTESIAN","summary":"The MOD09GA Version 6.1 product provides an estimate of the surface spectral reflectance of Terra Moderate Resolution Imaging Spectroradiometer (MODIS) Bands 1 through 7, corrected for atmospheric conditions such as gasses, aerosols, and Rayleigh scattering. Provided along with the 500 meter (m) surface reflectance, observation, and quality bands are a set of ten 1 kilometer (km) observation bands and geolocation flags. The reflectance layers from the MOD09GA are used as the source data for many of the MODIS land products. \\n\\nValidation at stage 3 (https://modis-land.gsfc.nasa.gov/MODLAND_val.html) has been achieved for the MODIS Surface Reflectance products. Further details regarding MODIS land product validation for the MOD09 data product is available from the MODIS Land Team Validation site (https://modis-land.gsfc.nasa.gov/ValStatus.php?ProductID=MOD09).\\n\\n Improvements/Changes from Previous Versions\\n\\n* The Version 6.1 Level-1B (L1B) products have been improved by undergoing various calibration changes that include: changes to the response-versus-scan angle (RVS) approach that affects reflectance bands for Aqua and Terra MODIS, corrections to adjust for the optical crosstalk in Terra MODIS infrared (IR) bands, and corrections to the Terra MODIS forward look-up table (LUT) update for the period 2012 - 2017.\\n* A polarization correction has been applied to the L1B Reflective Solar Bands (RSB).\\n\\n","service_features":{"opendap":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false},"esi":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false},"harmony":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false}},"orbit_parameters":{},"id":"C2202497474-LPCLOUD","has_formats":false,"consortiums":["GEOSS","EOSDIS"],"original_format":"UMM_JSON","collection_data_type":"SCIENCE_QUALITY","archive_center":"LP DAAC","has_temporal_subsetting":false,"browse_flag":true,"platforms":["Terra"],"online_access_flag":true,"links":[{"rel":"http://esipfed.org/ns/fedsearch/1.1/metadata#","hreflang":"en-US","href":"https://doi.org/10.5067/MODIS/MOD09GA.061"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/metadata#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://e4ftl01.cr.usgs.gov/MOLT/MOD09GA.061/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://search.earthdata.nasa.gov/search/granules?p=C2202497474-LPCLOUD"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://appeears.earthdatacloud.nasa.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://earthexplorer.usgs.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/service#","hreflang":"en-US","href":"https://opendap.cr.usgs.gov/opendap/hyrax/MOD09GA.061/contents.html"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/documents/305/MOD09_ATBD.pdf"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/documents/925/MOD09_User_Guide_V61.pdf"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://ladsweb.modaps.eosdis.nasa.gov/filespec/MODIS/61/MOD09GA"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://modis-land.gsfc.nasa.gov/ValStatus.php?ProductID=MOD09"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://modis-land.gsfc.nasa.gov/MODLAND_val.html"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://landweb.modaps.eosdis.nasa.gov/cgi-bin/QA_WWW/qaFlagPage.cgi?sat=terra&amp;ver=C6"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/browse#","hreflang":"en-US","href":"https://cmr.earthdata.nasa.gov/browse-scaler/browse_images/granules/G2358429497-LPCLOUD?h=500&amp;w=500"}]},{"processing_level_id":"2G","cloud_hosted":true,"boxes":["-90 -180 90 180"],"time_start":"2000-02-24T00:00:00.000Z","version_id":"061","updated":"2016-03-21T09:32:15.906Z","dataset_id":"MODIS/Terra Surface Reflectance Daily L2G Global 250m SIN Grid V061","has_spatial_subsetting":false,"has_transforms":false,"has_variables":false,"data_center":"LPCLOUD","short_name":"MOD09GQ","organizations":["LP DAAC","NASA/GSFC/SED/ESD/TISL/MODAPS"],"title":"MODIS/Terra Surface Reflectance Daily L2G Global 250m SIN Grid V061","coordinate_system":"CARTESIAN","summary":"The MOD09GQ Version 6.1 product provides an estimate of the surface spectral reflectance of Terra Moderate Resolution Imaging Spectroradiometer (MODIS) 250 meter (m) bands 1 and 2, corrected for atmospheric conditions such as gasses, aerosols, and Rayleigh scattering. Along with the 250 m surface reflectance bands are the Quality Assurance (QA) layer and five observation layers. This product is intended to be used in conjunction with the quality and viewing geometry information of the 500 m product (MOD09GA). \\n\\nValidation at stage 3 (https://modis-land.gsfc.nasa.gov/MODLAND_val.html) has been achieved for the MODIS Surface Reflectance products. Further details regarding MODIS land product validation for the MOD09 data product is available from the MODIS Land Team Validation site (https://modis-land.gsfc.nasa.gov/ValStatus.php?ProductID=MOD09).\\n\\nImprovements/Changes from Previous Versions\\n\\n* The Version 6.1 Level-1B (L1B) products have been improved by undergoing various calibration changes that include: changes to the response-versus-scan angle (RVS) approach that affects reflectance bands for Aqua and Terra MODIS, corrections to adjust for the optical crosstalk in Terra MODIS infrared (IR) bands, and corrections to the Terra MODIS forward look-up table (LUT) update for the period 2012 - 2017.\\n* A polarization correction has been applied to the L1B Reflective Solar Bands (RSB).","service_features":{"opendap":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false},"esi":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false},"harmony":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false}},"orbit_parameters":{},"id":"C2343115666-LPCLOUD","has_formats":false,"consortiums":["GEOSS","EOSDIS"],"original_format":"UMM_JSON","collection_data_type":"SCIENCE_QUALITY","archive_center":"LP DAAC","has_temporal_subsetting":false,"browse_flag":true,"platforms":["Terra"],"online_access_flag":true,"links":[{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://e4ftl01.cr.usgs.gov/MOLT/MOD09GQ.061/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://search.earthdata.nasa.gov/search?q=C2343115666-LPCLOUD"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://earthexplorer.usgs.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://appeears.earthdatacloud.nasa.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/metadata#","hreflang":"en-US","href":"https://doi.org/10.5067/MODIS/MOD09GQ.061"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/metadata#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/documents/925/MOD09_User_Guide_V61.pdf"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/documents/305/MOD09_ATBD.pdf"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://ladsweb.modaps.eosdis.nasa.gov/filespec/MODIS/61/MOD09GQ"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://modis-land.gsfc.nasa.gov/MODLAND_val.html"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://modis-land.gsfc.nasa.gov/ValStatus.php?ProductID=MOD09"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/service#","hreflang":"en-US","href":"https://opendap.cr.usgs.gov/opendap/hyrax/DP124/MOLT/MOD09GQ.061/contents.html"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/browse#","hreflang":"en-US","href":"https://cmr.earthdata.nasa.gov/browse-scaler/browse_images/granules/G2509506318-LPCLOUD?h=85&amp;w=85"}]},{"processing_level_id":"3","cloud_hosted":true,"boxes":["-90 -180 90 180"],"time_start":"2000-02-24T00:00:00.000Z","version_id":"061","updated":"2015-09-30T10:47:37.333Z","dataset_id":"MODIS/Terra Land Surface Temperature/Emissivity Daily L3 Global 1km SIN Grid V061","has_spatial_subsetting":false,"has_transforms":false,"has_variables":false,"data_center":"LPCLOUD","short_name":"MOD11A1","organizations":["LP DAAC","NASA/GSFC/SED/ESD/TISL/MODAPS"],"title":"MODIS/Terra Land Surface Temperature/Emissivity Daily L3 Global 1km SIN Grid V061","coordinate_system":"CARTESIAN","summary":"The MOD11A1 Version 6.1 product provides daily per-pixel Land Surface Temperature and Emissivity (LST&amp;E) with 1 kilometer (km) spatial resolution in a 1,200 by 1,200 km grid. The pixel temperature value is derived from the MOD11_L2 (https://doi.org/10.5067/MODIS/MOD11_L2.006) swath product. Above 30 degrees latitude, some pixels may have multiple observations where the criteria for clear-sky are met. When this occurs, the pixel value is a result of the average of all qualifying observations. Provided along with the daytime and nighttime surface temperature bands are associated quality control assessments, observation times, view zenith angles, and clear-sky coverages along with bands 31 and 32 emissivities from land cover types. Validation at stage 2 (https://modis-land.gsfc.nasa.gov/MODLAND_val.html) has been achieved for all MODIS Land Surface Temperature and Emissivity products. Further details regarding MODIS land product validation for the MOD11 data products are available from the MODIS Land Team Validation site (https://modis-land.gsfc.nasa.gov/ValStatus.php?ProductID=MOD11). Improvements/Changes from Previous Versions * The Version 6.1 Level-1B (L1B) products have been improved by undergoing various calibration changes that include: changes to the response-versus-scan angle (RVS) approach that affects reflectance bands for Aqua and Terra MODIS, corrections to adjust for the optical crosstalk in Terra MODIS infrared (IR) bands, and corrections to the Terra MODIS forward look-up table (LUT) update for the period 2012 - 2017. * A polarization correction has been applied to the L1B Reflective Solar Bands (RSB). ","service_features":{"opendap":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false},"esi":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false},"harmony":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false}},"orbit_parameters":{},"id":"C1748058432-LPCLOUD","has_formats":false,"consortiums":["GEOSS","EOSDIS"],"original_format":"UMM_JSON","collection_data_type":"SCIENCE_QUALITY","archive_center":"LP DAAC","has_temporal_subsetting":false,"browse_flag":true,"platforms":["Terra"],"online_access_flag":true,"links":[{"rel":"http://esipfed.org/ns/fedsearch/1.1/metadata#","hreflang":"en-US","href":"https://doi.org/10.5067/MODIS/MOD11A1.061"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/metadata#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://e4ftl01.cr.usgs.gov/MOLT/MOD11A1.061/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://search.earthdata.nasa.gov/search/granules?p=C1748058432-LPCLOUD"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://appeears.earthdatacloud.nasa.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://earthexplorer.usgs.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/service#","hreflang":"en-US","href":"https://opendap.cr.usgs.gov/opendap/hyrax/DP128/MOLT/MOD11A1.061/contents.html"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/documents/119/MOD11_ATBD.pdf"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/documents/715/MOD11_User_Guide_V61.pdf"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://ladsweb.modaps.eosdis.nasa.gov/filespec/MODIS/61/MOD11A1"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://modis-land.gsfc.nasa.gov/ValStatus.php?ProductID=MOD11"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://modis-land.gsfc.nasa.gov/MODLAND_val.html"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://landweb.modaps.eosdis.nasa.gov/cgi-bin/QA_WWW/qaFlagPage.cgi?sat=terra&amp;ver=C6"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/browse#","hreflang":"en-US","href":"https://cmr.earthdata.nasa.gov/browse-scaler/browse_images/granules/G2357124367-LPCLOUD?h=500&amp;w=500"}]},{"processing_level_id":"2G","cloud_hosted":true,"boxes":["-90 -180 90 180"],"time_start":"2002-07-04T00:00:00.000Z","version_id":"061","updated":"2015-09-30T10:48:18.602Z","dataset_id":"MODIS/Aqua Surface Reflectance Daily L2G Global 1km and 500m SIN Grid V061","has_spatial_subsetting":false,"has_transforms":false,"has_variables":false,"data_center":"LPCLOUD","short_name":"MYD09GA","organizations":["LP DAAC","NASA/GSFC/SED/ESD/TISL/MODAPS"],"title":"MODIS/Aqua Surface Reflectance Daily L2G Global 1km and 500m SIN Grid V061","coordinate_system":"CARTESIAN","summary":"The MYD09GA Version 6.1 product provides an estimate of the surface spectral reflectance of Aqua Moderate Resolution Imaging Spectroradiometer (MODIS) Bands 1 through 7, corrected for atmospheric conditions such as gasses, aerosols, and Rayleigh scattering. Provided along with the 500 meter (m) surface reflectance, observation, and quality bands are a set of ten 1 km observation bands and geolocation flags. The reflectance layers from the MYD09GA are used as the source data for many of the MODIS land products. \\n\\nValidation at stage 3 (https://modis-land.gsfc.nasa.gov/MODLAND_val.html) has been achieved for the MODIS Surface Reflectance products. Further details regarding MODIS land product validation for the MYD09 data product is available from the MODIS Land Team Validation site (https://modis-land.gsfc.nasa.gov/ValStatus.php?ProductID=MOD09).\\n\\nImprovements/Changes from Previous Versions\\n\\n* The Version 6.1 Level-1B (L1B) products have been improved by undergoing various calibration changes that include: changes to the response-versus-scan angle (RVS) approach that affects reflectance bands for Aqua and Terra MODIS, corrections to adjust for the optical crosstalk in Terra MODIS infrared (IR) bands, and corrections to the Terra MODIS forward look-up table (LUT) update for the period 2012 - 2017.\\n* A polarization correction has been applied to the L1B Reflective Solar Bands (RSB).","service_features":{"opendap":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false},"esi":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false},"harmony":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false}},"orbit_parameters":{},"id":"C2202498116-LPCLOUD","has_formats":false,"consortiums":["GEOSS","EOSDIS"],"original_format":"UMM_JSON","collection_data_type":"SCIENCE_QUALITY","archive_center":"LP DAAC","has_temporal_subsetting":false,"browse_flag":true,"platforms":["Aqua"],"online_access_flag":true,"links":[{"rel":"http://esipfed.org/ns/fedsearch/1.1/metadata#","hreflang":"en-US","href":"https://doi.org/10.5067/MODIS/MYD09GA.061"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/metadata#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://e4ftl01.cr.usgs.gov/MOLA/MYD09GA.061/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://search.earthdata.nasa.gov/search/granules?p=C2202498116-LPCLOUD"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://appeears.earthdatacloud.nasa.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://earthexplorer.usgs.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/service#","hreflang":"en-US","href":"https://opendap.cr.usgs.gov/opendap/hyrax/MYD09GA.061/contents.html"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/documents/305/MOD09_ATBD.pdf"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/documents/925/MOD09_User_Guide_V61.pdf"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://ladsweb.modaps.eosdis.nasa.gov/filespec/MODIS/61/MYD09GA"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://modis-land.gsfc.nasa.gov/ValStatus.php?ProductID=MYD09"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://modis-land.gsfc.nasa.gov/MODLAND_val.html"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://landweb.modaps.eosdis.nasa.gov/cgi-bin/QA_WWW/qaFlagPage.cgi?sat=aqua&amp;ver=C6"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/browse#","hreflang":"en-US","href":"https://cmr.earthdata.nasa.gov/browse-scaler/browse_images/granules/G2358467881-LPCLOUD?h=00&amp;w=500"}]},{"processing_level_id":"2G","cloud_hosted":true,"boxes":["-90 -180 90 180"],"time_start":"2002-07-04T00:00:00.000Z","version_id":"061","updated":"2015-09-30T10:48:19.848Z","dataset_id":"MODIS/Aqua Surface Reflectance Daily L2G Global 250m SIN Grid V061","has_spatial_subsetting":false,"has_transforms":false,"has_variables":false,"data_center":"LPCLOUD","short_name":"MYD09GQ","organizations":["LP DAAC","NASA/GSFC/SED/ESD/TISL/MODAPS"],"title":"MODIS/Aqua Surface Reflectance Daily L2G Global 250m SIN Grid V061","coordinate_system":"CARTESIAN","summary":"The MYD09GQ Version 6.1 product provides an estimate of the surface spectral reflectance of Aqua Moderate Resolution Imaging Spectroradiometer (MODIS) 250 meter (m) bands 1 and 2, corrected for atmospheric conditions such as gasses, aerosols, and Rayleigh scattering. Along with the 250 m bands are the Quality Assurance (QA) layer and five observation layers. This product is intended to be used in conjunction with the quality and viewing geometry information of the 500 m product (MYD09GA). \\r\\n\\r\\nValidation at stage 3 (https://modis-land.gsfc.nasa.gov/MODLAND_val.html) has been achieved for the MODIS Surface Reflectance products. Further details regarding MODIS land product validation for the MYD09 data product is available from the MODIS Land Team Validation site (https://modis-land.gsfc.nasa.gov/ValStatus.php?ProductID=MOD09).\\r\\n\\r\\nImprovements/Changes from Previous Versions\\r\\n\\r\\n* The Version 6.1 Level-1B (L1B) products have been improved by undergoing various calibration changes that include: changes to the response-versus-scan angle (RVS) approach that affects reflectance bands for Aqua and Terra MODIS, corrections to adjust for the optical crosstalk in Terra MODIS infrared (IR) bands, and corrections to the Terra MODIS forward look-up table (LUT) update for the period 2012 - 2017.\\r\\n* A polarization correction has been applied to the L1B Reflective Solar Bands (RSB).","service_features":{"opendap":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false},"esi":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false},"harmony":{"has_formats":false,"has_variables":false,"has_transforms":false,"has_spatial_subsetting":false,"has_temporal_subsetting":false}},"orbit_parameters":{},"id":"C2343109950-LPCLOUD","has_formats":false,"consortiums":["GEOSS","EOSDIS"],"original_format":"UMM_JSON","collection_data_type":"SCIENCE_QUALITY","archive_center":"LP DAAC","has_temporal_subsetting":false,"browse_flag":true,"platforms":["Aqua"],"online_access_flag":true,"links":[{"rel":"http://esipfed.org/ns/fedsearch/1.1/metadata#","hreflang":"en-US","href":"https://doi.org/10.5067/MODIS/MYD09GQ.061"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/metadata#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://e4ftl01.cr.usgs.gov/MOLA/MYD09GQ.061/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://search.earthdata.nasa.gov/search/granules?p=C2343109950-LPCLOUD"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://appeears.earthdatacloud.nasa.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/data#","hreflang":"en-US","href":"https://earthexplorer.usgs.gov/"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/service#","hreflang":"en-US","href":"https://opendap.cr.usgs.gov/opendap/hyrax/MYD09GQ.061/contents.html"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/documents/305/MOD09_ATBD.pdf"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://lpdaac.usgs.gov/documents/925/MOD09_User_Guide_V61.pdf"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://ladsweb.modaps.eosdis.nasa.gov/filespec/MODIS/61/MYD09GQ"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://modis-land.gsfc.nasa.gov/ValStatus.php?ProductID=MYD09"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://modis-land.gsfc.nasa.gov/MODLAND_val.html"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/documentation#","hreflang":"en-US","href":"https://landweb.modaps.eosdis.nasa.gov/cgi-bin/QA_WWW/qaFlagPage.cgi?sat=aqua&amp;ver=C6"},{"rel":"http://esipfed.org/ns/fedsearch/1.1/browse#","hreflang":"en-US","href":"https://cmr.earthdata.nasa.gov/browse-scaler/browse_images/granules/G2359475509-LPCLOUD?h=500&amp;w=500"}]}]}}'</code></pre>
+</div>
+</div>
+<p>A more convenient way to work with this information is to use <code>json</code> formatted data. I’m using pretty print <code>pprint</code> to print the data in an easy to read way.</p>
+<p><strong>Note</strong> - <code>response.json()</code> will format our response in <code>json</code> - <code>['feed']['entry']</code> returns all entries that CMR returned in the request (not the same as <strong>CMR-Hits</strong>) - <code>[0]</code> returns the first entry. Reminder that python starts indexing at 0, not 1!</p>
+<div id="frequent-tucson" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>pprint(response.json()[<span class="st">'feed'</span>][<span class="st">'entry'</span>][<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'archive_center': 'LP DAAC',
+ 'association_details': {'tools': [{'concept_id': 'TL1860232272-LPDAAC_ECS'}]},
+ 'associations': {'tools': ['TL1860232272-LPDAAC_ECS']},
+ 'boxes': ['-90 -180 90 180'],
+ 'browse_flag': True,
+ 'cloud_hosted': True,
+ 'collection_data_type': 'SCIENCE_QUALITY',
+ 'consortiums': ['GEOSS', 'EOSDIS'],
+ 'coordinate_system': 'CARTESIAN',
+ 'data_center': 'LPCLOUD',
+ 'dataset_id': 'HLS Landsat Operational Land Imager Surface Reflectance and '
+               'TOA Brightness Daily Global 30m v2.0',
+ 'has_formats': False,
+ 'has_spatial_subsetting': False,
+ 'has_temporal_subsetting': False,
+ 'has_transforms': False,
+ 'has_variables': False,
+ 'id': 'C2021957657-LPCLOUD',
+ 'links': [{'href': 'https://search.earthdata.nasa.gov/search?q=C2021957657-LPCLOUD',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/data#'},
+           {'href': 'https://doi.org/10.5067/HLS/HLSL30.002',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/metadata#'},
+           {'href': 'https://lpdaac.usgs.gov/',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/metadata#'},
+           {'href': 'https://lpdaac.usgs.gov/documents/1326/HLS_User_Guide_V2.pdf',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/documentation#'},
+           {'href': 'https://lpdaac.usgs.gov/documents/769/HLS_ATBD_V15_provisional.pdf',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/documentation#'},
+           {'href': 'https://lpdaac.usgs.gov/documents/1117/HLS_Quick_Guide_v02.pdf',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/documentation#'},
+           {'href': 'https://git.earthdata.nasa.gov/projects/LPDUR/repos/hls-tutorial/browse',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/documentation#'},
+           {'href': 'https://git.earthdata.nasa.gov/projects/LPDUR/repos/hls-super-script/browse',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/documentation#'},
+           {'href': 'https://cmr.earthdata.nasa.gov/browse-scaler/browse_images/granules/G2095313663-LPCLOUD?h=512&amp;w=512',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#'},
+           {'href': 'https://git.earthdata.nasa.gov/projects/LPDUR/repos/hls-bulk-download/browse',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/documentation#'},
+           {'href': 'https://lpdaac.usgs.gov/resources/e-learning/getting-started-with-cloud-native-harmonized-landsat-sentinel-2-hls-data-in-r/',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/documentation#'},
+           {'href': 'https://appeears.earthdatacloud.nasa.gov/',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/data#'}],
+ 'online_access_flag': True,
+ 'orbit_parameters': {},
+ 'organizations': ['LP DAAC', 'NASA/IMPACT'],
+ 'original_format': 'UMM_JSON',
+ 'platforms': ['LANDSAT-8', 'LANDSAT-9'],
+ 'processing_level_id': '3',
+ 'service_features': {'esi': {'has_formats': False,
+                              'has_spatial_subsetting': False,
+                              'has_temporal_subsetting': False,
+                              'has_transforms': False,
+                              'has_variables': False},
+                      'harmony': {'has_formats': False,
+                                  'has_spatial_subsetting': False,
+                                  'has_temporal_subsetting': False,
+                                  'has_transforms': False,
+                                  'has_variables': False},
+                      'opendap': {'has_formats': False,
+                                  'has_spatial_subsetting': False,
+                                  'has_temporal_subsetting': False,
+                                  'has_transforms': False,
+                                  'has_variables': False}},
+ 'short_name': 'HLSL30',
+ 'summary': 'The Harmonized Landsat Sentinel-2 (HLS) project provides '
+            'consistent surface reflectance (SR) and top of atmosphere (TOA) '
+            'brightness data from a virtual constellation of satellite '
+            'sensors. The Operational Land Imager (OLI) is housed aboard the '
+            'joint NASA/USGS Landsat 8 and Landsat 9 satellites, while the '
+            'Multi-Spectral Instrument (MSI) is mounted aboard Europe’s '
+            'Copernicus Sentinel-2A and Sentinel-2B satellites. The combined '
+            'measurement enables global observations of the land every 2–3 '
+            'days at 30-meter (m) spatial resolution. The HLS project uses a '
+            'set of algorithms to obtain seamless products from OLI and MSI '
+            'that include atmospheric correction, cloud and cloud-shadow '
+            'masking, spatial co-registration and common gridding, '
+            'illumination and view angle normalization, and spectral bandpass '
+            'adjustment.\r\n'
+            '\r\n'
+            'The HLSL30 product provides 30-m Nadir Bidirectional Reflectance '
+            'Distribution Function (BRDF)-Adjusted Reflectance (NBAR) and is '
+            'derived from Landsat 8/9 OLI data products. The HLSS30 and HLSL30 '
+            'products are gridded to the same resolution and Military Grid '
+            'Reference System '
+            '(MGRS)(https://hls.gsfc.nasa.gov/products-description/tiling-system/) '
+            'tiling system, and thus are “stackable” for time series '
+            'analysis.\r\n'
+            '\r\n'
+            'The HLSL30 product is provided in Cloud Optimized GeoTIFF (COG) '
+            'format, and each band is distributed as a separate file. There '
+            'are 11 bands included in the HLSL30 product along with one '
+            'quality assessment (QA) band and four angle bands. See the User '
+            'Guide for a more detailed description of the individual bands '
+            'provided in the HLSL30 product.',
+ 'time_start': '2013-04-11T00:00:00.000Z',
+ 'title': 'HLS Landsat Operational Land Imager Surface Reflectance and TOA '
+          'Brightness Daily Global 30m v2.0',
+ 'updated': '2015-12-03T10:57:07.000Z',
+ 'version_id': '2.0'}</code></pre>
+</div>
+</div>
+<p>The first response contains a lot more information than we need. We’ll narrow in on a few fields to get a feel for what we have. We’ll print the name of the dataset (<code>dataset_id</code>) and the concept id (<code>id</code>). We can build this variable and print statement like we did above with the <code>url</code> variable.</p>
+<div id="radio-lightning" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>collections <span class="op">=</span> response.json()[<span class="st">'feed'</span>][<span class="st">'entry'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="other-grant" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> collection <span class="kw">in</span> collections:</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>collection[<span class="st">"archive_center"</span>]<span class="sc">}</span><span class="ss"> | </span><span class="sc">{</span>collection[<span class="st">"dataset_id"</span>]<span class="sc">}</span><span class="ss"> | </span><span class="sc">{</span>collection[<span class="st">"short_name"</span>]<span class="sc">}</span><span class="ss"> |</span><span class="sc">{</span>collection[<span class="st">"id"</span>]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>LP DAAC | HLS Landsat Operational Land Imager Surface Reflectance and TOA Brightness Daily Global 30m v2.0 | HLSL30 |C2021957657-LPCLOUD
+LP DAAC | HLS Sentinel-2 Multi-spectral Instrument Surface Reflectance Daily Global 30m v2.0 | HLSS30 |C2021957295-LPCLOUD
+LP DAAC | ASTER Global Digital Elevation Model V003 | ASTGTM |C1711961296-LPCLOUD
+LP DAAC | MODIS/Aqua Land Surface Temperature/Emissivity Daily L3 Global 1km SIN Grid V061 | MYD11A1 |C1748046084-LPCLOUD
+LP DAAC | MODIS/Terra Vegetation Indices 16-Day L3 Global 250m SIN Grid V061 | MOD13Q1 |C1748066515-LPCLOUD
+LP DAAC | MODIS/Terra Surface Reflectance Daily L2G Global 1km and 500m SIN Grid V061 | MOD09GA |C2202497474-LPCLOUD
+LP DAAC | MODIS/Terra Surface Reflectance Daily L2G Global 250m SIN Grid V061 | MOD09GQ |C2343115666-LPCLOUD
+LP DAAC | MODIS/Terra Land Surface Temperature/Emissivity Daily L3 Global 1km SIN Grid V061 | MOD11A1 |C1748058432-LPCLOUD
+LP DAAC | MODIS/Aqua Surface Reflectance Daily L2G Global 1km and 500m SIN Grid V061 | MYD09GA |C2202498116-LPCLOUD
+LP DAAC | MODIS/Aqua Surface Reflectance Daily L2G Global 250m SIN Grid V061 | MYD09GQ |C2343109950-LPCLOUD</code></pre>
+</div>
+</div>
+<p><code>CMR-Hits</code> showed 209 data collections above but CMR restricts the number of results returned by each query. The default is 10 but it can be set to a maximum of 2000 by adding <code>page_size</code> parameter. We can set the <code>page_size</code> parameter to 300 (higher than the number of results returned) so we get all results in a single query.</p>
+<div id="federal-analyst" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(url,</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                        params<span class="op">=</span>{</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'cloud_hosted'</span>: <span class="st">'True'</span>,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'has_granules'</span>: <span class="st">'True'</span>,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'provider'</span>: provider,</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'page_size'</span>: <span class="dv">300</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>                        },</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>                        headers<span class="op">=</span>{</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'Accept'</span>: <span class="st">'application/json'</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>                            }</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>                       )</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>response</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<pre><code>&lt;Response [200]&gt;</code></pre>
+</div>
+</div>
+<p>Now, when we can re-run our for loop for the collections we now have all of the available collections listed.</p>
+<div id="consecutive-detroit" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>collections <span class="op">=</span> response.json()[<span class="st">'feed'</span>][<span class="st">'entry'</span>]</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> collection <span class="kw">in</span> collections:</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>collection[<span class="st">"archive_center"</span>]<span class="sc">}</span><span class="ss"> | </span><span class="sc">{</span>collection[<span class="st">"dataset_id"</span>]<span class="sc">}</span><span class="ss"> | </span><span class="sc">{</span>collection[<span class="st">"short_name"</span>]<span class="sc">}</span><span class="ss"> |</span><span class="sc">{</span>collection[<span class="st">"id"</span>]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>LP DAAC | HLS Landsat Operational Land Imager Surface Reflectance and TOA Brightness Daily Global 30m v2.0 | HLSL30 |C2021957657-LPCLOUD
+LP DAAC | HLS Sentinel-2 Multi-spectral Instrument Surface Reflectance Daily Global 30m v2.0 | HLSS30 |C2021957295-LPCLOUD
+LP DAAC | ASTER Global Digital Elevation Model V003 | ASTGTM |C1711961296-LPCLOUD
+LP DAAC | MODIS/Aqua Land Surface Temperature/Emissivity Daily L3 Global 1km SIN Grid V061 | MYD11A1 |C1748046084-LPCLOUD
+LP DAAC | MODIS/Terra Vegetation Indices 16-Day L3 Global 250m SIN Grid V061 | MOD13Q1 |C1748066515-LPCLOUD
+LP DAAC | MODIS/Terra Surface Reflectance Daily L2G Global 1km and 500m SIN Grid V061 | MOD09GA |C2202497474-LPCLOUD
+LP DAAC | MODIS/Terra Surface Reflectance Daily L2G Global 250m SIN Grid V061 | MOD09GQ |C2343115666-LPCLOUD
+LP DAAC | MODIS/Terra Land Surface Temperature/Emissivity Daily L3 Global 1km SIN Grid V061 | MOD11A1 |C1748058432-LPCLOUD
+LP DAAC | MODIS/Aqua Surface Reflectance Daily L2G Global 1km and 500m SIN Grid V061 | MYD09GA |C2202498116-LPCLOUD
+LP DAAC | MODIS/Aqua Surface Reflectance Daily L2G Global 250m SIN Grid V061 | MYD09GQ |C2343109950-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Nadir BRDF-Adjusted Ref Daily L3 Global - 500m V061 | MCD43A4 |C2218719731-LPCLOUD
+LP DAAC | MODIS/Terra Land Surface Temperature/Emissivity 8-Day L3 Global 1km SIN Grid V061 | MOD11A2 |C2269056084-LPCLOUD
+LP DAAC | MODIS/Terra Vegetation Indices 16-Day L3 Global 1km SIN Grid V061 | MOD13A2 |C2565788905-LPCLOUD
+LP DAAC | MODIS/Aqua Land Surface Temperature/Emissivity 8-Day L3 Global 1km SIN Grid V061 | MYD11A2 |C2269057787-LPCLOUD
+LP DAAC | MODIS/Terra Surface Reflectance 8-Day L3 Global 500m SIN Grid V061 | MOD09A1 |C2343111356-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua Land Aerosol Optical Depth Daily L2G Global 1km SIN Grid V061 | MCD19A2 |C2324689816-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Albedo Daily L3 Global - 500m V061 | MCD43A3 |C2278860820-LPCLOUD
+LP DAAC | MODIS/Terra Thermal Anomalies/Fire 5-Min L2 Swath 1km V061 | MOD14 |C2271754179-LPCLOUD
+LP DAAC | MODIS/Aqua Thermal Anomalies/Fire 5-Min L2 Swath 1km V061 | MYD14 |C2278858993-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Model Parameters Daily L3 Global - 500m V061 | MCD43A1 |C2343116130-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Quality Daily L3 Global - 500m V061 | MCD43A2 |C2343116525-LPCLOUD
+LP DAAC | MODIS/Terra Leaf Area Index/FPAR 8-Day L4 Global 500m SIN Grid V061 | MOD15A2H |C2218777082-LPCLOUD
+LP DAAC | MODIS/Terra Land Surface Temperature/3-Band Emissivity Daily L3 Global 1km SIN Grid Day V061 | MOD21A1D |C2545303088-LPCLOUD
+LP DAAC | MODIS/Terra Land Surface Temperature/3-Band Emissivity Daily L3 Global 1km SIN Grid Night V061 | MOD21A1N |C2545303093-LPCLOUD
+LP DAAC | MODIS/Aqua Vegetation Indices 16-Day L3 Global 250m SIN Grid V061 | MYD13Q1 |C2307290656-LPCLOUD
+LP DAAC | MODIS/Aqua Land Surface Temperature/3-Band Emissivity Daily L3 Global 1km SIN Grid Day V061 | MYD21A1D |C2565805783-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua Leaf Area Index/FPAR 4-Day L4 Global 500m SIN Grid V061 | MCD15A3H |C2343110937-LPCLOUD
+LP DAAC | MODIS/Terra Surface Reflectance 8-Day L3 Global 250m SIN Grid V061 | MOD09Q1 |C2343112831-LPCLOUD
+LP DAAC | MODIS/Terra Vegetation Indices 16-Day L3 Global 500m SIN Grid V061 | MOD13A1 |C2565788901-LPCLOUD
+LP DAAC | MODIS/Terra Thermal Anomalies/Fire Daily L3 Global 1km SIN Grid V061 | MOD14A1 |C2565791013-LPCLOUD
+LP DAAC | MODIS/Terra Net Evapotranspiration 8-Day L4 Global 500m SIN Grid V061 | MOD16A2 |C2343113232-LPCLOUD
+LP DAAC | MODIS/Terra Gross Primary Productivity 8-Day L4 Global 500m SIN Grid V061 | MOD17A2H |C2565791027-LPCLOUD
+LP DAAC | MODIS/Aqua Surface Reflectance 8-Day L3 Global 500m SIN Grid V061 | MYD09A1 |C2343113743-LPCLOUD
+LP DAAC | MODIS/Aqua Land Surface Temperature/Emissivity 5-Min L2 Swath 1km V061 | MYD11_L2 |C2343114808-LPCLOUD
+LP DAAC | MODIS/Aqua Vegetation Indices 16-Day L3 Global 1km SIN Grid V061 | MYD13A2 |C2565794049-LPCLOUD
+LP DAAC | MODIS/Aqua Land Surface Temperature/3-Band Emissivity Daily L3 Global 1km SIN Grid Night V061 | MYD21A1N |C2565805789-LPCLOUD
+LP DAAC | MODIS/Terra Thermal Anomalies/Fire 8-Day L3 Global 1km SIN Grid V061 | MOD14A2 |C2565791018-LPCLOUD
+LP DAAC | MODIS/Aqua Surface Reflectance 8-Day L3 Global 250m SIN Grid V061 | MYD09Q1 |C2343114343-LPCLOUD
+LP DAAC | MODIS/Aqua Thermal Anomalies/Fire Daily L3 Global 1km SIN Grid V061 | MYD14A1 |C2565794059-LPCLOUD
+LP DAAC | MODIS/Aqua Thermal Anomalies/Fire 8-Day L3 Global 1km SIN Grid V061 | MYD14A2 |C2565794060-LPCLOUD
+LP DAAC | MODIS/Aqua Leaf Area Index/FPAR 8-Day L4 Global 500m SIN Grid V061 | MYD15A2H |C2565794061-LPCLOUD
+LP DAAC | MODIS/Aqua Net Evapotranspiration 8-Day L4 Global 500m SIN Grid V061 | MYD16A2 |C2565794064-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua Land Cover Type Yearly L3 Global 500m SIN Grid V061 | MCD12Q1 |C2484079608-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua Direct Broadcast Burned Area Monthly L3 Global 500m SIN Grid V061 | MCD64A1 |C2565786756-LPCLOUD
+LP DAAC | MODIS/Terra Vegetation Indices Monthly L3 Global 0.05Deg CMG V061 | MOD13C2 |C2565788914-LPCLOUD
+LP DAAC | MODIS/Terra Net Primary Production Gap-Filled Yearly L4 Global 500m SIN Grid V061 | MOD17A3HGF |C2565791034-LPCLOUD
+LP DAAC | MODIS/Aqua Gross Primary Productivity 8-Day L4 Global 500m SIN Grid V061 | MYD17A2H |C2565794796-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Albedo Daily L3 Global 0.05Deg CMG V061 | MCD43C3 |C2532068039-LPCLOUD
+LP DAAC | MODIS/Terra Surface Reflectance Daily L3 Global 0.05Deg CMG V061 | MOD09CMG |C2565788876-LPCLOUD
+LP DAAC | MODIS/Terra Vegetation Indices Monthly L3 Global 1km SIN Grid V061 | MOD13A3 |C2327962326-LPCLOUD
+LP DAAC | MODIS/Aqua Vegetation Indices 16-Day L3 Global 500m SIN Grid V061 | MYD13A1 |C2565794046-LPCLOUD
+LP DAAC | ASTER Global Digital Elevation Model NetCDF V003 | ASTGTM_NC |C2439422590-LPCLOUD
+LP DAAC | EMIT L1B At-Sensor Calibrated Radiance and Geolocation Data 60 m V001 | EMITL1BRAD |C2408009906-LPCLOUD
+LP DAAC | EMIT L2A Estimated Surface Reflectance and Uncertainty and Masks 60 m V001 | EMITL2ARFL |C2408750690-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua Land Cover Type Yearly L3 Global 0.05Deg CMG V061 | MCD12C1 |C2484078896-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua Land Cover Dynamics Yearly L3 Global 500m SIN Grid V061 | MCD12Q2 |C2484079943-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua Leaf Area Index/FPAR 8-Day L4 Global 500m SIN Grid V061 | MCD15A2H |C2222147000-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua Photosynthetically Active Radiation Daily/3-Hour L3 Global 1km SIN Grid V061 | MCD18A2 |C2484080763-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua Photosynthetically Active Radiation Daily/3-Hour L3 Global 0.05Deg CMG V061 | MCD18C2 |C2484081543-LPCLOUD
+LP DAAC | MODIS/Terra Land Surface Temperature/Emissivity Monthly L3 Global 0.05Deg CMG V061 | MOD11C3 |C2565788897-LPCLOUD
+LP DAAC | MODIS/Terra Land Surface Temperature/Emissivity 5-Min L2 Swath 1km V061 | MOD11_L2 |C2343115255-LPCLOUD
+LP DAAC | MODIS/Terra Vegetation Indices 16-Day L3 Global 0.05Deg CMG V061 | MOD13C1 |C2565788912-LPCLOUD
+LP DAAC | MODIS/Terra Net Evapotranspiration Gap-Filled 8-Day L4 Global 500m SIN Grid V061 | MOD16A2GF |C2565791021-LPCLOUD
+LP DAAC | MODIS/Terra Net Evapotranspiration Gap-Filled Yearly L4 Global 500m SIN Grid V061 | MOD16A3GF |C2565791024-LPCLOUD
+LP DAAC | MODIS/Terra Gross Primary Productivity Gap-Filled 8-Day L4 Global 500m SIN Grid V061 | MOD17A2HGF |C2565791029-LPCLOUD
+LP DAAC | MODIS/Terra Land Surface Temperature/3-Band Emissivity 5-Min L2 1km V061 | MOD21 |C2565791036-LPCLOUD
+LP DAAC | MODIS/Terra Land Surface Temperature/3-Band Emissivity Daily L3 Global 0.05Deg CMG V061 | MOD21C1 |C2565791044-LPCLOUD
+LP DAAC | MODIS/Aqua Surface Reflectance Daily L3 Global 0.05Deg CMG V061 | MYD09CMG |C2565794001-LPCLOUD
+LP DAAC | ASTER Global Digital Elevation Model Attributes NetCDF V003 | ASTGTM_NUMNC |C2439429778-LPCLOUD
+LP DAAC | ECOSTRESS Swath Attitude and Ephemeris Instantaneous L1B Global V002 | ECO_L1B_ATT |C2076117996-LPCLOUD
+LP DAAC | ECOSTRESS Swath Geolocation Instantaneous L1B Global 70 m V002 | ECO_L1B_GEO |C2076087338-LPCLOUD
+LP DAAC | ECOSTRESS Swath Top of Atmosphere Calibrated Radiance Instantaneous L1B Global 70 m V002 | ECO_L1B_RAD |C2076116385-LPCLOUD
+LP DAAC | ECOSTRESS Gridded Top of Atmosphere Calibrated Radiance Instantaneous L1C Global 70 m V002 | ECO_L1CG_RAD |C2595678497-LPCLOUD
+LP DAAC | ECOSTRESS Tiled Top of Atmosphere Calibrated Radiance Instantaneous L1C Global 70 m V002 | ECO_L1CT_RAD |C2595678301-LPCLOUD
+LP DAAC | ECOSTRESS Gridded Cloud Mask Instantaneous L2 Global 70 m V002 | ECO_L2G_CLOUD |C2076113561-LPCLOUD
+LP DAAC | ECOSTRESS Gridded Land Surface Temperature and Emissivity Instantaneous L2 Global 70 m V002 | ECO_L2G_LSTE |C2076113037-LPCLOUD
+LP DAAC | ECOSTRESS Tiled Land Surface Temperature and Emissivity Instantaneous L2 Global 70 m V002 | ECO_L2T_LSTE |C2076090826-LPCLOUD
+LP DAAC | ECOSTRESS Swath Cloud Mask Instantaneous L2 Global 70 m V002 | ECO_L2_CLOUD |C2076115306-LPCLOUD
+LP DAAC | ECOSTRESS Swath Land Surface Temperature and Emissivity Instantaneous L2 Global 70 m V002 | ECO_L2_LSTE |C2076114664-LPCLOUD
+LP DAAC | EMIT L1B Corrected Spacecraft Attitude and Ephemeris V001 | EMITL1BATT |C2408031090-LPCLOUD
+LP DAAC | EMIT L2B Estimated Mineral Identification and Band Depth and Uncertainty 60 m V001 | EMITL2BMIN |C2408034484-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua Surface Radiation Daily/3-Hour L3 Global 1km SIN Grid V061 | MCD18A1 |C2484080427-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua Downward Shortwave Radiation Daily/3-Hour L3 Global 0.05Deg CMG V061 | MCD18C1 |C2484081120-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua Land Surface BRF Daily L2G Global 500m and 1km SIN Grid V061 | MCD19A1 |C2484086031-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF Model Parameters Daily L3 Global 1km SIN Grid V061 | MCD19A3D |C2484086411-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Model Parameters Daily L3 Global 0.05Deg CMG V061 | MCD43C1 |C2532015377-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Snow-free Model Parameters Daily L3 Global 0.05Deg CMG V061 | MCD43C2 |C2532059394-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Nadir BRDF-Adjusted Ref Daily L3 Global 0.05Deg CMG V061 | MCD43C4 |C2532449179-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter 1 Band 1 Daily L3 Global 30 ArcSec CMG V061 | MCD43D01 |C2532021230-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter 2 Band 1 Daily L3 Global 30 ArcSec CMG V061 | MCD43D02 |C2532020158-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter 3 Band 1 Daily L3 Global 30 ArcSec CMG V061 | MCD43D03 |C2532019021-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter 1 Band 2 Daily L3 Global 30 ArcSec CMG V061 | MCD43D04 |C2532014841-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter 2 Band 2 Daily L3 Global 30 ArcSec CMG V061 | MCD43D05 |C2532011588-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter 3 Band 2 Daily L3 Global 30 ArcSec CMG V061 | MCD43D06 |C2532007810-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter1 Band3 Daily L3 Global 30ArcSec CMG V061 | MCD43D07 |C2539207575-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter2 Band3 Daily L3 Global 30ArcSec CMG V061 | MCD43D08 |C2539208411-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter3 Band3 Daily L3 Global 30ArcSec CMG V061 | MCD43D09 |C2539209209-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter1 Band4 Daily L3 Global 30ArcSec CMG V061 | MCD43D10 |C2539209814-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter2 Band4 Daily L3 Global 30ArcSec CMG V061 | MCD43D11 |C2539902420-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter3 Band4 Daily L3 Global 30ArcSec CMG V061 | MCD43D12 |C2539907890-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter1 Band5 Daily L3 Global 30ArcSec CMG V061 | MCD43D13 |C2539907921-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter2 Band5 Daily L3 Global 30ArcSec CMG V061 | MCD43D14 |C2539907928-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter3 Band5 Daily L3 Global 30ArcSec CMG V061 | MCD43D15 |C2539907934-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter1 Band6 Daily L3 Global 30ArcSec CMG V061 | MCD43D16 |C2539907940-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter2 Band6 Daily L3 Global 30ArcSec CMG V061 | MCD43D17 |C2539907945-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter3 Band6 Daily L3 Global 30ArcSec CMG V061 | MCD43D18 |C2539907952-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter1 Band7 Daily L3 Global 30ArcSec CMG V061 | MCD43D19 |C2539907958-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter2 Band7 Daily L3 Global 30ArcSec CMG V061 | MCD43D20 |C2539907962-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter3 Band7 Daily L3 Global 30ArcSec CMG V061 | MCD43D21 |C2540268544-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter1 VIS Daily L3 Global 30ArcSec CMG V061 | MCD43D22 |C2540268550-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter2 VIS Daily L3 Global 30ArcSec CMG V061 | MCD43D23 |C2540268554-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter3 VIS Daily L3 Global 30ArcSec CMG V061 | MCD43D24 |C2540268560-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter1 NIR Daily L3 Global 30ArcSec CMG V061 | MCD43D25 |C2540268566-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter2 NIR Daily L3 Global 30ArcSec CMG V061 | MCD43D26 |C2540268573-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter3 NIR Daily L3 Global 30ArcSec CMG V061 | MCD43D27 |C2540268577-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter1 Shortwave Daily L3 Global 30ArcSec CMG V061 | MCD43D28 |C2540268581-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter2 Shortwave Daily L3 Global 30ArcSec CMG V061 | MCD43D29 |C2540268586-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Parameter3 Shortwave Daily L3 Global 30ArcSec CMG V061 | MCD43D30 |C2540268595-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo QA BRDFQuality Daily L3 Global 30ArcSec CMG V061 | MCD43D31 |C2540270738-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo QA LocalSolarNoon Daily L3 Global 30ArcSec CMG V061 | MCD43D32 |C2540270742-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo QA ValidobsBand1 Daily L3 Global 30ArcSec CMG V061 | MCD43D33 |C2540270747-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo QA ValidobsBand2 Daily L3 Global 30ArcSec CMG V061 | MCD43D34 |C2540270751-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo QA ValidobsBand3 Daily L3 Global 30ArcSec CMG V061 | MCD43D35 |C2540270757-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo QA ValidobsBand4 Daily L3 Global 30ArcSec CMG V061 | MCD43D36 |C2540270762-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo QA ValidobsBand5 Daily L3 Global 30ArcSec CMG V061 | MCD43D37 |C2540270766-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo QA ValidobsBand6 Daily L3 Global 30ArcSec CMG V061 | MCD43D38 |C2540270771-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo QA ValidobsBand7 Daily L3 Global 30ArcSec CMG V061 | MCD43D39 |C2540270775-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo QA SnowStatus Daily L3 Global 30ArcSec CMG V061 | MCD43D40 |C2540270779-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo QA Uncertainty Daily L3 Global 30ArcSec CMG V061 | MCD43D41 |C2540271801-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Black Sky Albedo Band1 Daily L3 Global 30ArcSec CMG V061 | MCD43D42 |C2540271806-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Black Sky Albedo Band2 Daily L3 Global 30ArcSec CMG V061 | MCD43D43 |C2540271810-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Black Sky Albedo Band3 Daily L3 Global 30ArcSec CMG V061 | MCD43D44 |C2540271815-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Black Sky Albedo Band4 Daily L3 Global 30ArcSec CMG V061 | MCD43D45 |C2540271820-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Black Sky Albedo Band5 Daily L3 Global 30ArcSec CMG V061 | MCD43D46 |C2540271825-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Black Sky Albedo Band6 Daily L3 Global 30ArcSec CMG V061 | MCD43D47 |C2540271830-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Black Sky Albedo Band7 Daily L3 Global 30ArcSec CMG V061 | MCD43D48 |C2540271835-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Black Sky Albedo VIS Daily L3 Global 30ArcSec CMG V061 | MCD43D49 |C2540271839-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Black Sky Albedo NIR Daily L3 Global 30ArcSec CMG V061 | MCD43D50 |C2540271843-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Black Sky Albedo Shortwave Daily L3 Global 30ArcSec CMG V061 | MCD43D51 |C2540273055-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo White Sky Albedo Band1 Daily L3 Global 30ArcSec CMG V061 | MCD43D52 |C2540273061-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo White Sky Albedo Band2 Daily L3 Global 30ArcSec CMG V061 | MCD43D53 |C2540273066-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo White Sky Albedo Band3 Daily L3 Global 30ArcSec CMG V061 | MCD43D54 |C2540273075-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo White Sky Albedo Band4 Daily L3 Global 30ArcSec CMG V061 | MCD43D55 |C2540273116-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo White Sky Albedo Band5 Daily L3 Global 30ArcSec CMG V061 | MCD43D56 |C2540273121-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo White Sky Albedo Band6 Daily L3 Global 30ArcSec CMG V061 | MCD43D57 |C2540273128-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo White Sky Albedo Band7 Daily L3 Global 30ArcSec CMG V061 | MCD43D58 |C2540273133-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo White Sky Albedo VIS Daily L3 Global 30ArcSec CMG V061 | MCD43D59 |C2540273183-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo White Sky Albedo NIR Daily L3 Global 30ArcSec CMG V061 | MCD43D60 |C2540273187-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo White Sky Albedo Shortwave Daily L3 Global 30ArcSec CMG V061 | MCD43D61 |C2540275672-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Nadir BRDF-Adjusted Ref Band1 Daily L3 Global 30ArcSec CMG V061 | MCD43D62 |C2540275683-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Nadir BRDF-Adjusted Ref Band2 Daily L3 Global 30ArcSec CMG V061 | MCD43D63 |C2540275688-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Nadir BRDF-Adjusted Ref Band3 Daily L3 Global 30ArcSec CMG V061 | MCD43D64 |C2540275694-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Nadir BRDF-Adjusted Ref Band4 Daily L3 Global 30ArcSec CMG V061 | MCD43D65 |C2540275719-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Nadir BRDF-Adjusted Ref Band5 Daily L3 Global 30ArcSec CMG V061 | MCD43D66 |C2540275742-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Nadir BRDF-Adjusted Ref Band6 Daily L3 Global 30ArcSec CMG V061 | MCD43D67 |C2540275748-LPCLOUD
+LP DAAC | MODIS/Terra+Aqua BRDF/Albedo Nadir BRDF-Adjusted Ref Band7 Daily L3 Global 30ArcSec CMG V061 | MCD43D68 |C2540275753-LPCLOUD
+LP DAAC | MODIS/Terra Land Surface Temperature/Emissivity Daily L3 Global 6km SIN Grid V061 | MOD11B1 |C2524245159-LPCLOUD
+LP DAAC | MODIS/Terra Land Surface Temperature/Emissivity 8-Day L3 Global 6km SIN Grid V061 | MOD11B2 |C2565788881-LPCLOUD
+LP DAAC | MODIS/Terra Land Surface Temperature/Emissivity Monthly L3 Global 6km SIN Grid V061 | MOD11B3 |C2565788885-LPCLOUD
+LP DAAC | MODIS/Terra Land Surface Temperature/Emissivity Daily L3 Global 0.05Deg CMG V061 | MOD11C1 |C2565788888-LPCLOUD
+LP DAAC | MODIS/Terra Land Surface Temperature/Emissivity 8-Day L3 Global 0.05Deg CMG V061 | MOD11C2 |C2565788893-LPCLOUD
+LP DAAC | MODIS/Terra Land Surface Temperature/3-Band Emissivity 8-Day L3 Global 1km SIN Grid V061 | MOD21A2 |C2565791040-LPCLOUD
+LP DAAC | MODIS/Terra Land Surface Temperature/3-Band Emissivity 8-Day L3 Global 0.05Deg CMG V061 | MOD21C2 |C2565791047-LPCLOUD
+LP DAAC | MODIS/Terra Land Surface Temperature/3-Band Emissivity Monthly L3 Global 0.05Deg CMG V061 | MOD21C3 |C2565791050-LPCLOUD
+LP DAAC | MODIS/Terra Water Reservoir 8-Day L3 Global V061 | MOD28C2 |C2565791054-LPCLOUD
+LP DAAC | MODIS/Terra Water Reservoir Monthly L3 Global V061 | MOD28C3 |C2565791057-LPCLOUD
+LP DAAC | MODIS/Aqua Land Surface Temperature/Emissivity Daily L3 Global 6km SIN Grid V061 | MYD11B1 |C2565794007-LPCLOUD
+LP DAAC | MODIS/Aqua Land Surface Temperature/Emissivity 8-Day L3 Global 6km SIN Grid V061 | MYD11B2 |C2565794018-LPCLOUD
+LP DAAC | MODIS/Aqua Land Surface Temperature/Emissivity Monthly L3 Global 6km SIN Grid V061 | MYD11B3 |C2565794030-LPCLOUD
+LP DAAC | MODIS/Aqua Land Surface Temperature/Emissivity Daily L3 Global 0.05Deg CMG V061 | MYD11C1 |C2565794038-LPCLOUD
+LP DAAC | MODIS/Aqua Land Surface Temperature/Emissivity 8-Day L3 Global 0.05Deg CMG V061 | MYD11C2 |C2565794042-LPCLOUD
+LP DAAC | MODIS/Aqua Land Surface Temperature/Emissivity Monthly L3 Global 0.05Deg CMG V061 | MYD11C3 |C2565794044-LPCLOUD
+LP DAAC | MODIS/Aqua Vegetation Indices Monthly L3 Global 1km SIN Grid V061 | MYD13A3 |C2327957988-LPCLOUD
+LP DAAC | MODIS/Aqua Vegetation Indices 16-Day L3 Global 0.05Deg CMG V061 | MYD13C1 |C2565794051-LPCLOUD
+LP DAAC | MODIS/Aqua Vegetation Indices Monthly L3 Global 0.05Deg CMG V061 | MYD13C2 |C2565794055-LPCLOUD
+LP DAAC | MODIS/Aqua Net Evapotranspiration Gap-Filled 8-Day L4 Global 500m SIN Grid V061 | MYD16A2GF |C2565794067-LPCLOUD
+LP DAAC | MODIS/Aqua Net Evapotranspiration Gap-Filled Yearly L4 Global 500m SIN Grid V061 | MYD16A3GF |C2565794069-LPCLOUD
+LP DAAC | MODIS/Aqua Gross Primary Productivity Gap-Filled 8-Day L4 Global 500m SIN Grid V061 | MYD17A2HGF |C2565794824-LPCLOUD
+LP DAAC | MODIS/Aqua Net Primary Production Gap-Filled Yearly L4 Global 500m SIN Grid V061 | MYD17A3HGF |C2565794850-LPCLOUD
+LP DAAC | MODIS/Aqua Land Surface Temperature/3-Band Emissivity 5-Min L2 1km V061 | MYD21 |C2565805776-LPCLOUD
+LP DAAC | MODIS/Aqua Land Surface Temperature/3-Band Emissivity 8-Day L3 Global 1km SIN Grid V061 | MYD21A2 |C2565805799-LPCLOUD
+LP DAAC | MODIS/Aqua Land Surface Temperature/3-Band Emissivity Daily L3 Global 0.05Deg CMG V061 | MYD21C1 |C2565805805-LPCLOUD
+LP DAAC | MODIS/Aqua Land Surface Temperature/3-Band Emissivity 8-Day L3 Global 0.05Deg CMG V061 | MYD21C2 |C2565805807-LPCLOUD
+LP DAAC | MODIS/Aqua Land Surface Temperature/3-Band Emissivity Monthly L3 Global 0.05Deg CMG V061 | MYD21C3 |C2565805812-LPCLOUD
+LP DAAC | MODIS/Aqua Water Reservoir 8-Day L3 Global V061 | MYD28C2 |C2565805818-LPCLOUD
+LP DAAC | MODIS/Aqua Water Reservoir Monthly L3 Global V061 | MYD28C3 |C2565805823-LPCLOUD
+LP DAAC | OPERA Land Surface Disturbance Alert from Harmonized Landsat Sentinel-2 provisional product (Version 0) | OPERA_L3_DIST-ALERT-HLS_PROVISIONAL_V0 |C2517904291-LPCLOUD
+LP DAAC | VIIRS/JPSS1 Surface Reflectance 8-Day L3 Global 1km SIN Grid V002 | VJ109A1 |C2501959919-LPCLOUD
+LP DAAC | VIIRS/JPSS1 Surface Reflectance Daily L3 Global 0.05Deg CMG V002 | VJ109CMG |C2519121257-LPCLOUD
+LP DAAC | VIIRS/JPSS1 Surface Reflectance Daily L2G Global 1km and 500m SIN Grid V002 | VJ109GA |C2631841524-LPCLOUD
+LP DAAC | VIIRS/JPSS1 Surface Reflectance 8-Day L3 Global 500m SIN Grid V002 | VJ109H1 |C2519120226-LPCLOUD
+LP DAAC | VIIRS/JPSS1 Land Surface Temperature and Emissivity 6-Min L2 Swath 750m V002 | VJ121 |C2545310883-LPCLOUD
+LP DAAC | VIIRS/JPSS1 Land Surface Temperature/Emissivity Daily L3 Global 1km SIN Grid Day V002 | VJ121A1D |C2545310887-LPCLOUD
+LP DAAC | VIIRS/JPSS1 Land Surface Temperature/Emissivity Daily L3 Global 1km SIN Grid Night V002 | VJ121A1N |C2545310892-LPCLOUD
+LP DAAC | VIIRS/JPSS1 Land Surface Temperature/Emissivity 8-Day L3 Global 1km SIN Grid V002 | VJ121A2 |C2545310897-LPCLOUD
+LP DAAC | VIIRS/JPSS1 Land Surface Temperature/Emissivity Daily L3 Global 0.05Deg CMG V002 | VJ121C1 |C2545310901-LPCLOUD
+LP DAAC | VIIRS/JPSS1 Land Surface Temperature/Emissivity 8-Day L3 Global 0.05Deg CMG V002 | VJ121C2 |C2545310905-LPCLOUD
+LP DAAC | VIIRS/JPSS1 Land Surface Temperature/Emissivity Monthly L3 Global 0.05Deg CMG V002 | VJ121C3 |C2545310909-LPCLOUD
+LP DAAC | VIIRS/NPP Surface Reflectance 8-Day L3 Global 1km SIN Grid V002 | VNP09A1 |C2519124793-LPCLOUD
+LP DAAC | VIIRS/NPP Surface Reflectance Daily L3 Global 0.05Deg CMG V002 | VNP09CMG |C2519126793-LPCLOUD
+LP DAAC | VIIRS/NPP Surface Reflectance Daily L2G Global 1km and 500m SIN Grid V002 | VNP09GA |C2631841556-LPCLOUD
+LP DAAC | VIIRS/NPP Surface Reflectance 8-Day L3 Global 500m SIN Grid V002 | VNP09H1 |C2519125808-LPCLOUD
+LP DAAC | VIIRS/NPP Land Surface Temperature and Emissivity 6-Min L2 Swath 750m V002 | VNP21 |C2545314550-LPCLOUD
+LP DAAC | VIIRS/NPP Land Surface Temperature/Emissivity Daily L3 Global 1km SIN Grid Day V002 | VNP21A1D |C2545314555-LPCLOUD
+LP DAAC | VIIRS/NPP Land Surface Temperature/Emissivity Daily L3 Global 1km SIN Grid Night V002 | VNP21A1N |C2545314559-LPCLOUD
+LP DAAC | VIIRS/NPP Land Surface Temperature/Emissivity 8-Day L3 Global 1km SIN Grid V002 | VNP21A2 |C2545314562-LPCLOUD
+LP DAAC | VIIRS/NPP Land Surface Temperature/Emissivity Daily L3 Global 0.05Deg CMG V002 | VNP21C1 |C2545314566-LPCLOUD
+LP DAAC | VIIRS/NPP Land Surface Temperature/Emissivity 8-Day L3 Global 0.05Deg CMG V002 | VNP21C2 |C2545314570-LPCLOUD
+LP DAAC | VIIRS/NPP Land Surface Temperature/Emissivity Monthly L3 Global 0.05Deg CMG V002 | VNP21C3 |C2545314573-LPCLOUD</code></pre>
+</div>
+</div>
+</section>
+<section id="query-cmr-using-project" class="level2">
+<h2 class="anchored" data-anchor-id="query-cmr-using-project">Query CMR Using Project</h2>
+<p>Collections can also be queried using project name. Below, we look for data Collections for <code>ECOSTRESS</code> and <code>SNWG/OPERA</code> projects distributed by LP DAAC and stored in cloud. Please note that all collections do not have a project parameter defined necessarily.</p>
+<div id="335309a8" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>project <span class="op">=</span> [<span class="st">'ECOSTRESS'</span>, <span class="st">'SNWG/OPERA'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="2c37576b" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(url,</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>                        params<span class="op">=</span>{</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'cloud_hosted'</span>: <span class="st">'True'</span>,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'has_granules'</span>: <span class="st">'True'</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'provider'</span>: provider,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'project'</span>: project, </span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'page_size'</span>: <span class="dv">50</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>                        },</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>                        headers<span class="op">=</span>{</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'Accept'</span>: <span class="st">'application/json'</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>                            }</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>                       )</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>response</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<pre><code>&lt;Response [200]&gt;</code></pre>
+</div>
+</div>
+<div id="6c1da668" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>collections <span class="op">=</span> response.json()[<span class="st">'feed'</span>][<span class="st">'entry'</span>]</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> collection <span class="kw">in</span> collections:</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>collection[<span class="st">"archive_center"</span>]<span class="sc">}</span><span class="ss"> | </span><span class="sc">{</span>collection[<span class="st">"dataset_id"</span>]<span class="sc">}</span><span class="ss"> | </span><span class="sc">{</span>collection[<span class="st">"short_name"</span>]<span class="sc">}</span><span class="ss"> |</span><span class="sc">{</span>collection[<span class="st">"id"</span>]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>LP DAAC | ECOSTRESS Swath Geolocation Instantaneous L1B Global 70 m V002 | ECO_L1B_GEO |C2076087338-LPCLOUD
+LP DAAC | ECOSTRESS Swath Top of Atmosphere Calibrated Radiance Instantaneous L1B Global 70 m V002 | ECO_L1B_RAD |C2076116385-LPCLOUD
+LP DAAC | ECOSTRESS Gridded Top of Atmosphere Calibrated Radiance Instantaneous L1C Global 70 m V002 | ECO_L1CG_RAD |C2595678497-LPCLOUD
+LP DAAC | ECOSTRESS Gridded Cloud Mask Instantaneous L2 Global 70 m V002 | ECO_L2G_CLOUD |C2076113561-LPCLOUD
+LP DAAC | ECOSTRESS Gridded Land Surface Temperature and Emissivity Instantaneous L2 Global 70 m V002 | ECO_L2G_LSTE |C2076113037-LPCLOUD
+LP DAAC | ECOSTRESS Tiled Land Surface Temperature and Emissivity Instantaneous L2 Global 70 m V002 | ECO_L2T_LSTE |C2076090826-LPCLOUD
+LP DAAC | ECOSTRESS Swath Cloud Mask Instantaneous L2 Global 70 m V002 | ECO_L2_CLOUD |C2076115306-LPCLOUD
+LP DAAC | ECOSTRESS Swath Land Surface Temperature and Emissivity Instantaneous L2 Global 70 m V002 | ECO_L2_LSTE |C2076114664-LPCLOUD
+LP DAAC | OPERA Land Surface Disturbance Alert from Harmonized Landsat Sentinel-2 provisional product (Version 0) | OPERA_L3_DIST-ALERT-HLS_PROVISIONAL_V0 |C2517904291-LPCLOUD</code></pre>
+</div>
+</div>
+<p>collection IDs are what we need for searching for granules.</p>
+</section>
+</section>
+<section id="searching-for-granules" class="level1">
+<h1>Searching for Granules</h1>
+<p>In NASA speak, Granules are files or groups of files. We will search by <code>concept_id</code>, <code>temporal</code>, and <code>bounding_box</code>. Details about these search parameters can be found in the CMR API Documentation.</p>
+<p>We need to change the resource url to look for <strong>granules</strong> instead of collections</p>
+<div id="unlimited-underwear" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>CMR_OPS<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span><span class="st">"granules"</span><span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>url</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<pre><code>'https://cmr.earthdata.nasa.gov/search/granules'</code></pre>
+</div>
+</div>
+<p>Below, <code>concept_id</code>, <code>temporal</code>, and <code>bounding_box</code> parameters are stored as a string to variables. Collection IDs are what we found from collection query. Here, we used <code>C2076090826-LPCLOUD</code> which is ID for ECOSTRESS Tiled Land Surface Temperature and Emissivity Instantaneous L2 Global 70 m V002 (<a href="https://doi.org/10.5067/ECOSTRESS/ECO_L2T_LSTE.002">ECO_L2T_LSTE</a>) as an example.</p>
+<p>The formatting of the values for each parameter is quite specific. For <code>temporal</code> and <code>bounding_box</code> follow the format below: <strong>Temporal parameters</strong> are in ISO 8061 format <code>yyyy-MM-ddTHH:mm:ssZ</code>.<br>
+<strong>Bounding box coordinates</strong> are lower left longitude, lower left latitude, upper right longitude, upper right latitude.</p>
+<div id="a3769176-73bc-4d80-8284-a0f0b15dc7ea" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>collection_id <span class="op">=</span> <span class="st">'C2076090826-LPCLOUD'</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>date_range <span class="op">=</span> <span class="st">'2022-10-20T00:00:00Z,2022-11-14T23:59:59Z'</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>bbox <span class="op">=</span> <span class="st">'-120.295181,34.210026,-119.526215,35.225021'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="identified-johnson" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(url, </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>                        params<span class="op">=</span>{</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'concept_id'</span>: collection_id,</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'temporal'</span>: date_range,</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'bounding_box'</span>: bbox,</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'page_size'</span>: <span class="dv">200</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>                            },</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>                        headers<span class="op">=</span>{</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'Accept'</span>: <span class="st">'application/json'</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>                            }</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>                       )</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.status_code)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>200</code></pre>
+</div>
+</div>
+<p>Let’s see how many granules are found for this query.</p>
+<div id="aggressive-repair" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.headers[<span class="st">'CMR-Hits'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>91</code></pre>
+</div>
+</div>
+<p>Now, look at the the first granule metadata.</p>
+<div id="f705ba75" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>granules <span class="op">=</span> response.json()[<span class="st">'feed'</span>][<span class="st">'entry'</span>]</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>pprint(granules[<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'boxes': ['33.309906 -120.259598 34.3242 -119.044289'],
+ 'browse_flag': True,
+ 'collection_concept_id': 'C2076090826-LPCLOUD',
+ 'coordinate_system': 'GEODETIC',
+ 'data_center': 'LPCLOUD',
+ 'dataset_id': 'ECOSTRESS Tiled Land Surface Temperature and Emissivity '
+               'Instantaneous L2 Global 70 m V002',
+ 'day_night_flag': 'NIGHT',
+ 'granule_size': '3.36234',
+ 'id': 'G2530780237-LPCLOUD',
+ 'links': [{'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_water.tif',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/data#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_water.tif'},
+           {'href': 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_water.tif',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/s3#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_cloud.tif',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/data#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_cloud.tif'},
+           {'href': 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_cloud.tif',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/s3#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_height.tif',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/data#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_height.tif'},
+           {'href': 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_height.tif',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/s3#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_QC.tif',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/data#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_QC.tif'},
+           {'href': 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_QC.tif',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/s3#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_LST.tif',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/data#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_LST.tif'},
+           {'href': 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_LST.tif',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/s3#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_LST_err.tif',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/data#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_LST_err.tif'},
+           {'href': 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_LST_err.tif',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/s3#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_EmisWB.tif',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/data#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_EmisWB.tif'},
+           {'href': 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_EmisWB.tif',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/s3#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01.json',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/metadata#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01.json '
+                     '(VIEW RELATED INFORMATION)'},
+           {'href': 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01.json',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/metadata#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule (VIEW RELATED INFORMATION)'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01.cmr.xml',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/metadata#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01.cmr.xml '
+                     '(EXTENDED METADATA)'},
+           {'href': 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01.cmr.xml',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/metadata#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule (EXTENDED METADATA)'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/s3credentials',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/metadata#',
+            'title': 'api endpoint to retrieve temporary credentials valid for '
+                     'same-region direct s3 access (VIEW RELATED INFORMATION)'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-public/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01.png',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01.png'},
+           {'href': 's3://lp-prod-public/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01.png',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_water.jpeg',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_water.jpeg'},
+           {'href': 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_water.jpeg',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_water.jpeg.aux.xml',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_water.jpeg.aux.xml'},
+           {'href': 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_water.jpeg.aux.xml',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_cloud.jpeg',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_cloud.jpeg'},
+           {'href': 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_cloud.jpeg',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_cloud.jpeg.aux.xml',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_cloud.jpeg.aux.xml'},
+           {'href': 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_cloud.jpeg.aux.xml',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_height.jpeg',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_height.jpeg'},
+           {'href': 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_height.jpeg',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_height.jpeg.aux.xml',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_height.jpeg.aux.xml'},
+           {'href': 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_height.jpeg.aux.xml',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_QC.jpeg',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_QC.jpeg'},
+           {'href': 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_QC.jpeg',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_QC.jpeg.aux.xml',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_QC.jpeg.aux.xml'},
+           {'href': 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_QC.jpeg.aux.xml',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_LST.jpeg',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_LST.jpeg'},
+           {'href': 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_LST.jpeg',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_LST.jpeg.aux.xml',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_LST.jpeg.aux.xml'},
+           {'href': 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_LST.jpeg.aux.xml',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_LST_err.jpeg',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_LST_err.jpeg'},
+           {'href': 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_LST_err.jpeg',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_LST_err.jpeg.aux.xml',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_LST_err.jpeg.aux.xml'},
+           {'href': 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_LST_err.jpeg.aux.xml',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_EmisWB.jpeg',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_EmisWB.jpeg'},
+           {'href': 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_EmisWB.jpeg',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule'},
+           {'href': 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_EmisWB.jpeg.aux.xml',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'Download '
+                     'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_EmisWB.jpeg.aux.xml'},
+           {'href': 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01/ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01_EmisWB.jpeg.aux.xml',
+            'hreflang': 'en-US',
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/browse#',
+            'title': 'This link provides direct download access via S3 to the '
+                     'granule'},
+           {'href': 'https://search.earthdata.nasa.gov/search?q=C2076090826-LPCLOUD',
+            'hreflang': 'en-US',
+            'inherited': True,
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/data#'},
+           {'href': 'https://doi.org/10.5067/ECOSTRESS/ECO_L2T_LSTE.002',
+            'hreflang': 'en-US',
+            'inherited': True,
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/metadata#'},
+           {'href': 'https://lpdaac.usgs.gov/',
+            'hreflang': 'en-US',
+            'inherited': True,
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/metadata#'},
+           {'href': 'https://lpdaac.usgs.gov/documents/1324/ECO2_LSTE_ATBD_V1.pdf',
+            'hreflang': 'en-US',
+            'inherited': True,
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/documentation#'},
+           {'href': 'https://lpdaac.usgs.gov/documents/380/ECO2_PSD_V1.pdf',
+            'hreflang': 'en-US',
+            'inherited': True,
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/documentation#'},
+           {'href': 'https://lpdaac.usgs.gov/documents/299/ECO2_ASD_V1.pdf',
+            'hreflang': 'en-US',
+            'inherited': True,
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/documentation#'},
+           {'href': 'https://lpdaac.usgs.gov/documents/1655/ECO_L1C-4_Grid_Tile_User_Guide_V2.pdf',
+            'hreflang': 'en-US',
+            'inherited': True,
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/documentation#'},
+           {'href': 'https://lpdaac-ops.cr.usgs.gov/documents/1574/ECOL2_User_Guide_V2.pdf',
+            'hreflang': 'en-US',
+            'inherited': True,
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/documentation#'},
+           {'href': 'https://appeears.earthdatacloud.nasa.gov/',
+            'hreflang': 'en-US',
+            'inherited': True,
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/data#'},
+           {'href': 'https://ecostress.jpl.nasa.gov/science',
+            'hreflang': 'en-US',
+            'inherited': True,
+            'rel': 'http://esipfed.org/ns/fedsearch/1.1/metadata#'}],
+ 'online_access_flag': True,
+ 'orbit_calculated_spatial_domains': [{'start_orbit_number': '24418',
+                                       'stop_orbit_number': '24418'}],
+ 'original_format': 'ECHO10',
+ 'producer_granule_id': 'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01',
+ 'time_end': '2022-10-26T11:00:36.970Z',
+ 'time_start': '2022-10-26T10:59:45.000Z',
+ 'title': 'ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01',
+ 'updated': '2022-10-28T10:41:15.849Z'}</code></pre>
+</div>
+</div>
+<p>Below, the information for granules are printed. Looking at the granules’ spatial box and start time shows they are filtered spatially and temporally for this collection.</p>
+<div id="animal-facing" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> granule <span class="kw">in</span> granules:</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>granule[<span class="st">"data_center"</span>]<span class="sc">}</span><span class="ss"> | </span><span class="sc">{</span>granule[<span class="st">"title"</span>]<span class="sc">}</span><span class="ss"> | </span><span class="sc">{</span>granule[<span class="st">"id"</span>]<span class="sc">}</span><span class="ss"> | </span><span class="sc">{</span>granule[<span class="st">"time_start"</span>]<span class="sc">}</span><span class="ss"> | </span><span class="sc">{</span>granule[<span class="st">"boxes"</span>]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>LPCLOUD | ECOv002_L2T_LSTE_24418_001_11SKT_20221026T105945_0710_01 | G2530780237-LPCLOUD | 2022-10-26T10:59:45.000Z | ['33.309906 -120.259598 34.3242 -119.044289']
+LPCLOUD | ECOv002_L2T_LSTE_24418_001_10SGC_20221026T105945_0710_01 | G2530780962-LPCLOUD | 2022-10-26T10:59:45.000Z | ['33.307163 -120.851555 34.322372 -119.635178']
+LPCLOUD | ECOv002_L2T_LSTE_24418_001_10SGD_20221026T105945_0710_01 | G2530781111-LPCLOUD | 2022-10-26T10:59:45.000Z | ['34.207188 -120.828926 35.223133 -119.598442']
+LPCLOUD | ECOv002_L2T_LSTE_24418_002_10SGD_20221026T110036_0710_01 | G2530775818-LPCLOUD | 2022-10-26T11:00:36.970Z | ['34.207188 -120.828926 35.223133 -119.598442']
+LPCLOUD | ECOv002_L2T_LSTE_24418_002_10SGE_20221026T110036_0710_01 | G2530778344-LPCLOUD | 2022-10-26T11:00:36.970Z | ['35.10759 -120.80526 36.124283 -119.560028']
+LPCLOUD | ECOv002_L2T_LSTE_24418_002_11SKV_20221026T110036_0710_01 | G2530780217-LPCLOUD | 2022-10-26T11:00:36.970Z | ['35.110527 -120.332405 36.126236 -119.088341']
+LPCLOUD | ECOv002_L2T_LSTE_24418_002_11SKU_20221026T110036_0710_01 | G2530780251-LPCLOUD | 2022-10-26T11:00:36.970Z | ['34.210026 -120.295181 35.225021 -119.065819']
+LPCLOUD | ECOv002_L2T_LSTE_24418_002_11SKT_20221026T110036_0710_01 | G2530780282-LPCLOUD | 2022-10-26T11:00:36.970Z | ['33.309906 -120.259598 34.3242 -119.044289']
+LPCLOUD | ECOv002_L2T_LSTE_24418_002_10SGC_20221026T110036_0710_01 | G2530780296-LPCLOUD | 2022-10-26T11:00:36.970Z | ['33.307163 -120.851555 34.322372 -119.635178']
+LPCLOUD | ECOv002_L2T_LSTE_24479_001_10SGE_20221030T092522_0710_01 | G2535607120-LPCLOUD | 2022-10-30T09:25:22.460Z | ['35.10759 -120.80526 36.124283 -119.560028']
+LPCLOUD | ECOv002_L2T_LSTE_24479_001_10SGD_20221030T092522_0710_01 | G2535607552-LPCLOUD | 2022-10-30T09:25:22.460Z | ['34.207188 -120.828926 35.223133 -119.598442']
+LPCLOUD | ECOv002_L2T_LSTE_24479_001_10SGC_20221030T092522_0710_01 | G2535607555-LPCLOUD | 2022-10-30T09:25:22.460Z | ['33.307163 -120.851555 34.322372 -119.635178']
+LPCLOUD | ECOv002_L2T_LSTE_24479_001_11SKT_20221030T092522_0710_01 | G2535609921-LPCLOUD | 2022-10-30T09:25:22.460Z | ['33.309906 -120.259598 34.3242 -119.044289']
+LPCLOUD | ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01 | G2535610056-LPCLOUD | 2022-10-30T09:25:22.460Z | ['34.210026 -120.295181 35.225021 -119.065819']
+LPCLOUD | ECOv002_L2T_LSTE_24479_001_11SKV_20221030T092522_0710_01 | G2535611479-LPCLOUD | 2022-10-30T09:25:22.460Z | ['35.110527 -120.332405 36.126236 -119.088341']
+LPCLOUD | ECOv002_L2T_LSTE_24494_003_11SKT_20221031T083716_0710_01 | G2536450014-LPCLOUD | 2022-10-31T08:37:16.490Z | ['33.309906 -120.259598 34.3242 -119.044289']
+LPCLOUD | ECOv002_L2T_LSTE_24514_011_10SGC_20221101T155724_0710_01 | G2539193798-LPCLOUD | 2022-11-01T15:57:24.370Z | ['33.307163 -120.851555 34.322372 -119.635178']
+LPCLOUD | ECOv002_L2T_LSTE_24514_011_10SGD_20221101T155724_0710_01 | G2539195601-LPCLOUD | 2022-11-01T15:57:24.370Z | ['34.207188 -120.828926 35.223133 -119.598442']
+LPCLOUD | ECOv002_L2T_LSTE_24514_011_10SGE_20221101T155724_0710_01 | G2539196967-LPCLOUD | 2022-11-01T15:57:24.370Z | ['35.10759 -120.80526 36.124283 -119.560028']
+LPCLOUD | ECOv002_L2T_LSTE_24514_011_11SKV_20221101T155724_0710_01 | G2539199950-LPCLOUD | 2022-11-01T15:57:24.370Z | ['35.110527 -120.332405 36.126236 -119.088341']
+LPCLOUD | ECOv002_L2T_LSTE_24514_012_11SKT_20221101T155816_0710_01 | G2539203544-LPCLOUD | 2022-11-01T15:58:16.340Z | ['33.309906 -120.259598 34.3242 -119.044289']
+LPCLOUD | ECOv002_L2T_LSTE_24514_012_11SKV_20221101T155816_0710_01 | G2539203547-LPCLOUD | 2022-11-01T15:58:16.340Z | ['35.110527 -120.332405 36.126236 -119.088341']
+LPCLOUD | ECOv002_L2T_LSTE_24514_012_10SGE_20221101T155816_0710_01 | G2539203627-LPCLOUD | 2022-11-01T15:58:16.340Z | ['35.10759 -120.80526 36.124283 -119.560028']
+LPCLOUD | ECOv002_L2T_LSTE_24514_012_10SGD_20221101T155816_0710_01 | G2539205423-LPCLOUD | 2022-11-01T15:58:16.340Z | ['34.207188 -120.828926 35.223133 -119.598442']
+LPCLOUD | ECOv002_L2T_LSTE_24514_012_10SGC_20221101T155816_0710_01 | G2539205436-LPCLOUD | 2022-11-01T15:58:16.340Z | ['33.307163 -120.851555 34.322372 -119.635178']
+LPCLOUD | ECOv002_L2T_LSTE_24514_012_11SKU_20221101T155816_0710_01 | G2539206874-LPCLOUD | 2022-11-01T15:58:16.340Z | ['34.210026 -120.295181 35.225021 -119.065819']
+LPCLOUD | ECOv002_L2T_LSTE_24540_005_10SGE_20221103T074954_0710_01 | G2541389219-LPCLOUD | 2022-11-03T07:49:54.910Z | ['35.10759 -120.80526 36.124283 -119.560028']
+LPCLOUD | ECOv002_L2T_LSTE_24540_005_10SGD_20221103T074954_0710_01 | G2541389633-LPCLOUD | 2022-11-03T07:49:54.910Z | ['34.207188 -120.828926 35.223133 -119.598442']
+LPCLOUD | ECOv002_L2T_LSTE_24540_005_10SGC_20221103T074954_0710_01 | G2541390013-LPCLOUD | 2022-11-03T07:49:54.910Z | ['33.307163 -120.851555 34.322372 -119.635178']
+LPCLOUD | ECOv002_L2T_LSTE_24540_005_11SKV_20221103T074954_0710_01 | G2541390707-LPCLOUD | 2022-11-03T07:49:54.910Z | ['35.110527 -120.332405 36.126236 -119.088341']
+LPCLOUD | ECOv002_L2T_LSTE_24540_005_11SKT_20221103T074954_0710_01 | G2541390948-LPCLOUD | 2022-11-03T07:49:54.910Z | ['33.309906 -120.259598 34.3242 -119.044289']
+LPCLOUD | ECOv002_L2T_LSTE_24540_005_11SKU_20221103T074954_0710_01 | G2541391017-LPCLOUD | 2022-11-03T07:49:54.910Z | ['34.210026 -120.295181 35.225021 -119.065819']
+LPCLOUD | ECOv002_L2T_LSTE_24540_006_11SKV_20221103T075046_0710_01 | G2541390173-LPCLOUD | 2022-11-03T07:50:46.870Z | ['35.110527 -120.332405 36.126236 -119.088341']
+LPCLOUD | ECOv002_L2T_LSTE_24560_012_10SGC_20221104T151000_0710_01 | G2543733039-LPCLOUD | 2022-11-04T15:10:00.780Z | ['33.307163 -120.851555 34.322372 -119.635178']
+LPCLOUD | ECOv002_L2T_LSTE_24560_012_10SGD_20221104T151000_0710_01 | G2543733267-LPCLOUD | 2022-11-04T15:10:00.780Z | ['34.207188 -120.828926 35.223133 -119.598442']
+LPCLOUD | ECOv002_L2T_LSTE_24560_013_10SGD_20221104T151052_0710_01 | G2543738483-LPCLOUD | 2022-11-04T15:10:52.750Z | ['34.207188 -120.828926 35.223133 -119.598442']
+LPCLOUD | ECOv002_L2T_LSTE_24560_013_11SKT_20221104T151052_0710_01 | G2543739516-LPCLOUD | 2022-11-04T15:10:52.750Z | ['33.309906 -120.259598 34.3242 -119.044289']
+LPCLOUD | ECOv002_L2T_LSTE_24560_013_10SGC_20221104T151052_0710_01 | G2543740062-LPCLOUD | 2022-11-04T15:10:52.750Z | ['33.307163 -120.851555 34.322372 -119.635178']
+LPCLOUD | ECOv002_L2T_LSTE_24575_011_10SGD_20221105T142134_0710_01 | G2545346904-LPCLOUD | 2022-11-05T14:21:34.540Z | ['34.207188 -120.828926 35.223133 -119.598442']
+LPCLOUD | ECOv002_L2T_LSTE_24575_011_10SGE_20221105T142134_0710_01 | G2545347453-LPCLOUD | 2022-11-05T14:21:34.540Z | ['35.10759 -120.80526 36.124283 -119.560028']
+LPCLOUD | ECOv002_L2T_LSTE_24575_011_11SKV_20221105T142134_0710_01 | G2545348685-LPCLOUD | 2022-11-05T14:21:34.540Z | ['35.110527 -120.332405 36.126236 -119.088341']
+LPCLOUD | ECOv002_L2T_LSTE_24575_012_10SGC_20221105T142226_0710_01 | G2545349703-LPCLOUD | 2022-11-05T14:22:26.510Z | ['33.307163 -120.851555 34.322372 -119.635178']
+LPCLOUD | ECOv002_L2T_LSTE_24575_012_10SGD_20221105T142226_0710_01 | G2545349707-LPCLOUD | 2022-11-05T14:22:26.510Z | ['34.207188 -120.828926 35.223133 -119.598442']
+LPCLOUD | ECOv002_L2T_LSTE_24575_012_10SGE_20221105T142226_0710_01 | G2545350290-LPCLOUD | 2022-11-05T14:22:26.510Z | ['35.10759 -120.80526 36.124283 -119.560028']
+LPCLOUD | ECOv002_L2T_LSTE_24575_012_11SKV_20221105T142226_0710_01 | G2545350562-LPCLOUD | 2022-11-05T14:22:26.510Z | ['35.110527 -120.332405 36.126236 -119.088341']
+LPCLOUD | ECOv002_L2T_LSTE_24575_012_11SKT_20221105T142226_0710_01 | G2545350572-LPCLOUD | 2022-11-05T14:22:26.510Z | ['33.309906 -120.259598 34.3242 -119.044289']
+LPCLOUD | ECOv002_L2T_LSTE_24575_012_11SKU_20221105T142226_0710_01 | G2545351427-LPCLOUD | 2022-11-05T14:22:26.510Z | ['34.210026 -120.295181 35.225021 -119.065819']
+LPCLOUD | ECOv002_L2T_LSTE_24586_005_10SGE_20221106T070230_0710_01 | G2547924621-LPCLOUD | 2022-11-06T07:02:30.120Z | ['35.10759 -120.80526 36.124283 -119.560028']
+LPCLOUD | ECOv002_L2T_LSTE_24601_001_10SGC_20221107T061356_0710_01 | G2549534375-LPCLOUD | 2022-11-07T06:13:56.780Z | ['33.307163 -120.851555 34.322372 -119.635178']
+LPCLOUD | ECOv002_L2T_LSTE_24601_001_10SGD_20221107T061356_0710_01 | G2549537569-LPCLOUD | 2022-11-07T06:13:56.780Z | ['34.207188 -120.828926 35.223133 -119.598442']
+LPCLOUD | ECOv002_L2T_LSTE_24601_001_11SKT_20221107T061356_0710_01 | G2549539722-LPCLOUD | 2022-11-07T06:13:56.780Z | ['33.309906 -120.259598 34.3242 -119.044289']
+LPCLOUD | ECOv002_L2T_LSTE_24601_001_11SKV_20221107T061356_0710_01 | G2549541811-LPCLOUD | 2022-11-07T06:13:56.780Z | ['35.110527 -120.332405 36.126236 -119.088341']
+LPCLOUD | ECOv002_L2T_LSTE_24601_001_11SKU_20221107T061356_0710_01 | G2549542048-LPCLOUD | 2022-11-07T06:13:56.780Z | ['34.210026 -120.295181 35.225021 -119.065819']
+LPCLOUD | ECOv002_L2T_LSTE_24601_001_10SGE_20221107T061356_0710_01 | G2549544152-LPCLOUD | 2022-11-07T06:13:56.780Z | ['35.10759 -120.80526 36.124283 -119.560028']
+LPCLOUD | ECOv002_L2T_LSTE_24601_002_10SGD_20221107T061448_0710_01 | G2549543455-LPCLOUD | 2022-11-07T06:14:48.750Z | ['34.207188 -120.828926 35.223133 -119.598442']
+LPCLOUD | ECOv002_L2T_LSTE_24601_002_11SKV_20221107T061448_0710_01 | G2549545353-LPCLOUD | 2022-11-07T06:14:48.750Z | ['35.110527 -120.332405 36.126236 -119.088341']
+LPCLOUD | ECOv002_L2T_LSTE_24601_002_11SKU_20221107T061448_0710_01 | G2549545958-LPCLOUD | 2022-11-07T06:14:48.750Z | ['34.210026 -120.295181 35.225021 -119.065819']
+LPCLOUD | ECOv002_L2T_LSTE_24601_002_10SGE_20221107T061448_0710_01 | G2549546174-LPCLOUD | 2022-11-07T06:14:48.750Z | ['35.10759 -120.80526 36.124283 -119.560028']
+LPCLOUD | ECOv002_L2T_LSTE_24621_014_10SGE_20221108T133404_0710_01 | G2552498791-LPCLOUD | 2022-11-08T13:34:04.820Z | ['35.10759 -120.80526 36.124283 -119.560028']
+LPCLOUD | ECOv002_L2T_LSTE_24621_014_10SGC_20221108T133404_0710_01 | G2552498842-LPCLOUD | 2022-11-08T13:34:04.820Z | ['33.307163 -120.851555 34.322372 -119.635178']
+LPCLOUD | ECOv002_L2T_LSTE_24621_014_10SGD_20221108T133404_0710_01 | G2552499035-LPCLOUD | 2022-11-08T13:34:04.820Z | ['34.207188 -120.828926 35.223133 -119.598442']
+LPCLOUD | ECOv002_L2T_LSTE_24621_014_11SKU_20221108T133404_0710_01 | G2552499106-LPCLOUD | 2022-11-08T13:34:04.820Z | ['34.210026 -120.295181 35.225021 -119.065819']
+LPCLOUD | ECOv002_L2T_LSTE_24621_015_10SGC_20221108T133456_0710_01 | G2552499524-LPCLOUD | 2022-11-08T13:34:56.780Z | ['33.307163 -120.851555 34.322372 -119.635178']
+LPCLOUD | ECOv002_L2T_LSTE_24621_015_10SGD_20221108T133456_0710_01 | G2552499737-LPCLOUD | 2022-11-08T13:34:56.780Z | ['34.207188 -120.828926 35.223133 -119.598442']
+LPCLOUD | ECOv002_L2T_LSTE_24621_015_11SKU_20221108T133456_0710_01 | G2552500199-LPCLOUD | 2022-11-08T13:34:56.780Z | ['34.210026 -120.295181 35.225021 -119.065819']
+LPCLOUD | ECOv002_L2T_LSTE_24621_015_11SKT_20221108T133456_0710_01 | G2552500209-LPCLOUD | 2022-11-08T13:34:56.780Z | ['33.309906 -120.259598 34.3242 -119.044289']
+LPCLOUD | ECOv002_L2T_LSTE_24636_014_10SGE_20221109T124603_0710_01 | G2552928897-LPCLOUD | 2022-11-09T12:46:03.360Z | ['35.10759 -120.80526 36.124283 -119.560028']
+LPCLOUD | ECOv002_L2T_LSTE_24636_014_11SKU_20221109T124603_0710_01 | G2552928920-LPCLOUD | 2022-11-09T12:46:03.360Z | ['34.210026 -120.295181 35.225021 -119.065819']
+LPCLOUD | ECOv002_L2T_LSTE_24636_014_10SGD_20221109T124603_0710_01 | G2552928925-LPCLOUD | 2022-11-09T12:46:03.360Z | ['34.207188 -120.828926 35.223133 -119.598442']
+LPCLOUD | ECOv002_L2T_LSTE_24636_014_11SKT_20221109T124603_0710_01 | G2552928949-LPCLOUD | 2022-11-09T12:46:03.360Z | ['33.309906 -120.259598 34.3242 -119.044289']
+LPCLOUD | ECOv002_L2T_LSTE_24636_014_11SKV_20221109T124603_0710_01 | G2552929009-LPCLOUD | 2022-11-09T12:46:03.360Z | ['35.110527 -120.332405 36.126236 -119.088341']
+LPCLOUD | ECOv002_L2T_LSTE_24662_001_10SGE_20221111T043744_0710_01 | G2553034860-LPCLOUD | 2022-11-11T04:37:44.260Z | ['35.10759 -120.80526 36.124283 -119.560028']
+LPCLOUD | ECOv002_L2T_LSTE_24662_001_11SKU_20221111T043744_0710_01 | G2553034938-LPCLOUD | 2022-11-11T04:37:44.260Z | ['34.210026 -120.295181 35.225021 -119.065819']
+LPCLOUD | ECOv002_L2T_LSTE_24662_001_10SGD_20221111T043744_0710_01 | G2553035041-LPCLOUD | 2022-11-11T04:37:44.260Z | ['34.207188 -120.828926 35.223133 -119.598442']
+LPCLOUD | ECOv002_L2T_LSTE_24662_001_11SKV_20221111T043744_0710_01 | G2553035200-LPCLOUD | 2022-11-11T04:37:44.260Z | ['35.110527 -120.332405 36.126236 -119.088341']
+LPCLOUD | ECOv002_L2T_LSTE_24662_001_11SKT_20221111T043744_0710_01 | G2553035219-LPCLOUD | 2022-11-11T04:37:44.260Z | ['33.309906 -120.259598 34.3242 -119.044289']
+LPCLOUD | ECOv002_L2T_LSTE_24662_001_10SGC_20221111T043744_0710_01 | G2553035253-LPCLOUD | 2022-11-11T04:37:44.260Z | ['33.307163 -120.851555 34.322372 -119.635178']
+LPCLOUD | ECOv002_L2T_LSTE_24662_002_11SKV_20221111T043836_0710_01 | G2553035117-LPCLOUD | 2022-11-11T04:38:36.230Z | ['35.110527 -120.332405 36.126236 -119.088341']
+LPCLOUD | ECOv002_L2T_LSTE_24682_012_11SKU_20221112T115757_0710_01 | G2555428866-LPCLOUD | 2022-11-12T11:57:57.020Z | ['34.210026 -120.295181 35.225021 -119.065819']
+LPCLOUD | ECOv002_L2T_LSTE_24682_012_10SGE_20221112T115757_0710_01 | G2555428917-LPCLOUD | 2022-11-12T11:57:57.020Z | ['35.10759 -120.80526 36.124283 -119.560028']
+LPCLOUD | ECOv002_L2T_LSTE_24682_012_10SGC_20221112T115757_0710_01 | G2555428936-LPCLOUD | 2022-11-12T11:57:57.020Z | ['33.307163 -120.851555 34.322372 -119.635178']
+LPCLOUD | ECOv002_L2T_LSTE_24682_012_11SKV_20221112T115757_0710_01 | G2555429029-LPCLOUD | 2022-11-12T11:57:57.020Z | ['35.110527 -120.332405 36.126236 -119.088341']
+LPCLOUD | ECOv002_L2T_LSTE_24682_012_11SKT_20221112T115757_0710_01 | G2555429051-LPCLOUD | 2022-11-12T11:57:57.020Z | ['33.309906 -120.259598 34.3242 -119.044289']
+LPCLOUD | ECOv002_L2T_LSTE_24682_012_10SGD_20221112T115757_0710_01 | G2555429069-LPCLOUD | 2022-11-12T11:57:57.020Z | ['34.207188 -120.828926 35.223133 -119.598442']
+LPCLOUD | ECOv002_L2T_LSTE_24697_012_11SKU_20221113T110920_0710_01 | G2555421232-LPCLOUD | 2022-11-13T11:09:20.140Z | ['34.210026 -120.295181 35.225021 -119.065819']
+LPCLOUD | ECOv002_L2T_LSTE_24697_012_11SKV_20221113T110920_0710_01 | G2555421277-LPCLOUD | 2022-11-13T11:09:20.140Z | ['35.110527 -120.332405 36.126236 -119.088341']
+LPCLOUD | ECOv002_L2T_LSTE_24697_012_10SGD_20221113T110920_0710_01 | G2555421290-LPCLOUD | 2022-11-13T11:09:20.140Z | ['34.207188 -120.828926 35.223133 -119.598442']
+LPCLOUD | ECOv002_L2T_LSTE_24697_012_10SGE_20221113T110920_0710_01 | G2555421372-LPCLOUD | 2022-11-13T11:09:20.140Z | ['35.10759 -120.80526 36.124283 -119.560028']
+LPCLOUD | ECOv002_L2T_LSTE_24708_007_10SGE_20221114T034942_0710_01 | G2555339715-LPCLOUD | 2022-11-14T03:49:42.650Z | ['35.10759 -120.80526 36.124283 -119.560028']
+LPCLOUD | ECOv002_L2T_LSTE_24708_007_10SGD_20221114T034942_0710_01 | G2555395190-LPCLOUD | 2022-11-14T03:49:42.650Z | ['34.207188 -120.828926 35.223133 -119.598442']
+LPCLOUD | ECOv002_L2T_LSTE_24708_007_11SKV_20221114T034942_0710_01 | G2555398551-LPCLOUD | 2022-11-14T03:49:42.650Z | ['35.110527 -120.332405 36.126236 -119.088341']</code></pre>
+</div>
+</div>
+<section id="get-urls-to-cloud-data-assets" class="level2">
+<h2 class="anchored" data-anchor-id="get-urls-to-cloud-data-assets">Get URLs to cloud data assets</h2>
+<p>Now that we have a list of granules filtered spatially and temporally for our collection, we can save the links to access the data. Below, HTTPS and S3 links are stored in two different lists. HTTPS links can be used to access data locally while S3 links can be used to access data in the cloud. View <a href="hub.com/nasa/LPDAAC-Data-Resources">LP DAAC Data Resources</a> for resources available for accessing and working with data collections in the Earthdata Cloud.</p>
+<div id="opposed-times" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>https_urls <span class="op">=</span> [l[<span class="st">'href'</span>] <span class="cf">for</span> l <span class="kw">in</span> granules[<span class="dv">13</span>][<span class="st">'links'</span>] <span class="cf">if</span> <span class="st">'https'</span> <span class="kw">in</span> l[<span class="st">'href'</span>] <span class="kw">and</span> <span class="st">'.tif'</span> <span class="kw">in</span> l[<span class="st">'href'</span>]]</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>https_urls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="28">
+<pre><code>['https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01_water.tif',
+ 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01_cloud.tif',
+ 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01_height.tif',
+ 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01_QC.tif',
+ 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01_LST.tif',
+ 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01_LST_err.tif',
+ 'https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01_EmisWB.tif']</code></pre>
+</div>
+</div>
+<div id="3d967958-0b7e-4c6f-be56-09d2b8e7b40a" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>s3_urls <span class="op">=</span> [l[<span class="st">'href'</span>] <span class="cf">for</span> l <span class="kw">in</span> granules[<span class="dv">13</span>][<span class="st">'links'</span>] <span class="cf">if</span> <span class="st">'s3'</span> <span class="kw">in</span> l[<span class="st">'href'</span>] <span class="kw">and</span> <span class="st">'.tif'</span> <span class="kw">in</span> l[<span class="st">'href'</span>]]</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>s3_urls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<pre><code>['s3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01_water.tif',
+ 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01_cloud.tif',
+ 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01_height.tif',
+ 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01_QC.tif',
+ 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01_LST.tif',
+ 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01_LST_err.tif',
+ 's3://lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01/ECOv002_L2T_LSTE_24479_001_11SKU_20221030T092522_0710_01_EmisWB.tif']</code></pre>
+</div>
+</div>
+</section>
+<section id="contact-info" class="level2">
+<h2 class="anchored" data-anchor-id="contact-info">Contact Info:</h2>
+<p>Email: LPDAAC@usgs.gov<br>
+Voice: +1-866-573-3222<br>
+Organization: Land Processes Distributed Active Archive Center (LP DAAC)¹<br>
+Website: <a href="https://lpdaac.usgs.gov/" class="uri">https://lpdaac.usgs.gov/</a><br>
+Date last modified: 7-5-2023</p>
+<p>¹Work performed under USGS contract G15PD00467 for NASA contract NNG14HH33I.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/nasa\.github\.io\/LPDAAC-Data-Resources\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>NASA Land Processes Distributed Active Archive Center (LP DAAC) | United States Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
