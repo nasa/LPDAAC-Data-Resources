@@ -67,7 +67,7 @@
         "title": "Local Python Environment Setup",
         "preamble": "This markdown document is from EMIT-Data-Resources",
         "source": "https://github.com/nasa/EMIT-Data-Resources",
-        "url": "https://raw.githubusercontent.com/nasa/EMIT-Data-Resources/min_dev/setup/setup_instructions.md",
+        "url": "https://raw.githubusercontent.com/nasa/EMIT-Data-Resources/main/setup/setup_instructions.md",
         "target": "setup_instructions.md",
         "process": false
     },
@@ -75,7 +75,7 @@
         "title": "Cloud Workspace Setup",
         "preamble": "This markdown document is from EMIT-Data-Resources",
         "source": "https://github.com/nasa/EMIT-Data-Resources",
-        "url": "https://raw.githubusercontent.com/nasa/EMIT-Data-Resources/min_dev/setup/workshop_setup.md",
+        "url": "https://raw.githubusercontent.com/nasa/EMIT-Data-Resources/main/setup/workshop_setup.md",
         "target": "workshop_setup.md",
         "process": false
     },
@@ -83,23 +83,23 @@
         "title": "Prerequisites",
         "preamble": "This markdown document is from EMIT-Data-Resources",
         "source": "https://github.com/nasa/EMIT-Data-Resources",
-        "url": "https://raw.githubusercontent.com/nasa/EMIT-Data-Resources/min_dev/setup/prerequisites.md",
+        "url": "https://raw.githubusercontent.com/nasa/EMIT-Data-Resources/main/setup/prerequisites.md",
         "target": "prerequisites.md",
         "process": false
     },
     {
         "title": "Finding EMIT L2B Data",
         "preamble": "This notebook is from [EMIT-Data-Resources](https://github.com/nasa/EMIT-Data-Resources)",
-        "source": "https://github.com/nasa/EMIT-Data-Resources/blob/min_dev/python/tutorials/Finding_EMIT_L2B_Data.ipynb",
-        "url": "https://raw.githubusercontent.com/nasa/EMIT-Data-Resources/min_dev/python/tutorials/Finding_EMIT_L2B_Data.ipynb",
+        "source": "https://github.com/nasa/EMIT-Data-Resources/blob/main/python/tutorials/Finding_EMIT_L2B_Data.ipynb",
+        "url": "https://raw.githubusercontent.com/nasa/EMIT-Data-Resources/main/python/tutorials/Finding_EMIT_L2B_Data.ipynb",
         "target": "Finding_EMIT_L2B_Data.ipynb",
         "process": true
     },
     {
         "title": "Working with EMIT L2B Mineralogy Data",
         "preamble": "This notebook is from [EMIT-Data-Resources](https://github.com/nasa/EMIT-Data-Resources)",
-        "source": "https://github.com/nasa/EMIT-Data-Resources/blob/min_dev/python/tutorials/Working_with_EMIT_L2B_Mineralogy.ipynb",
-        "url": "https://raw.githubusercontent.com/nasa/EMIT-Data-Resources/min_dev/python/tutorials/Working_with_EMIT_L2B_Mineralogy.ipynb",
+        "source": "https://github.com/nasa/EMIT-Data-Resources/blob/main/python/tutorials/Working_with_EMIT_L2B_Mineralogy.ipynb",
+        "url": "https://raw.githubusercontent.com/nasa/EMIT-Data-Resources/main/python/tutorials/Working_with_EMIT_L2B_Mineralogy.ipynb",
         "target": "Working_with_EMIT_L2B_Mineralogy.ipynb",
         "process": true
     }
