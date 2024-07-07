@@ -1,12 +1,10 @@
 # How to bulk download LP DAAC data using wget  
 
 This guide shows how to bulk download [LP DAAC](https://lpdaac.usgs.gov/) data using [wget](https://www.gnu.org/software/wget/) from the command line. The wget command is a tool developed by the GNU Project to download files from the web. Wget allows you to automate retrieving content and files from web servers using a command-line interface. 
----
 
 ## Requirements:
 - [Install wget](https://ftp.gnu.org/gnu/wget/). View [Frequently Asked Questions About Downloading GNU Wget](http://wget.addictivecode.org/FrequentlyAskedQuestions.html#download) for more details.
 - NASA Earthdata Login credentials are required to access data from all NASA DAACs. You can create an account [here](https://urs.earthdata.nasa.gov/users/new).
----
 
 # Method 1: Authenticate using .wgetrc file
 ## Step 1: Save the Download Link(s)  
@@ -64,16 +62,11 @@ You should now be able to run wget commands to download data directly from the L
 
   ```
 
----
 # Method 2: Authenticate Manually
 
 If you prefer to not create .wgetrc file for authentication, you can make wget command to work by passing authentications manually.
 
-
-
-
 ## Download LP DAAC Data
-
 
 - Navigate to the directory you want to save the data using `cd Insert_Your_Directory`.
 - Replace your Earthdata login username with "Insert_Your_Username" below.
@@ -97,8 +90,6 @@ If you prefer to not create .wgetrc file for authentication, you can make wget c
     wget --http-user=MYUSERNAME --ask-password --keep-session-cookies -i data/Granule-DownloadLinks.txt
     ```
   **Alternatively, you can replace `--ask-password` with `--http-passwd=Insert_Your_Password` and enter your password directly in the command line.** 
-
----
 
 ## Contact Info:  
 

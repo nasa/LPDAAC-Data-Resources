@@ -32,7 +32,7 @@ website:
     collapse-level: 1
     contents:
       - text: "Welcome"
-        href: web_book/lpdaac.qmd
+        href: index.qmd
       - section: "2024 IGARSS Workshop"
         contents:
           - text: "Overview"
