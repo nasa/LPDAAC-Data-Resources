@@ -1,68 +1,100 @@
-# Contributing to Our GitHub
+# Contributing to this Repository
 
-This page is your one-stop shop for uncovering how to contribute to our Github!
+> Please submit a pull request early in the development phase, outlining the changes you intend to make or features you intend to add. This allows us to offer feedback early on, ensuring your contribution can be added to the repository before you invest a significant amount of time.
 
-## We Want Your Help!
+We want your help! Even if you're not a coder! There are several ways you can contribute to this repository:
 
-No, really, we do! Please come and participate in our community and lets do science together! Depending on your level of interaction with the Land Processes Data Active Archive Center (LP DAAC) and the LP DAAC GitHub, visitors to the site can be described as: 
-- A **community member**: anyone in the open science community who visits a LP DAAC site, utilizes LP DAAC online tools, or attends a LP DAAC event.
-- A **participant**: anyone who posts a comment or poses a question in the *GitHub Discussion Space*, reports a site bug or requests a new resource in *GitHub Issues*, or attends a LP DAAC event and utilizes any virtual chat features during that event. 
-- A **contributor**: anyone who forks this GitHub repository and submits pull requests to make additions or changes to the posted content.
+- Report an [Issue](https://github.com/nasa/VITALS/issues) or make a recommendation
+- Update code, documentation, notebooks, or other files (even fixing typos)
+- Propose a new notebook
 
-Everyone reading this page is a community member, and we hope everyone will post comments and join discussions as a participant. Contributors are welcome, particularly to help find and point to other open science resources. 
+In the sections below we outline how to approach each of these types of contributions. If you're new to GitHub, you can [sign up here](https://github.com/). There are a bunch of great resources on the [GitHub Quickstart page](https://docs.github.com/en/get-started/quickstart). The [GitHub Cheatsheet](https://training.github.com/downloads/github-git-cheat-sheet/) is also quite helpful, even for experienced users. Please reach out to [lpdaac@usgs.gov](lpdaac@usgs.gov) with questions or concerns.  
 
-## Ways to Contribute to the  GitHub
-There are two main ways to contribute to the LP DAAC GitHub.  
-- **Suggest a change, addition, or deletion to what is already on the GitHub using [Issues](https://github.com/nasa/Transform-to-Open-Science/issues).** Issues can be about any LP DAAC plans, timelines, and content. 
-     - Before submitting a new [issue](https://github.com/nasa/LPDAAC-Data-Resources/issues), check to make sure [a similar issue isn't already open](https://github.com/nasa/LPDAAC-Data-Resources/issues). If one is, contribute to that issue thread with your feedback.
-     - When submitting a bug report, please try to provide as much detail as possible, i.e. a screenshot or [gist](https://gist.github.com/) that demonstrates the problem, the technology you are using, and any relevant links. 
-     - Issues labeled :sparkles:[`help wanted`](https://github.com/nasa/LPDAAC-Data-Resources/labels/help%20wanted):sparkles: make it easy for you to find ways you can contribute today. 
-- **Become a contributor!** [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) the repository and [make commits](https://docs.github.com/en/get-started/quickstart/contributing-to-projects#making-and-pushing-changes) to add resources and additional materials. Here are some ways you can contribute:
-     - by reporting bugs
-     - by suggesting new features
-     - by translating content to a new language
-     - by writing or editing documentation
-     - by writing specifications
-     - by writing code and documentation (**no pull request is too small**: fix typos, add code comments, clean up inconsistent whitespace)
-     - by closing [issues](https://github.com/nasa/LPDAAC-Data-Resources/issues)
+## Report an Issue or Make a Recommendation
 
-In the spirit of open source software, everyone is encouraged to help improve this project!
-                                                               
-## New to GitHub? Start here!
-You can [sign up for GitHub here](https://github.com/)! The NASA Transform to Open Science Team has made a short video demonstrating how to make an easy pull request [here](https://youtu.be/PHoScPeMWHI).
+If you've found a problem with the repository, we want to know about it! Please submit an [Issue](https://github.com/nasa/VITALS/issues). Before submitting, we would appreciate if you check to see if a similar issue already exists. If not, create a new issue, providing as much detail as possible. Things like screenshots and code excerpts demonstrating the problem are very helpful!
 
-For a more in-depth start, we suggest *[Getting Started with Git and GitHub: The Complete Beginner’s Guide](https://towardsdatascience.com/getting-started-with-git-and-github-6fcd0f2d4ac6)* and *[The Beginners Guide to Git and GitHub](https://www.freecodecamp.org/news/the-beginners-guide-to-git-github/)*. We've summarized some of the most important points below.
+## Updating Code, Documentation, Notebooks, or Other Files
 
-### Making a Change
-*This section is attributed to [NumFOCUS](https://github.com/numfocus/getting-started-with-open-source/blob/master/CONTRIBUTING.md) and [Adrienne Friend](https://github.com/adriennefriend/imposter-syndrome-disclaimer).*
+To contribute a solution to an issue or make a change to files within the repository we've created a typical outline of how to do that below. If you want to make a simple change, like correcting a typo within a markdown document or other documentation, there's a great video explaining how to do that without leaving the GitHub website [here](https://www.youtube.com/watch?v=PHoScPeMWHI). To make a more complex change to a notebook, code, or other file follow the instructions below.  
 
-Once you've identified something you'd like to help with you're ready to make a change to the project repository!
+1. Please create an [Issue](https://github.com/nasa/LPDAAC-Data-Resources) or comment on an existing issue describing the changes you intend to make.  
+2. Create a [fork](https://docs.github.com/en/get-started/quickstart/contributing-to-projects#about-forking) of this repository. This will create your own copy of the repository. When working from your fork, you can do whatever you want, you won't mess up anyone else's work so you're safe to try things out. Worst case scenario you can delete your fork and recreate it.  
+3. Clone your fork to your local computer or cloud workspace using your preferred command line interface after navigating to the directory you want to place the repository in:
 
-1. First, describe what you're planning to do as a comment to the issue, (and this might mean making a new issue).
+    ```
+    git clone your-fork-repository-url
+    ```
 
-    [This blog](https://www.igvita.com/2011/12/19/dont-push-your-pull-requests/) is a nice explanation of why putting this work in up front is so useful to everyone involved.
+    - Change directories to the one you cloned
 
-2. Fork this repository to your profile.
+    ```
+    cd repository-name
+    ```
 
-    You can now do whatever you want with this copy of the project. You won't mess up anyone else's work so you're super safe.
+    - Add the upstream repository, this is the original repository that you want to contribute to.
 
-    Make sure to [keep your fork up to date]( https://github.com/KirstieJane/STEMMRoleModels/wiki/Syncing-your-fork-to-the-original-repository-via-the-browser) with the master repository.
+    ```
+    git remote add upstream original-repository-url
+    ```
 
-3. Make the changes you've discussed.
+    - You can use the following to view the remote repositories:
 
-    Try to keep the changes focused rather than changing lots of things at once. If you feel tempted to branch out then please *literally* branch out: create separate branches for different updates to make the next step much easier!
+    ```
+    git remote -v
+    ```
 
-4. Submit a pull request.
+    - `upstream`, which refers to the original repository  
+    - `origin`, which refers to your personal fork  
 
-    A member of the executive team will review your changes, have a bit of discussion and hopefully merge them in!  
-    
-    N.B. you don't have to be ready to merge to make a pull request! We encourage you to submit a pull request as early as you want to. They help us to keep track of progress and help you to get earlier feedback.
+4. Develop your contribution:
+    - Create a new branch named appropriately for the feature you want to work on:
 
-## Development Model
+    ```
+    git checkout -b new-branch-name
+    ```
 
-For accepting new contributions, TOPS uses the [forking workflow](https://guides.github.com/activities/forking/). As the first step of your contribution, you'll want to fork this repository, make a local clone of it, add your contribution, and then create a pull request back to the LP DAAC repository.  
+    - Often, updates to an `upstream` repository will occur while you are developing changes on your personal fork. You can pull the latest changes from `upstream`
 
-All documentation should be written using Markdown and Github Markdown-supported HTML.  
+    ```
+    git pull upstream dev
+    ```
+
+    - You can check the status of your local copy of the repository to see what changes have been made using:
+
+    ```
+    git status
+    ```
+
+    - Commit locally as you progress using `git add` and `git commit`. For example, updating a readme.md file:
+
+    ```
+    git add readme.md
+    git commit -m "updated readme file"
+    ```
+
+    - You can check the status of your local copy of the repository again to see what pending changes have not been added or committed using:
+
+    ```
+    git status
+    ```
+
+    - After making some changes, push your changes back to your fork on GitHub:
+
+    ```git
+    git push origin branch-name
+    ```
+
+    - Enter username and password, depending on your settings, you may need to use a [Personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+
+5. To submit your contribution, navigate to your forked repository GitHub page and make a pull request using the `Compare &pull request` green button. Make sure to select the `base repository` and its `dev` branch. Also select your forked repository as `head repository` and make sure `compare` shows your branch name. You can add your comments and press `Create pull request` green button. Our team will be notified and will review your suggested revisions.
+
+    - **Please submit a pull request early in the development phase, outlining the changes you intend to make or features you intend to add. This allows us to offer feedback early on, ensuring your contribution can be added to the repository before you invest a significant amount of time.**
+
+## Adding New Notebooks or Example Workflows
+
+In the spirit of open science, we want to minimize barriers to sharing code and examples. We have added `user_contributed` directories to our repositories for users to share examples of their work in notebook or code form. Documentation and descriptions do not need to be as thorough as the examples we've created, but we ask that you provide as much as possible. Follow the [instructions](#updating-code-documentation-notebooks-or-other-files) above, placing your new notebook or module in a suitably named directory within the `user_contributed` directory. Be sure to remove any large datasets and indicate where users can retrieve them.
 
 ## Attribution
-These contributing guidelines are adapted from the NASA Transform to Open Science github, available at https://github.com/nasa/Transform-to-Open-Science/blob/main/CONTRIBUTING.md.
+
+These contributing guidelines are adapted from the NASA Transform to Open Science GitHub, available at <https://github.com/nasa/Transform-to-Open-Science/blob/main/CONTRIBUTING.md>.

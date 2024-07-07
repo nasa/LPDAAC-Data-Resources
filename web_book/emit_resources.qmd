@@ -1,0 +1,6 @@
+---
+title: EMIT Data Resources
+---
+
+All of the content in this section can be found in the EMIT-Data-Resources repository.
+

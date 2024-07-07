@@ -1,3 +1,18 @@
+# python internals
 *.ipynb_checkpoints
+*__pycache__*
+
+# local development
+*.img*
+*.envi*
+*.hdr*
+*.nc*
+/_ignore/
+/.quarto/
+/_site/
+/_imports/
 *GEDI02_B_2022120091720_O19145_02_T09106_02_003_01_V002.geojson
 *GEDI02_B_2022120091720_O19145_02_T09106_02_003_01_V002.h5
+
+# Exteral Notebooks for web-book
+/external/
