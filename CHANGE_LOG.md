@@ -4,10 +4,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 _________________________________________________________________________
+## 2024-08-08
+
+> ### Added
+> - [Streaming_cloud_optimized_geotiffs_using_QGIS.md](/guides/Streaming_cloud_optimized_geotiffs_using_QGIS.md) and images
+
+> ### Changed
+> - [How to bulk download LP DAAC data using Curl](guides/bulk_download_using_curl.md) to update .netrc setup instructions
+
+
+## 2024-06-28
+
+> ### Added
+> - Web-book resources for IGARSS Mineralogy Tutorial
 
 ## 2023-01-25
 
-> ### ADDED
+> ### Added
 > [Data_Discovery_CMR_API_Bulk_Query.ipynb](/python/tutorials/Data_Discovery_CMR_API_Bulk_Query.ipynb) tutorial
 
 ## 2023-09-11

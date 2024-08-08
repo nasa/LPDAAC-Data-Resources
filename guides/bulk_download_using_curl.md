@@ -21,25 +21,18 @@ Set up a .netrc file in your home directory.
 - ### Create .netrc file from the Command Line
   - Enter the following in Terminal:
     - #### Windows
-      To Create a .netrc file, enter the following in the command line. 
-      ```
-      NUL >> %userprofile%\.netrc | echo machine urs.earthdata.nasa.gov >> %userprofile%\.netrc
-      ```
-      To insert your NASA Earthdata login username and password into the file, enter the following in the Command Prompt and replace your username and password.
+      To Create a .netrc file, enter the following in the command line, replacing <USERNAME> and <PASSWORD> with your NASA Earthdata username and password. This will create a file in your home directory or append your NASA credentials to an existing file.
 
+      ```cmd
+      echo machine urs.earthdata.nasa.gov login <USERNAME> password <PASSWORD> >> %userprofile%\.netrc
       ```
-      echo login Insert_Your_Username >> %userprofile%\.netrc | echo password Insert_Your_Password >> %userprofile%\.netrc
-      ```
-    - #### MacOS:
+      
+    - #### Linux/MacOS:
 
-      To Create a .netrc file, enter the following in the command line. 
-      ```
-      touch ~/.netrc | chmod og-rw ~/.netrc | echo machine urs.earthdata.nasa.gov >> ~/.netrc
-      ```
-      To insert your NASA Earthdata login username and password into the file, enter the following in the Command Prompt and replace your username and password.
+      To Create a .netrc file, enter the following in the command line, replacing <USERNAME> and <PASSWORD> with your NASA Earthdata username and password. This will create a file in your home directory or append your NASA credentials to an existing file.
 
-      ```
-      echo login Insert_Your_Username >> ~/.netrc | echo password Insert_Your_Password >> ~/.netrc
+      ```bash
+      echo "machine urs.earthdata.nasa.gov login <USERNAME> password <PASSWORD>" >>~/.netrc
       ```
 
 - ### Programmatically:
