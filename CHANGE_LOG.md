@@ -4,11 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 _________________________________________________________________________
+## 2024-08-08
+>
+> ADDED: [Streaming_cloud_optimized_geotiffs_using_QGIS.md](/guides/Streaming_cloud_optimized_geotiffs_using_QGIS.md) and images 
+> UPDATED: [How to bulk download LP DAAC data using Curl](guides/bulk_download_using_curl.md) to update .netrc setup instructions
+
+## 2024-06-28
+>
+> ADDED: Web-book resources for IGARSS Mineralogy Tutorial
 
 ## 2024-09-10
 >
 > ADDED: [LP DAAC Data Access Guide](/guides/NASA_LPDAAC_Data_Access_Guide.md)
->
 
 ## 2023-01-25
 >
