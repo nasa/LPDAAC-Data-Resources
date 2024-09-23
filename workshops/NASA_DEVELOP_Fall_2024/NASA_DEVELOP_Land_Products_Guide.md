@@ -1,4 +1,4 @@
-# NASA DEVELOP Land Data Products Cheat Sheet - Fall 2024
+# NASA DEVELOP Land Data Products Guide - Fall 2024
 
 ## General Tools and Applications
 
