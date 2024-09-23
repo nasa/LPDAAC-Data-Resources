@@ -17,6 +17,7 @@
 ---
 
 **Description**
+
 [Earthdata Search](https://search.earthdata.nasa.gov/search) is NASA's comprehensive data discovery and access platform. Search, visualize, and download Earth science data from NASA's vast archives, covering climate, weather, land, ocean, and more.
 
 **Interface**
@@ -34,6 +35,7 @@
 ---
 
 **Description**
+
 [AppEEARS](https://appeears.earthdatacloud.nasa.gov/) simplifies geospatial data access and transformation, allowing users to easily subset datasets from multiple federal archives by point or area locations, time, and layers. The tool provides interactive data previews with quality decoding, and enables users to explore their data before downloading.
 
 **Interface**
@@ -53,6 +55,7 @@
 ---
 
 **Description**
+
 EarthExplorer allows users to search, download, and order data held in USGS archives
 
 through many query options
@@ -67,7 +70,7 @@ through many query options
 - Visualization (Footprint)
 - Download
 
-> **NOTE**: NASA LP DAAC data products were removed from USGS’s EarthExplorer and Machine-to-Machine (M2M) API on **August 30, 2024** ([News Announcement](https://lpdaac.usgs.gov/news/nasa-lp-daac-products-removed-from-usgs-earthexplorer-and-machine-to-machine-api-on-august-30-2024/)). Users are encouraged to use NASA’s [Earthdata Search](https://search.earthdata.nasa.gov/search) and/or [AppEEARS](https://appeears.earthdatacloud.nasa.gov/) to discover and download [LP DAAC data products](https://lpdaac.usgs.gov/product_search/?status=Operational). For those who used M2M for programmatic search and access, please explore the [AppEEARS API](https://appeears.earthdatacloud.nasa.gov/api/), the [CMR API](https://cmr.earthdata.nasa.gov/search/site/docs/search/api.html), the [`earthaccess`](https://earthaccess.readthedocs.io/en/latest/) Python package
+> **NOTE**: NASA LP DAAC data products were removed from USGS’s EarthExplorer and Machine-to-Machine (M2M) API on **August 30, 2024** ([News Announcement](https://lpdaac.usgs.gov/news/nasa-lp-daac-products-removed-from-usgs-earthexplorer-and-machine-to-machine-api-on-august-30-2024/)). Users are encouraged to use NASA’s [Earthdata Search](https://search.earthdata.nasa.gov/search) and/or [AppEEARS](https://appeears.earthdatacloud.nasa.gov/) to discover and download [LP DAAC data products](https://lpdaac.usgs.gov/product_search/?status=Operational). For those who used M2M for programmatic search and access, please explore the [AppEEARS API](https://appeears.earthdatacloud.nasa.gov/api/), the [CMR API](https://cmr.earthdata.nasa.gov/search/site/docs/search/api.html), or the [`earthaccess`](https://earthaccess.readthedocs.io/en/latest/) Python package
 
 ## Data Collection Resources
 
@@ -164,3 +167,13 @@ through many query options
 ### LP DAAC Managed Repositories
 
 - [LP DAAC Data Use Resources](https://github.com/nasa/LPDAAC-Data-Resources)
+
+## Contact Info  
+
+Email: <LPDAAC@usgs.gov>  
+Voice: +1-866-573-3222  
+Organization: Land Processes Distributed Active Archive Center (LP DAAC)¹  
+Website: <https://lpdaac.usgs.gov/>  
+Date last modified: 09-23-2024  
+
+¹Work performed under USGS contract 140G0121D0001 for NASA contract NNG14HH33I.
