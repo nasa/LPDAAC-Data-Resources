@@ -11,6 +11,7 @@ Content include in this repository are listed below.
 | **[Data_Discovery_CMR_API_Bulk_Query.ipynb](/python/tutorials/Data_Discovery_CMR_API_Bulk_Query.ipynb)** | Jupyter Notebook | Demonstrates how to search and extract data URLs for an entire collection using Python's `asyncio` package|
 | **[bulk_download_using_curl.md](/guides/bulk_download_using_curl.md)** | Markdown | Demonstrates how to bulk download LP DAAC data using Curl from command line |
 | **[bulk_download_using_wget.md](/guides/bulk_download_using_wget.md)** | Markdown | Demonstrates how to bulk download LP DAAC data using Wget from command line |
+| **[DAACDataDownload.py](/python/scripts/daac_data_download_python)** | Python script | Demonstrates how to download LP DAAC data using a command line executable script |
 
 The other guides, tutorials, how-tos and scripts can be accessed in our mission specific repositories. 
 
