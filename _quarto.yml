@@ -33,10 +33,10 @@ website:
     contents:
       - text: "Welcome"
         href: index.qmd
-      - section: "2024 IGARSS Workshop"
+      - section: "WICSIS 2024 EMIT Access Workshop"
         contents:
           - text: "Overview"
-            href: web_book/igarss_2024.qmd
+            href: web_book/wicsis_2024.qmd
           - section: "Setup Instructions"
             contents:
             - text: "Prerequisites"
@@ -47,12 +47,14 @@ website:
               href: external/setup_instructions.md
           - section: "Tutorials"
             contents:
-            - text: "1. Finding EMIT L2B Data"
-              href: external/Finding_EMIT_L2B_Data.ipynb
-            - text: "2. Working with EMIT L2B Mineralogy"
-              href: external/Working_with_EMIT_L2B_Mineralogy.ipynb
+            - text: "1. Finding and Accessing EMIT Data"
+              href: external/How_to_find_and_access_EMIT_data.ipynb
+            - text: "2. Exploring EMIT L2A Reflectance"
+              href: external/Exploring_EMIT_L2A_Reflectance.ipynb
       - section: "Past Workshops"
         contents:
+          - text: "2024 IGARSS Workshop"
+            href: web_book/igarss_2024.qmd
           - text: "2023/2024 VITALS Workshop"
             href: web_book/vitals.qmd
           - text: "LP/JPL EMIT Tutorial Series"
@@ -83,6 +85,10 @@ website:
             href: external/Generating_Methane_Spectral_Fingerprint.ipynb
           - text: "8. Visualizing Methane Plume Timeseries"
             href: external/Visualizing_Methane_Plume_Timeseries.ipynb
+          - text: "9. Finding EMIT L2B Data"
+            href: external/Finding_EMIT_L2B_Data.ipynb
+          - text: "10. Working with EMIT L2B Mineralogy"
+            href: external/Working_with_EMIT_L2B_Mineralogy.ipynb
       - section: "Contributing"
         contents:
           - href: CONTRIBUTING.md

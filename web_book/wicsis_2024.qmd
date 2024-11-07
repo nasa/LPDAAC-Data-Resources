@@ -1,0 +1,34 @@
+---
+title: WICSIS 2024 EMIT Access Workshop
+---
+
+**Tuesday, 12/Nov/2024: 4:30pm - 6:00pm, (GMT +1)**
+
+The Earth Surface Mineral Dust Source Investigation (EMIT) instrument aboard the International Space Station (ISS) measures visible to short-wave infrared (VSWIR) wavelengths and can be used to map Earth’s surface in detail. Here we demonstrate how to access and visualize EMIT data through Earthdata search with Python. We also provide information for downloading EMIT data through various web interfaces. Participants will complete two Jupyter notebooks and be able to inspect EMIT spectra throughout the session.
+
+## Slides
+
+<iframe src="https://docs.google.com/presentation/d/1-3q-yIdYx3tFDIoHkziBYM5w6dFv_f8e/embed?start=false&loop=false&delayms=3000" frameborder="0" width="750" height="445" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
+## Prerequisites
+
+The prerequisites for this tutorial include: a basic familiarity with remote sensing and python, an [Earthdata Login account](https://urs.earthdata.nasa.gov/users/new), a [GitHub account](https://github.com/join). All participants need to bring their laptop on the day of event.
+
+## Helpful Links
+
+- [Earthdata Search](https://search.earthdata.nasa.gov/search)
+- [EMIT-Data-Resources](https://github.com/nasa/EMIT-Data-Resources)
+- [Visions EMIT Data Portal](https://earth.jpl.nasa.gov/emit/data/data-portal/coverage-and-forecasts/)
+- [AppEEARS](https://appeears.earthdatacloud.nasa.gov/)
+- [EMIT Mission Website](https://earth.jpl.nasa.gov/emit/)
+- [EMIT SDS Github](https://github.com/emit-sds)
+
+## Contact Info  
+
+Email: <LPDAAC@usgs.gov>  
+Voice: +1-866-573-3222  
+Organization: Land Processes Distributed Active Archive Center (LP DAAC)¹  
+Website: <https://lpdaac.usgs.gov/>  
+Date last modified: 11-07-2024
+
+¹Work performed under USGS contract 140G0121D0001 for NASA contract NNG14HH33I.
