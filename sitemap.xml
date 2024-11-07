@@ -2,138 +2,150 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://nasa.github.io/LPDAAC-Data-Resources/workshops/usfs_aeoip/GEDI_data.html</loc>
-    <lastmod>2024-07-07T07:51:34.309Z</lastmod>
+    <lastmod>2024-08-08T21:31:14.315Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nasa.github.io/LPDAAC-Data-Resources/web_book/wicsis_2024.html</loc>
+    <lastmod>2024-11-07T21:49:20.890Z</lastmod>
   </url>
   <url>
     <loc>https://nasa.github.io/LPDAAC-Data-Resources/web_book/python_resources.html</loc>
-    <lastmod>2024-07-07T07:51:34.257Z</lastmod>
+    <lastmod>2024-08-08T21:31:14.298Z</lastmod>
   </url>
   <url>
     <loc>https://nasa.github.io/LPDAAC-Data-Resources/web_book/emit_tutorial_series.html</loc>
-    <lastmod>2024-07-07T07:51:34.257Z</lastmod>
+    <lastmod>2024-08-08T21:31:14.298Z</lastmod>
   </url>
   <url>
     <loc>https://nasa.github.io/LPDAAC-Data-Resources/setup/workshop_setup_python.html</loc>
-    <lastmod>2024-07-07T07:51:34.257Z</lastmod>
+    <lastmod>2024-08-08T21:31:14.289Z</lastmod>
   </url>
   <url>
     <loc>https://nasa.github.io/LPDAAC-Data-Resources/setup/setup_instructions_python.html</loc>
-    <lastmod>2024-06-28T21:32:06.123Z</lastmod>
+    <lastmod>2024-08-08T21:29:45.860Z</lastmod>
   </url>
   <url>
     <loc>https://nasa.github.io/LPDAAC-Data-Resources/python/tutorials/Data_Discovery_CMR_API_Bulk_Query.html</loc>
-    <lastmod>2024-06-28T21:32:06.108Z</lastmod>
+    <lastmod>2024-08-08T21:29:45.860Z</lastmod>
   </url>
   <url>
     <loc>https://nasa.github.io/LPDAAC-Data-Resources/python/how-tos/Earthdata_Cloud__Download_file_from_S3.html</loc>
-    <lastmod>2024-06-28T21:32:06.108Z</lastmod>
+    <lastmod>2024-08-08T21:29:45.843Z</lastmod>
   </url>
   <url>
     <loc>https://nasa.github.io/LPDAAC-Data-Resources/LICENSE.html</loc>
-    <lastmod>2024-06-28T21:32:05.954Z</lastmod>
+    <lastmod>2024-08-08T21:29:45.843Z</lastmod>
   </url>
   <url>
-    <loc>https://nasa.github.io/LPDAAC-Data-Resources/guides/bulk_download_using_wget.html</loc>
-    <lastmod>2024-07-07T07:51:34.240Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/workshop_setup.html</loc>
-    <lastmod>2024-07-07T07:34:07.567Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/Visualizing_Methane_Plume_Timeseries.html</loc>
-    <lastmod>2024-07-07T07:34:05.173Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/prerequisites.html</loc>
-    <lastmod>2024-07-07T07:34:07.652Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/How_to_find_and_access_EMIT_data.html</loc>
-    <lastmod>2024-07-07T07:34:05.771Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/How_to_Extract_Area.html</loc>
-    <lastmod>2024-07-07T07:34:06.719Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/Generating_Methane_Spectral_Fingerprint.html</loc>
-    <lastmod>2024-07-07T07:34:04.786Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/Exploring_EMIT_L2A_Reflectance.html</loc>
-    <lastmod>2024-07-07T07:34:05.502Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nasa.github.io/LPDAAC-Data-Resources/CODE_OF_CONDUCT.html</loc>
-    <lastmod>2024-06-28T21:32:05.954Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nasa.github.io/LPDAAC-Data-Resources/CHANGE_LOG.html</loc>
-    <lastmod>2024-06-28T21:32:05.954Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nasa.github.io/LPDAAC-Data-Resources/CONTRIBUTING.html</loc>
-    <lastmod>2024-07-07T07:51:34.225Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/Finding_EMIT_L2B_Data.html</loc>
-    <lastmod>2024-07-07T07:34:08.464Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/How_to_Convert_to_ENVI.html</loc>
-    <lastmod>2024-07-07T07:34:06.087Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/How_to_Extract_Points.html</loc>
-    <lastmod>2024-07-07T07:34:06.378Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/How_to_use_EMIT_Quality_data.html</loc>
-    <lastmod>2024-07-07T07:34:07.005Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/setup_instructions.html</loc>
-    <lastmod>2024-07-07T07:34:07.259Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/Working_with_EMIT_L2B_Mineralogy.html</loc>
-    <lastmod>2024-07-07T07:34:08.753Z</lastmod>
+    <loc>https://nasa.github.io/LPDAAC-Data-Resources/guides/Streaming_cloud_optimized_geotiffs_using_QGIS.html</loc>
+    <lastmod>2024-10-29T14:06:53.684Z</lastmod>
   </url>
   <url>
     <loc>https://nasa.github.io/LPDAAC-Data-Resources/guides/bulk_download_using_curl.html</loc>
-    <lastmod>2024-07-07T07:51:34.240Z</lastmod>
+    <lastmod>2024-10-29T14:06:53.685Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/Working_with_EMIT_L2B_Mineralogy.html</loc>
+    <lastmod>2024-11-07T21:06:17.714Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/setup_instructions.html</loc>
+    <lastmod>2024-11-07T21:06:15.117Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/How_to_use_EMIT_Quality_data.html</loc>
+    <lastmod>2024-11-07T21:06:14.714Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/How_to_Extract_Points.html</loc>
+    <lastmod>2024-11-07T21:06:13.716Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/How_to_Convert_to_ENVI.html</loc>
+    <lastmod>2024-11-07T21:06:13.107Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/Finding_EMIT_L2B_Data.html</loc>
+    <lastmod>2024-11-07T21:06:17.199Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nasa.github.io/LPDAAC-Data-Resources/CONTRIBUTING.html</loc>
+    <lastmod>2024-08-08T21:31:14.274Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nasa.github.io/LPDAAC-Data-Resources/CHANGE_LOG.html</loc>
+    <lastmod>2024-10-29T14:06:53.668Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nasa.github.io/LPDAAC-Data-Resources/CODE_OF_CONDUCT.html</loc>
+    <lastmod>2024-08-08T21:29:45.842Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/Exploring_EMIT_L2A_Reflectance.html</loc>
+    <lastmod>2024-11-07T21:06:12.176Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/Generating_Methane_Spectral_Fingerprint.html</loc>
+    <lastmod>2024-11-07T21:06:10.972Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/How_to_Extract_Area.html</loc>
+    <lastmod>2024-11-07T21:06:14.252Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/How_to_find_and_access_EMIT_data.html</loc>
+    <lastmod>2024-11-07T21:06:12.651Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/prerequisites.html</loc>
+    <lastmod>2024-11-07T21:06:16.031Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/Visualizing_Methane_Plume_Timeseries.html</loc>
+    <lastmod>2024-11-07T21:06:11.664Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nasa.github.io/LPDAAC-Data-Resources/external/workshop_setup.html</loc>
+    <lastmod>2024-11-07T21:06:15.532Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nasa.github.io/LPDAAC-Data-Resources/guides/bulk_download_using_wget.html</loc>
+    <lastmod>2024-08-08T21:31:14.289Z</lastmod>
   </url>
   <url>
     <loc>https://nasa.github.io/LPDAAC-Data-Resources/index.html</loc>
-    <lastmod>2024-07-07T07:51:34.257Z</lastmod>
+    <lastmod>2024-08-08T21:31:14.289Z</lastmod>
   </url>
   <url>
     <loc>https://nasa.github.io/LPDAAC-Data-Resources/python/how-tos/Earthdata_Authentication__Create_netrc_file.html</loc>
-    <lastmod>2024-06-28T21:32:06.108Z</lastmod>
+    <lastmod>2024-08-08T21:29:45.843Z</lastmod>
   </url>
   <url>
     <loc>https://nasa.github.io/LPDAAC-Data-Resources/python/how-tos/Earthdata_Cloud__List_bucket_objects.html</loc>
-    <lastmod>2024-06-28T21:32:06.108Z</lastmod>
+    <lastmod>2024-08-08T21:29:45.860Z</lastmod>
   </url>
   <url>
     <loc>https://nasa.github.io/LPDAAC-Data-Resources/python/tutorials/Data_Discovery_CMR_API_Request.html</loc>
-    <lastmod>2024-06-28T21:32:06.123Z</lastmod>
+    <lastmod>2024-08-08T21:29:45.860Z</lastmod>
   </url>
   <url>
     <loc>https://nasa.github.io/LPDAAC-Data-Resources/setup/setup_instructions_r.html</loc>
-    <lastmod>2024-07-07T07:51:34.257Z</lastmod>
+    <lastmod>2024-08-08T21:31:14.289Z</lastmod>
   </url>
   <url>
     <loc>https://nasa.github.io/LPDAAC-Data-Resources/web_book/emit_resources.html</loc>
-    <lastmod>2024-07-07T07:51:34.257Z</lastmod>
+    <lastmod>2024-08-08T21:31:14.289Z</lastmod>
   </url>
   <url>
     <loc>https://nasa.github.io/LPDAAC-Data-Resources/web_book/igarss_2024.html</loc>
-    <lastmod>2024-07-07T07:51:34.257Z</lastmod>
+    <lastmod>2024-08-08T21:31:14.298Z</lastmod>
   </url>
   <url>
     <loc>https://nasa.github.io/LPDAAC-Data-Resources/web_book/vitals.html</loc>
-    <lastmod>2024-07-07T07:51:34.257Z</lastmod>
+    <lastmod>2024-08-08T21:31:14.298Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nasa.github.io/LPDAAC-Data-Resources/workshops/NASA_DEVELOP_Fall_2024/NASA_DEVELOP_Land_Products_Guide.html</loc>
+    <lastmod>2024-10-29T14:06:53.685Z</lastmod>
   </url>
 </urlset>
