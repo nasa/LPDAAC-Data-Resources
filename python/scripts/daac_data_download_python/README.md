@@ -11,7 +11,14 @@ The script begins with authenticating and then downloads the URL(s) that you pro
 
 ### Environment Setup 
 
-Instruction for setting up a compatible environment is available at: <https://github.com/nasa/LPDAAC-Data-Resources/blob/main/setup/setup_instructions_python.md>
+If you do not have an Environment Manager installed, we recommend [mamba](https://mamba.readthedocs.io/en/latest/) to manage Python packages. Details instruction on how to install an environment manager can be found [here](https://github.com/nasa/LPDAAC-Data-Resources/blob/main/setup/setup_instructions_python.md). Once you have it installed, type the following in your preferred command line interface (command prompt, terminal, cmder, etc.) to create a compatible environment.
+
+```
+mamba create -n daac-download -c conda-forge earthaccess
+```
+**If you are using conda, replace the "mamba" with "conda" and be patient.**
+
+Instruction for setting up a compatible environment for all LP DAAC Python resources is available at: <https://github.com/nasa/LPDAAC-Data-Resources/blob/main/setup/setup_instructions_python.md>
 
 ### NASA Earthdata Login:
 
@@ -21,7 +28,7 @@ To download data from the LP DAAC archive, you need to authorize our application
 To authorize Data Pool, please [click here](https://urs.earthdata.nasa.gov/approve_app?client_id=ijpRZvb9qeKCK5ctsn75Tg&_ga=2.128429068.1284688367.1541426539-1515316899.1516123516).  
 
 ### **Netrc file**
-The netrc file is needed to download NASA Earthdata science data from a scripting environment like Python. There are multiple methods to create a .netrc file. Here, the `earth access` package is used to automatically create a netrc file using your Earthdata login credentials if one does not exist.
+The netrc file is needed to download NASA Earthdata science data from a scripting environment like Python. There are multiple methods to [create a .netrc file for authntication](https://github.com/nasa/LPDAAC-Data-Resources/tree/main/guides/create_netrc_file.md). Here, the `earthaccess` package is used to automatically create a `.netrc` file using your Earthdata login credentials. If one does not exist, you will be prompted to enter your Earthdata Login credentials.
 ---
 
 # Procedures:
@@ -53,6 +60,6 @@ Email: LPDAAC@usgs.gov  
 Voice: +1-866-573-3222  
 Organization: Land Processes Distributed Active Archive Center (LP DAAC)¹  
 Website: <https://lpdaac.usgs.gov/>  
-Date last modified: 02-20-2024  
+Date last modified: 12-23-2024  
 
 ¹Work performed under USGS contract G15PD00467 for NASA contract NNG14HH33I.  
