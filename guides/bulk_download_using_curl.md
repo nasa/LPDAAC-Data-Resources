@@ -11,7 +11,7 @@ This guide shows how to bulk download [LP DAAC](https://lpdaac.usgs.gov/) data u
 Save download links for your data as a text file using [Nasa Earthdata Search](https://search.earthdata.nasa.gov/search) or [Common Metadata Repository (CMR)](https://www.earthdata.nasa.gov/eosdis/science-system-description/eosdis-components/cmr) API. Follow the steps in the [Earthdata Search guide](https://github.com/nasa/EMIT-Data-Resources/blob/main/guides/Getting_EMIT_Data_using_EarthData_Search.md) to find your data and save the download links. If you prefer to use an API to find your data and save the download links, a tutorial on how to use the CMR API can be found [here](https://github.com/nasa/LPDAAC-Data-Resources/blob/main/python/tutorials/Data_Discovery_CMR_API_Request.ipynb). 
 
 ## Step 2: Set up a .netrc file for Authentication
-Follow the instruction on how to create a `.netrc` file [here](https://github.com/nasa/LPDAAC-Data-Resources/tree/bulk_query/guides/create_netrc_file.md) to set up the file using your Earthdata Login Credentials. 
+Follow the instruction on how to create a `.netrc` file [here](https://github.com/nasa/LPDAAC-Data-Resources/blob/main/guides/create_netrc_file.md) to set up the file using your Earthdata Login Credentials. 
 
 ## Step 3: Download LP DAAC Data
 You should now be able to run the command to download data directly from the LP DAAC. 
