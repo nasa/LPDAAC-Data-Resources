@@ -27,32 +27,55 @@ Instruction for setting up a compatible environment for all LP DAAC Python resou
 To download data from the LP DAAC archive, you need to authorize our applications to view your NASA Earthdata Login profile. Once authorization is complete, you may resume your session.
 To authorize Data Pool, please [click here](https://urs.earthdata.nasa.gov/approve_app?client_id=ijpRZvb9qeKCK5ctsn75Tg&_ga=2.128429068.1284688367.1541426539-1515316899.1516123516).  
 
-### **Netrc file**
+### **.netrc file**
+
 The netrc file is needed to download NASA Earthdata science data from a scripting environment like Python. There are multiple methods to [create a .netrc file for authntication](https://github.com/nasa/LPDAAC-Data-Resources/tree/main/guides/create_netrc_file.md). Here, the `earthaccess` package is used to automatically create a `.netrc` file using your Earthdata login credentials. If one does not exist, you will be prompted to enter your Earthdata Login credentials.
+
 ---
 
 # Procedures:
 
 ## Getting Started:
 
-> #### 1. Save a download URL for your data from  [NASA Earthdata Search](https://search.earthdata.nasa.gov/) for a single file. For multiple files, download the text file containing URLs to files.   
+#### 1. Save a download URL for your data from  [NASA Earthdata Search](https://search.earthdata.nasa.gov/) for a single file. For multiple files, download the text file containing URLs to files.   
 
-> #### 2. Access `DAACDataDownload.py` from [LPDAAC-Data-Resources] Github Repository   
-  > 1. You can download the raw file for the script from <https://github.com/nasa/LPDAAC-Data-Resources/blob/main/python/scripts/daac_data_download_python/DAACDataDownload.py> 
+#### 2. Access `DAACDataDownload.py` from [LPDAAC-Data-Resources] Github Repository   
+
+You can download the raw file for the script from <https://github.com/nasa/LPDAAC-Data-Resources/blob/main/python/scripts/daac_data_download_python/DAACDataDownload.py> 
    
-  > 2. Additionally, you can download all contents of this repository as a [zip file](https://github.com/nasa/LPDAAC-Data-Resources/archive/refs/heads/main.zip). You can also clone the repository by typing `git clone https://github.com/nasa/LPDAAC-Data-Resources.git` in a command line. Navigate to `python/scripts/daac_data_download_python/DAACDataDownload.py`.  
+Additionally, you can download all contents of this repository as a [zip file](https://github.com/nasa/LPDAAC-Data-Resources/archive/refs/heads/main.zip). You can also clone the repository by typing the following into command line.
+
+```bash
+git clone https://github.com/nasa/LPDAAC-Data-Resources.git
+```
+
+Afterwards, navigate to `python/scripts/daac_data_download_python/DAACDataDownload.py`.  
 
 ## Script Execution
 
-> #### 1. Activate your MacOS/Windows environment, run the script with the following in your Command Prompt/terminal window:
+Activate your MacOS/Windows environment, run the script with the following in your Command Prompt/terminal window:
 
-  > 1.  `python DAACDataDownload.py -dir <insert local directory to save files to> -f <insert a single granule URL, or the location of a csv or text file containing granule URLs>`  
-  > - Ex:   `python C:\User\Downloads\DAACDataDownload.py  -dir C:\User\downloads -f C:\User\downloads\ECOSTRESS-granule-list.txt` 
-  > - Ex: `python C:\User\Downloads\DAACDataDownload.py  -dir C:\User\downloads -f https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_34912_026_54GXQ_20240902T022621_0712_01/ECOv002_L2T_LSTE_34912_026_54GXQ_20240902T022621_0712_01_LST.tif`
+```cmd
+python DAACDataDownload.py -dir <insert local directory to save files to> -f <insert a single granule URL, or the location of a csv or text file containing granule URLs>
+```
 
-  > 2. If you do not have a netrc file configured in your home directory, the script will prompt you for input on your NASA Earthdata Login Username and Password. Enter your username and password and hit enter to continue downloading your data. **Please note that your Earthdata Login info, your username, and password, will be stored in a .netrc file located in the Home directory on this system you are using.** You will get the same message when you run the script as a reminder. If you do not trust the machine you are using, make sure to delete the created netrc file.   
-  > 4. Your file(s) will be downloaded at the designated `-dir` assigned above.
----  
+**Example 1, downloading a list of files:**
+
+```cmd
+python C:\User\Downloads\DAACDataDownload.py  -dir C:\User\downloads -f C:\User\downloads\ECOSTRESS-granule-list.txt
+```
+
+**Example 2, downloading a single .tif file:**
+
+```cmd
+python C:\User\Downloads\DAACDataDownload.py  -dir C:\User\downloads -f https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L2T_LSTE.002/ECOv002_L2T_LSTE_34912_026_54GXQ_20240902T022621_0712_01/ECOv002_L2T_LSTE_34912_026_54GXQ_20240902T022621_0712_01_LST.tif
+```
+
+If you do not have a netrc file configured in your home directory, the script will prompt you for input on your NASA Earthdata Login Username and Password. Enter your username and password and hit enter to continue downloading your data. **Please note that your Earthdata Login info, your username, and password, will be stored in a .netrc file located in the Home directory on this system you are using.** You will get the same message when you run the script as a reminder. If you do not trust the machine you are using, make sure to delete the created netrc file.   
+
+Your file(s) will be downloaded at the designated `-dir` assigned above.
+
+---
 
 ## Contact Info  
 
