@@ -1,16 +1,16 @@
 # Code of Conduct
 
-1. Our Commitment
+## 1. Our Commitment
 
 We are dedicated to fostering a respectful environment for everyone contributing to this project. We expect all participants to treat each other with respect, professionalism, and kindness.
 
-2. Expected Behavior
+## 2. Expected Behavior
 
 - Be respectful and considerate of others.
 - Engage in constructive discussions and offer helpful feedback.
 - Gracefully accept constructive criticism.
 
-3. Unacceptable Behavior
+## 3. Unacceptable Behavior
 
 The following behaviors will not be tolerated:
 
@@ -20,9 +20,17 @@ The following behaviors will not be tolerated:
 - Trolling or disruptive conduct.
 - Sharing inappropriate content.
 
-4. Reporting Violations
+## 4. Reporting Violations
 If you experience or witness any behavior that violates this Code of Conduct, please report it by contacting the project maintainers. All reports will be reviewed confidentially.
 
-5. Enforcement
+## 5. Enforcement
 Violations of this Code of Conduct may result in actions such as warnings, temporary bans, or permanent exclusion from participation at the discretion of the maintainers.
 
+## Contact Info  
+Email: <LPDAAC@usgs.gov>  
+Voice: +1-866-573-3222  
+Organization: Land Processes Distributed Active Archive Center (LP DAAC)¹  
+Website: <https://lpdaac.usgs.gov/>  
+Date last modified: 01-22-2025  
+
+¹Work performed under USGS contract G15PD00467 for NASA contract NNG14HH33I.
