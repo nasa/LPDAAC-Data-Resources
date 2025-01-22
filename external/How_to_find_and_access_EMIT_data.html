@@ -372,7 +372,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../CODE_OF_CONDUCT.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Contributor Code of Conduct</span></a>
+ <span class="menu-text">Code of Conduct</span></a>
   </div>
 </li>
       </ul>
@@ -418,15 +418,15 @@ This notebook is from <a href="https://github.com/nasa/EMIT-Data-Resources">EMIT
 <p>
 Source: <a href="https://github.com/nasa/EMIT-Data-Resources/blob/main/python/how-tos/How_to_find_and_access_EMIT_data.ipynb">How to Find and Access EMIT Data</a>
 </p>
-<p>Imported on: <strong>2024-11-07</strong></p>
+<p>Imported on: <strong>2025-01-22</strong></p>
 </blockquote>
 <section id="how-to-find-and-access-emit-data" class="level1">
 <h1>How to: Find and Access EMIT Data</h1>
 <p><strong>Summary</strong></p>
-<p>There are currently 3 ways to find EMIT data:</p>
+<p>There are currently 4 ways to find EMIT data:</p>
 <ol type="1">
 <li><a href="https://search.earthdata.nasa.gov/search">EarthData Search</a></li>
-<li><a href="https://www.earthdata.nasa.gov/eosdis/science-system-description/eosdis-components/cmr">NASA’s CMR API</a></li>
+<li><a href="https://www.earthdata.nasa.gov/eosdis/science-system-description/eosdis-components/cmr">NASA’s CMR API</a> (<code>earthaccess</code> uses this)</li>
 <li><a href="https://cmr.earthdata.nasa.gov/search/site/docs/search/stac">NASA’s CMR-STAC API</a></li>
 <li><a href="https://earth.jpl.nasa.gov/emit/data/data-portal/coverage-and-forecasts/">Visions Open Access Data Portal</a></li>
 </ol>
@@ -481,8 +481,18 @@ Source: <a href="https://github.com/nasa/EMIT-Data-Resources/blob/main/python/ho
 </div>
 <p>We can also create a list of the <code>short-name</code>, <code>concept-id</code>, and <code>version</code> of each result collection using list comprehension. These fields are important for specifying and searching for data within collections.</p>
 <div id="cell-13" class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>collections_info <span class="op">=</span> [{n:[c.summary()[<span class="st">'short-name'</span>], c.summary()[<span class="st">'concept-id'</span>], c.summary()[<span class="st">'version'</span>], c[<span class="st">'umm'</span>][<span class="st">'EntryTitle'</span>]]} <span class="cf">for</span> n, c <span class="kw">in</span> <span class="bu">enumerate</span>(collections)]</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>collections_info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>collections_info <span class="op">=</span> [</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">'short_name'</span>: c.summary()[<span class="st">'short-name'</span>],</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">'collection_concept_id'</span>: c.summary()[<span class="st">'concept-id'</span>],</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">'version'</span>: c.summary()[<span class="st">'version'</span>],</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">'entry_title'</span>: c[<span class="st">'umm'</span>][<span class="st">'EntryTitle'</span>]</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> collections</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">'display.max_colwidth'</span>, <span class="dv">150</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>collections_info <span class="op">=</span> pd.DataFrame(collections_info)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>collections_info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The collection <code>concept-id</code> is the best way to search for data within a collection, as this is unique to each collection. The <code>short-name</code> can be used as well, however the <code>version</code> should be passed as well as there can be multiple versions available with the same short name. After finding the collection you want to search, you can use the <code>concept-id</code> to search for granules within that collection.</p>
 </section>
@@ -532,15 +542,16 @@ Source: <a href="https://github.com/nasa/EMIT-Data-Resources/blob/main/python/ho
 </table>
 <section id="point-search" class="level3">
 <h3 class="anchored" data-anchor-id="point-search">Point Search</h3>
-<p>In this case, we specify the <code>shortname</code>, <code>point</code>, and <code>temporal</code>, as well as <code>count</code>, which limits the maximum number of results returned.</p>
-<div id="cell-16" class="cell" data-tags="[]" data-execution_count="13">
+<p>In this case, we specify the <code>shortname</code>, <code>point</code> coordinates, <code>temporal</code> range, and min and max <code>cloud_cover</code> percentages, as well as <code>count</code>, which limits the maximum number of results returned.</p>
+<div id="cell-16" class="cell" data-tags="[]" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Search example using a Point</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> earthaccess.search_data(</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    short_name<span class="op">=</span><span class="st">'EMITL2ARFL'</span>,</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    point<span class="op">=</span>(<span class="op">-</span><span class="fl">62.1123</span>,<span class="op">-</span><span class="fl">39.89402</span>),</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    temporal<span class="op">=</span>(<span class="st">'2022-09-03'</span>,<span class="st">'2022-09-04'</span>),</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    count<span class="op">=</span><span class="dv">100</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    cloud_cover<span class="op">=</span>(<span class="dv">0</span>,<span class="dv">90</span>),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    count<span class="op">=</span><span class="dv">100</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="bounding-box-search" class="level3">
@@ -561,8 +572,9 @@ Source: <a href="https://github.com/nasa/EMIT-Data-Resources/blob/main/python/ho
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    short_name<span class="op">=</span><span class="st">'EMITL2ARFL'</span>,</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    bounding_box<span class="op">=</span>bbox,</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    temporal<span class="op">=</span>(<span class="st">'2022-09-03'</span>,<span class="st">'2022-09-04'</span>),</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    count<span class="op">=</span><span class="dv">100</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    cloud_cover<span class="op">=</span>(<span class="dv">0</span>,<span class="dv">90</span>),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    count<span class="op">=</span><span class="dv">100</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="polygon-search" class="level3">
@@ -582,8 +594,9 @@ Source: <a href="https://github.com/nasa/EMIT-Data-Resources/blob/main/python/ho
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    short_name<span class="op">=</span><span class="st">'EMITL2ARFL'</span>,</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    polygon<span class="op">=</span>polygon,</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    temporal<span class="op">=</span>(<span class="st">'2022-09-03'</span>,<span class="st">'2022-09-04'</span>),</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    count<span class="op">=</span><span class="dv">100</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    cloud_cover<span class="op">=</span>(<span class="dv">0</span>,<span class="dv">90</span>),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    count<span class="op">=</span><span class="dv">100</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -598,16 +611,28 @@ Source: <a href="https://github.com/nasa/EMIT-Data-Resources/blob/main/python/ho
 <div id="cell-29" class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>result.keys()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-30" class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>result[<span class="st">'umm'</span>].keys()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Look at each of the keys to see what is available.</p>
+<div id="cell-31" class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>result[<span class="st">'meta'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Look at the cloud cover percentage for the result granule.</p>
 <div id="cell-32" class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>result[<span class="st">'umm'</span>][<span class="st">'CloudCover'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>result[<span class="st">'size'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>From here, we can do other things, such as convert the results to a <code>pandas</code> dataframe.</p>
+<p>The <code>umm</code> metadata contains a lot of fields, so instead of printing the entire object, we can just look at the keys.</p>
 <div id="cell-34" class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pd.json_normalize(results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>result[<span class="st">'umm'</span>].keys()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>One important piece of info here is the Look at the cloud cover percentage.</p>
+<div id="cell-36" class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>result[<span class="st">'umm'</span>][<span class="st">'CloudCover'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Another of note is the <code>AdditionalAttributes</code> key, which contains other useful information about the EMIT granule, like solar zenith and azimuth.</p>
+<div id="cell-38" class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>result[<span class="st">'umm'</span>][<span class="st">'AdditionalAttributes'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>From here, we can do other things, such as convert the results to a <code>pandas</code> dataframe, or filter down your results further using string matching and list comprehension.</p>
+<div id="cell-40" class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>pd.json_normalize(results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="downloading-or-streaming-data" class="level2">
@@ -619,60 +644,60 @@ Source: <a href="https://github.com/nasa/EMIT-Data-Resources/blob/main/python/ho
 <li>Access in place / Stream the data.</li>
 </ol>
 <p>To download the data we can simply use the download function. This will retrieve all assets associated with a granule, and is nice if you plan to work with the data in this way and need all of the assets included with the product. For the EMIT L2A Reflectance, this includes the Uncertainty and Masks files.</p>
-<div id="cell-36" class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># earthaccess.download(results, '../../data/')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-42" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># earthaccess.download(results, '../../data/')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If we want to stream the data or further filter the assets for download we want to first create a list of URLs nested by granule using list comprehesion.</p>
-<div id="cell-38" class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>emit_results_urls <span class="op">=</span> [granule.data_links() <span class="cf">for</span> granule <span class="kw">in</span> results]</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>emit_results_urls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-44" class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>emit_results_urls <span class="op">=</span> [granule.data_links() <span class="cf">for</span> granule <span class="kw">in</span> results]</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>emit_results_urls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we can also split these into results for specific assets or filter out an asset using the following. In this example, we only want to access or download reflectance.</p>
-<div id="cell-40" class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>filtered_asset_links <span class="op">=</span> []</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Pick Desired Assets - Use underscores to aid in stringmatching of the filenames (_RFL_, _RFLUNCERT_, _MASK_)</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>desired_assets <span class="op">=</span> [<span class="st">'_RFL_'</span>]</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Step through each sublist (granule) and filter based on desired assets.</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n, granule <span class="kw">in</span> <span class="bu">enumerate</span>(emit_results_urls):</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> url <span class="kw">in</span> granule: </span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>        asset_name <span class="op">=</span> url.split(<span class="st">'/'</span>)[<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">any</span>(asset <span class="kw">in</span> asset_name <span class="cf">for</span> asset <span class="kw">in</span> desired_assets):</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>            filtered_asset_links.append(url)</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>filtered_asset_links</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-46" class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>filtered_asset_links <span class="op">=</span> []</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Pick Desired Assets - Use underscores to aid in stringmatching of the filenames (_RFL_, _RFLUNCERT_, _MASK_)</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>desired_assets <span class="op">=</span> [<span class="st">'_RFL_'</span>]</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Step through each sublist (granule) and filter based on desired assets.</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n, granule <span class="kw">in</span> <span class="bu">enumerate</span>(emit_results_urls):</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> url <span class="kw">in</span> granule: </span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>        asset_name <span class="op">=</span> url.split(<span class="st">'/'</span>)[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">any</span>(asset <span class="kw">in</span> asset_name <span class="cf">for</span> asset <span class="kw">in</span> desired_assets):</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>            filtered_asset_links.append(url)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>filtered_asset_links</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>After we have our filtered list, we can stream the reflectance asset or download it. Start an https session then open it to stream the data, or download to save the file.</p>
 <section id="stream-data" class="level4">
 <h4 class="anchored" data-anchor-id="stream-data">Stream Data</h4>
 <p>This may take a while to load the dataset.</p>
-<div id="cell-42" class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get Https Session using Earthdata Login Info</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>fs <span class="op">=</span> earthaccess.get_fsspec_https_session()</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve granule asset ID from URL (to maintain existing naming convention)</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> filtered_asset_links[<span class="dv">0</span>]</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>granule_asset_id <span class="op">=</span> url.split(<span class="st">'/'</span>)[<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define Local Filepath</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>fp <span class="op">=</span> fs.<span class="bu">open</span>(url)</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Open with `emit_xarray` function</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> emit_xarray(fp)</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>ds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-48" class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get Https Session using Earthdata Login Info</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>fs <span class="op">=</span> earthaccess.get_fsspec_https_session()</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve granule asset ID from URL (to maintain existing naming convention)</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> filtered_asset_links[<span class="dv">0</span>]</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>granule_asset_id <span class="op">=</span> url.split(<span class="st">'/'</span>)[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define Local Filepath</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>fp <span class="op">=</span> fs.<span class="bu">open</span>(url)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Open with `emit_xarray` function</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> emit_xarray(fp)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>ds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="download-filtered" class="level4">
 <h4 class="anchored" data-anchor-id="download-filtered">Download Filtered</h4>
-<div id="cell-44" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get requests https Session using Earthdata Login Info</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>fs <span class="op">=</span> earthaccess.get_requests_https_session()</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve granule asset ID from URL (to maintain existing naming convention)</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> url <span class="kw">in</span> filtered_asset_links:</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    granule_asset_id <span class="op">=</span> url.split(<span class="st">'/'</span>)[<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define Local Filepath</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    fp <span class="op">=</span> <span class="ss">f'../../data/</span><span class="sc">{</span>granule_asset_id<span class="sc">}</span><span class="ss">'</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Download the Granule Asset if it doesn't exist</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> os.path.isfile(fp):</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> fs.get(url,stream<span class="op">=</span><span class="va">True</span>) <span class="im">as</span> src:</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">with</span> <span class="bu">open</span>(fp,<span class="st">'wb'</span>) <span class="im">as</span> dst:</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> chunk <span class="kw">in</span> src.iter_content(chunk_size<span class="op">=</span><span class="dv">64</span><span class="op">*</span><span class="dv">1024</span><span class="op">*</span><span class="dv">1024</span>):</span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>                    dst.write(chunk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-50" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get requests https Session using Earthdata Login Info</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>fs <span class="op">=</span> earthaccess.get_requests_https_session()</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve granule asset ID from URL (to maintain existing naming convention)</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> url <span class="kw">in</span> filtered_asset_links:</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    granule_asset_id <span class="op">=</span> url.split(<span class="st">'/'</span>)[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define Local Filepath</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    fp <span class="op">=</span> <span class="ss">f'../../data/</span><span class="sc">{</span>granule_asset_id<span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Download the Granule Asset if it doesn't exist</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> os.path.isfile(fp):</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> fs.get(url,stream<span class="op">=</span><span class="va">True</span>) <span class="im">as</span> src:</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">with</span> <span class="bu">open</span>(fp,<span class="st">'wb'</span>) <span class="im">as</span> dst:</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> chunk <span class="kw">in</span> src.iter_content(chunk_size<span class="op">=</span><span class="dv">64</span><span class="op">*</span><span class="dv">1024</span><span class="op">*</span><span class="dv">1024</span>):</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>                    dst.write(chunk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>

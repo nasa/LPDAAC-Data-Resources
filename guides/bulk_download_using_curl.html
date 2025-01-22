@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -154,33 +120,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="step-2-set-up-a-.netrc-file-for-authentication" class="level2">
 <h2 class="anchored" data-anchor-id="step-2-set-up-a-.netrc-file-for-authentication">Step 2: Set up a .netrc file for Authentication</h2>
-<p>Set up a .netrc file in your home directory.</p>
-<ul>
-<li><h3 id="manual-set-up" class="anchored">Manual set up</h3>
-<ul>
-<li>Download the <a href="https://github.com/nasa/LPDAAC-Data-Resources/tree/main/data/.netrc">.netrc template file</a> and save it in your home directory.
-<ul>
-<li>Open the .netrc file in a text editor and replace <code>&lt;USERNAME&gt;</code> with your NASA Earthdata Login username and <code>&lt;PASSWORD&gt;</code> with your NASA Earthdata Login password.</li>
-</ul></li>
-</ul></li>
-<li><h3 id="create-.netrc-file-from-the-command-line" class="anchored">Create .netrc file from the Command Line</h3>
-<ul>
-<li>Enter the following in Terminal:
-<ul>
-<li><h4 id="windows" class="anchored">Windows</h4>
-<p>To Create a .netrc file, enter the following in the command line, replacing <username> and <password> with your NASA Earthdata username and password. This will create a file in your home directory or append your NASA credentials to an existing file.</password></username></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> machine urs.earthdata.nasa.gov login <span class="kw">&lt;</span>USERNAME<span class="kw">&gt;</span> password <span class="kw">&lt;</span>PASSWORD<span class="kw">&gt;</span> <span class="kw">&gt;&gt;</span> <span class="pp">%</span><span class="va">userprofile</span><span class="pp">%</span>\.netrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><h4 id="linuxmacos" class="anchored">Linux/MacOS:</h4>
-<p>To Create a .netrc file, enter the following in the command line, replacing <username> and <password> with your NASA Earthdata username and password. This will create a file in your home directory or append your NASA credentials to an existing file.</password></username></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"machine urs.earthdata.nasa.gov login &lt;USERNAME&gt; password &lt;PASSWORD&gt;"</span> <span class="op">&gt;&gt;</span>~/.netrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ul></li>
-</ul></li>
-<li><h3 id="programmatically" class="anchored">Programmatically:</h3>
-<ul>
-<li>Run <a href="https://github.com/nasa/LPDAAC-Data-Resources/blob/main/python/how-tos/Earthdata_Authentication__Create_netrc_file.ipynb">Authentication for NASA Earthdata notebook</a> to create <em>.netrc</em> file.</li>
-<li>Alternatively, you can run the <a href="https://github.com/nasa/LPDAAC-Data-Resources/blob/main/python/scripts/EarthdataLoginSetup.py">EarthdataLoginSetup script</a> in a Python interpreter or from the command line.</li>
-</ul></li>
-</ul>
+<p>Follow the instruction on how to create a <code>.netrc</code> file <a href="https://github.com/nasa/LPDAAC-Data-Resources/blob/main/guides/create_netrc_file.md">here</a> to set up the file using your Earthdata Login Credentials.</p>
 </section>
 <section id="step-3-download-lp-daac-data" class="level2">
 <h2 class="anchored" data-anchor-id="step-3-download-lp-daac-data">Step 3: Download LP DAAC Data</h2>

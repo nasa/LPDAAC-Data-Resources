@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>change_log – LP DAAC Data Resources</title>
+<title>nasa_lpdaac_data_access_guide – LP DAAC Data Resources</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +23,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2486e1f0a3ee9ee1fc393803a1361cdb.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-6561bbde787c299e21493071c8edc6ff.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-fdfdc58ad6c2f6f036eeed4db0fdae11.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2486e1f0a3ee9ee1fc393803a1361cdb.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-6561bbde787c299e21493071c8edc6ff.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-fdfdc58ad6c2f6f036eeed4db0fdae11.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -69,7 +69,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body>
@@ -84,16 +84,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#change-log" id="toc-change-log" class="nav-link active" data-scroll-target="#change-log">Change Log</a>
+  <li><a href="#accessing-nasa-lp-daac-data" id="toc-accessing-nasa-lp-daac-data" class="nav-link active" data-scroll-target="#accessing-nasa-lp-daac-data">Accessing NASA LP DAAC Data</a>
   <ul class="collapse">
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">2024-06-28</a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">2024-09-10</a></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">2023-01-25</a></li>
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">2023-09-11</a></li>
-  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4">2023-07-12</a></li>
-  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5">2023-07-05</a></li>
-  <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6">2023-06-09</a></li>
-  <li><a href="#section-7" id="toc-section-7" class="nav-link" data-scroll-target="#section-7">2023-03-29</a></li>
+  <li><a href="#web-applications" id="toc-web-applications" class="nav-link" data-scroll-target="#web-applications">Web Applications</a>
+  <ul class="collapse">
+  <li><a href="#nasa-earthdata-search" id="toc-nasa-earthdata-search" class="nav-link" data-scroll-target="#nasa-earthdata-search">NASA Earthdata Search</a></li>
+  <li><a href="#appeears" id="toc-appeears" class="nav-link" data-scroll-target="#appeears">AppEEARS</a></li>
+  </ul></li>
+  <li><a href="#programmatic-access" id="toc-programmatic-access" class="nav-link" data-scroll-target="#programmatic-access">Programmatic Access</a>
+  <ul class="collapse">
+  <li><a href="#cmr-api" id="toc-cmr-api" class="nav-link" data-scroll-target="#cmr-api">CMR API</a></li>
+  <li><a href="#appeears-api" id="toc-appeears-api" class="nav-link" data-scroll-target="#appeears-api">AppEEARS API</a></li>
+  <li><a href="#earthaccess-python-library" id="toc-earthaccess-python-library" class="nav-link" data-scroll-target="#earthaccess-python-library"><code>earthaccess</code> Python Library</a></li>
+  <li><a href="#earthdatalogin-r-package" id="toc-earthdatalogin-r-package" class="nav-link" data-scroll-target="#earthdatalogin-r-package"><code>Earthdatalogin</code> R Package</a></li>
+  <li><a href="#cmr-stac-api" id="toc-cmr-stac-api" class="nav-link" data-scroll-target="#cmr-stac-api">CMR STAC API</a></li>
+  </ul></li>
+  <li><a href="#contact-info" id="toc-contact-info" class="nav-link" data-scroll-target="#contact-info">Contact Info</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -104,60 +110,54 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="change-log" class="level1">
-<h1>Change Log</h1>
-<p>All notable changes to this project will be documented in this file. The format is based on <a href="http://keepachangelog.com/">Keep a Changelog</a> and this project adheres to <a href="http://semver.org/">Semantic Versioning</a>. _________________________________________________________________________ ## 2024-08-08 &gt; &gt; ADDED: <a href="./guides/Streaming_cloud_optimized_geotiffs_using_QGIS.html">Streaming_cloud_optimized_geotiffs_using_QGIS.md</a> and images &gt; UPDATED: <a href="./guides/bulk_download_using_curl.html">How to bulk download LP DAAC data using Curl</a> to update .netrc setup instructions</p>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section">2024-06-28</h2>
-<blockquote class="blockquote">
-<p>ADDED: Web-book resources for IGARSS Mineralogy Tutorial</p>
-</blockquote>
+<section id="accessing-nasa-lp-daac-data" class="level1">
+<h1>Accessing NASA LP DAAC Data</h1>
+<p>This guide summarizes the various ways to find and access NASA data hosted at Land Processes Distributed Active Archive Center (LP DAAC).</p>
+<section id="web-applications" class="level2">
+<h2 class="anchored" data-anchor-id="web-applications">Web Applications</h2>
+<section id="nasa-earthdata-search" class="level3">
+<h3 class="anchored" data-anchor-id="nasa-earthdata-search">NASA Earthdata Search</h3>
+<p><a href="https://search.earthdata.nasa.gov/search">NASA Earthdata Search</a> is a powerful search and discovery application for NASA’s Earth Observing System Data and Information System (EOSDIS). Users can search across a wide range of NASA’s Earth science data, filter granules by temporal range and region of interest (ROI), view collection and granule-level metadata, and dowload granules and customized outputs.</p>
+<p>Interested in bulk downloading of files? Visit the guides available at: <a href="https://github.com/nasa/LPDAAC-Data-Resources/tree/main/guides" class="uri">https://github.com/nasa/LPDAAC-Data-Resources/tree/main/guides</a></p>
 </section>
-<section id="section-1" class="level2">
-<h2 class="anchored" data-anchor-id="section-1">2024-09-10</h2>
-<blockquote class="blockquote">
-<p>ADDED: <a href="./guides/NASA_LPDAAC_Data_Access_Guide.html">LP DAAC Data Access Guide</a></p>
-</blockquote>
+<section id="appeears" class="level3">
+<h3 class="anchored" data-anchor-id="appeears">AppEEARS</h3>
+<p>The <a href="https://appeears.earthdatacloud.nasa.gov/">Application for Extracting and Exploring Analysis Ready Samples (AppEEARS)</a> offers a streamlined way to access, subset, transform, and visualize geospatial data from NASA’s Earthdata Cloud and other federal data archives. AppEEARS provides an intuitive graphical user interface (GUI) and a powerful application programming interface (API), allowing users to extract data from multiple collections and return results in a common projection and analysis-ready file format. By using AppEEARS, users can save time by reducing preprocessing needs, receive results in their selected formats with quality information, and minimize data download requirements. To get started, visit the <a href="https://appeears.earthdatacloud.nasa.gov/products">Available Products</a> page for a complete list of accessible data, explore the <a href="https://appeears.earthdatacloud.nasa.gov/help">AppEEARS documantation</a> for a step-by-step guide, and check out the <a href="https://github.com/nasa/AppEEARS-Data-Resources">AppEEARS Data Resources</a> in GitHub for additional guides, tutorials, and resources.</p>
 </section>
-<section id="section-2" class="level2">
-<h2 class="anchored" data-anchor-id="section-2">2023-01-25</h2>
-<blockquote class="blockquote">
-<p>ADDED: <a href="./python/tutorials/Data_Discovery_CMR_API_Bulk_Query.html">Data_Discovery_CMR_API_Bulk_Query.ipynb</a> tutorial</p>
-</blockquote>
 </section>
-<section id="section-3" class="level2">
-<h2 class="anchored" data-anchor-id="section-3">2023-09-11</h2>
-<blockquote class="blockquote">
-<p>UPDATED: <a href="./setup/setup_instructions_python.html">The environment set up instruction</a><br>
-ADDED: <a href="setup/lpdaac_windows.yml">The YML file with versioning of Python libraries</a></p>
-</blockquote>
+<section id="programmatic-access" class="level2">
+<h2 class="anchored" data-anchor-id="programmatic-access">Programmatic Access</h2>
+<section id="cmr-api" class="level3">
+<h3 class="anchored" data-anchor-id="cmr-api">CMR API</h3>
+<p><a href="https://www.earthdata.nasa.gov/eosdis/science-system-description/eosdis-components/cmr">NASA’s Common Metadata Repository (CMR)</a> is a metadata system that catalogs all data and service metadata records for NASA’s Earth Observing System Data and Information System (EOSDIS) data including data hosted by the LP DAAC. With CMR, users can programmatically discover data using the <a href="https://cmr.earthdata.nasa.gov/search/site/docs/search/api.html">CMR API</a>, which supports REST client requests for metadata information. Furthermore, R and Python packages (see below) are available to simplify data exploration and access, making it easier to find and utilize the data you need.</p>
+<p>Visit the tutorials available in <a href="https://github.com/nasa/LPDAAC-Data-Resources/tree/main/python/tutorials">LPDAAC-Data-Resources</a> to learn more about accessing data directly from CMR API.</p>
 </section>
-<section id="section-4" class="level2">
-<h2 class="anchored" data-anchor-id="section-4">2023-07-12</h2>
-<blockquote class="blockquote">
-<p>ADDED: <a href="./guides/bulk_download_using_curl.html">How to bulk download LP DAAC data using Curl</a><br>
-ADDED: <a href="./guides/bulk_download_using_wget.html">How to bulk download LP DAAC data using wget</a></p>
-</blockquote>
+<section id="appeears-api" class="level3">
+<h3 class="anchored" data-anchor-id="appeears-api">AppEEARS API</h3>
+<p>The <a href="https://lpdaacsvc.cr.usgs.gov/appeears/api/">AppEEARS API</a> is a RESTful API that allows users to access the same functionality as the AppEEARS web application. The API provides users with the ability to subset, reformat, and visualize data from a variety of federal data archives. The API documentation can be found <a href="https://lpdaacsvc.cr.usgs.gov/appeears/api/">here</a> and provides step by step instructions on how to work with AppEEARS web application and API. Additionally, <a href="https://github.com/nasa/AppEEARS-Data-Resources">AppEEARS Data Resources Gilthub</a> includes guides and tutorials on how to utilize AppEEARS.</p>
 </section>
-<section id="section-5" class="level2">
-<h2 class="anchored" data-anchor-id="section-5">2023-07-05</h2>
-<blockquote class="blockquote">
-<p>ADDED: <a href="./python/tutorials/Data_Discovery_CMR_API_Request.html">CMR API Data Discovery using Request Package</a></p>
-</blockquote>
+<section id="earthaccess-python-library" class="level3">
+<h3 class="anchored" data-anchor-id="earthaccess-python-library"><code>earthaccess</code> Python Library</h3>
+<p>The <a href="https://github.com/nsidc/earthaccess"><code>earthaccess</code></a> is a Python library that simplifies querying, accessing, and downloading/streaming of NASA Earth science data from Python. Detailed information, how-tos, and tutorials can be found <a href="https://earthaccess.readthedocs.io/en/latest/">here</a>. Check the <a href="https://github.com/nasa/EMIT-Data-Resources/blob/main/python/how-tos/How_to_find_and_access_EMIT_data.ipynb">EMIT access Python tutorial</a> how to incorporate <code>earthaccess</code> in your workflows.</p>
 </section>
-<section id="section-6" class="level2">
-<h2 class="anchored" data-anchor-id="section-6">2023-06-09</h2>
-<blockquote class="blockquote">
-<p>ADDED:<a href="./python/how-tos/Earthdata_Cloud__Download_file_from_S3.html">Download Files from S3 Using boto3 Python how-to</a><br>
-ADDED: <a href="./python/how-tos/Earthdata_Cloud__List_bucket_objects.html">Listing Objects in S3 Using to boto3 Python how-to</a><br>
-Updated the repository structure</p>
-</blockquote>
+<section id="earthdatalogin-r-package" class="level3">
+<h3 class="anchored" data-anchor-id="earthdatalogin-r-package"><code>Earthdatalogin</code> R Package</h3>
+<p>The <a href="https://cran.r-project.org/web/packages/earthdatalogin/"><code>Earthdatalogin</code></a> R library provides convenient authentication and access to cloud-hosted NASA Earth science data products. This package is compatible with R packages that are widely used with cloud native earth observation data (such as ‘terra’, ‘sf’, etc.). View the <a href="https://cran.r-project.org/web/packages/earthdatalogin/earthdatalogin.pdf">documentation</a> for more details.</p>
 </section>
-<section id="section-7" class="level2">
-<h2 class="anchored" data-anchor-id="section-7">2023-03-29</h2>
-<blockquote class="blockquote">
-<p>ADDED: CHANGE_LOG.md</p>
-</blockquote>
+<section id="cmr-stac-api" class="level3">
+<h3 class="anchored" data-anchor-id="cmr-stac-api">CMR STAC API</h3>
+<p><a href="https://github.com/nasa/cmr-stac">NASA’s CMR-STAC</a> API is a web API that allows users to search and access NASA’s Earth science data collections using the SpatioTemporal Asset Catalog (STAC) specification. The CMR STAC API is built on top of NASA’s Common Metadata Repository (CMR), which catalogs metadata records for NASA’s Earth Observing System Data and Information System (EOSDIS) data. By using the STAC specification, the CMR STAC API enables users to search and access data from multiple NASA data centers and repositories, including the LP DAAC, in a standardized and interoperable way. Read the <a href="https://github.com/nasa/cmr-stac/blob/master/docs/usage/usage.md">documentation</a> for more details.</p>
+<p>Visit the <a href="https://github.com/nasa/HLS-Data-Resources/blob/main/r/HLS_Tutorial.Rmd">HLS tutorial in R</a> to learn how to utilize <code>Earthdatalogin</code> and CMR STAC API.</p>
+</section>
+</section>
+<section id="contact-info" class="level2">
+<h2 class="anchored" data-anchor-id="contact-info">Contact Info</h2>
+<p>Email: <a href="mailto:LPDAAC@usgs.gov" class="email">LPDAAC@usgs.gov</a><br>
+Voice: +1-866-573-3222<br>
+Organization: Land Processes Distributed Active Archive Center (LP DAAC)¹<br>
+Website: <a href="https://lpdaac.usgs.gov/" class="uri">https://lpdaac.usgs.gov/</a><br>
+Date last modified: 07-11-2023</p>
+<p>¹Work performed under USGS contract G15PD00467 for NASA contract NNG14HH33I.</p>
 
 
 </section>
