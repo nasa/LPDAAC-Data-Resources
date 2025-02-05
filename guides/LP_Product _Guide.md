@@ -1,4 +1,4 @@
-# NASA DEVELOP Land Data Products Guide - Fall 2024
+# Land Data Products Guide
 
 ## General Tools and Applications
 
@@ -11,6 +11,7 @@
 - **Data Catalog**: <https://lpdaac.usgs.gov/product_search/?status=Operational>
 - **News**: <https://lpdaac.usgs.gov/news/>
 - **Help**: <https://lpdaac.usgs.gov/lpdaac-contact-us/>
+
 
 ### NASA [Earthdata Search](https://search.earthdata.nasa.gov/search)
 
@@ -49,6 +50,12 @@
 - Processing (point/area extraction, mosaic, clip, reproject, quality decoding, data format )
 - Explore
 - Download/Access
+
+**Resources**
+
+- [AppEEARS Data Resources](https://github.com/nasa/AppEEARS-Data-Resources)
+
+For a more detailed information on how to sccess NASA LP DAAC Data, please refer to the [LP DAAC access data guide](https://github.com/nasa/LPDAAC-Data-Resources/blob/main/guides/NASA_LPDAAC_Data_Access_Guide.md).
 
 ### USGS [EarthExplorer](https://earthexplorer.usgs.gov/)
 
@@ -115,6 +122,25 @@ through many query options
 - [ECOSTRESS Data Resources](https://github.com/nasa/ECOSTRESS-Data-Resources) GitHub Repository
 - [ECOSTRESS Tutorials](https://github.com/ECOSTRESS-Tutorials) managed by NASA JPL
 - [VSWIR Imaging and Thermal Applications, Learning, and Science (VITALS)](https://github.com/nasa/VITALS) GitHub Repository
+
+
+### Global Ecosystem Dynamics Investigation (GEDI)
+
+---
+
+### Product Landing Pages
+
+- [GEDI v2.0 Products](https://lpdaac.usgs.gov/product_search/?collections=GEDI&status=Operational&view=cards&sort=title)
+
+### Resources
+
+#### Graphical User Interfaces / Applications
+
+- [**Earthdata Search**](https://search.earthdata.nasa.gov/search)
+
+#### Tutorials and Scripts
+
+- [GEDI Data Resources](https://github.com/nasa/GEDI-Data-Resources) GitHub Repository
 
 ### Earth Surface Mineral Dust Source Investigation (EMIT)
 

@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 _________________________________________________________________________
+## 2025-05-02
+>
+> Update the LP DAAC Product Guide(/guides/LP_Product _Guide.md) 
+
 ## 2024-08-08
 >
 > ADDED: [Streaming_cloud_optimized_geotiffs_using_QGIS.md](/guides/Streaming_cloud_optimized_geotiffs_using_QGIS.md) and images 
