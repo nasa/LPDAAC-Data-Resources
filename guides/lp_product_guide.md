@@ -55,7 +55,8 @@
 
 - [AppEEARS Data Resources](https://github.com/nasa/AppEEARS-Data-Resources)
 
-For a more detailed information on how to sccess NASA LP DAAC Data, please refer to the [LP DAAC access data guide](https://github.com/nasa/LPDAAC-Data-Resources/blob/main/guides/NASA_LPDAAC_Data_Access_Guide.md).
+
+> **For a more detailed information on how to sccess NASA LP DAAC Data, please refer to the [LP DAAC access data guide](https://github.com/nasa/LPDAAC-Data-Resources/blob/main/guides/NASA_LPDAAC_Data_Access_Guide.md).**
 
 ### USGS [EarthExplorer](https://earthexplorer.usgs.gov/)
 
@@ -76,6 +77,9 @@ through many query options
 - Search
 - Visualization (Footprint)
 - Download
+
+View the previous webinar on [exploring EarthExplorer](https://www.youtube.com/watch?v=lkbzQunkT_s&list=PL6df2u6b8WNZnAuUHyC23xLFIYrsgZz6b&index=5) to learn more.
+
 
 > **NOTE**: NASA LP DAAC data products were removed from USGS’s EarthExplorer and Machine-to-Machine (M2M) API on **August 30, 2024** ([News Announcement](https://lpdaac.usgs.gov/news/nasa-lp-daac-products-removed-from-usgs-earthexplorer-and-machine-to-machine-api-on-august-30-2024/)). Users are encouraged to use NASA’s [Earthdata Search](https://search.earthdata.nasa.gov/search) and/or [AppEEARS](https://appeears.earthdatacloud.nasa.gov/) to discover and download [LP DAAC data products](https://lpdaac.usgs.gov/product_search/?status=Operational). For those who used M2M for programmatic search and access, please explore the [AppEEARS API](https://appeears.earthdatacloud.nasa.gov/api/), the [CMR API](https://cmr.earthdata.nasa.gov/search/site/docs/search/api.html), or the [`earthaccess`](https://earthaccess.readthedocs.io/en/latest/) Python package
 
