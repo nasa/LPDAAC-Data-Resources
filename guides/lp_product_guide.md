@@ -19,7 +19,7 @@
 
 **Description**
 
-[Earthdata Search](https://search.earthdata.nasa.gov/search) is NASA's comprehensive data discovery and access platform. Search, visualize, and download Earth science data from NASA's vast archives, covering climate, weather, land, ocean, and more.
+[Earthdata Search](https://search.earthdata.nasa.gov/search) is NASA's comprehensive data discovery and access platform. Search, visualize, and download Earth science data from NASA's vast archives, covering climate, weather, land, ocean, and more. To access the NASA Earth Science data, you are required to create a [NASA Earthdata account](https://urs.earthdata.nasa.gov/profile). 
 
 **Interface**
 
@@ -64,7 +64,7 @@
 
 **Description**
 
-EarthExplorer allows users to search, download, and order data held in USGS archives
+EarthExplorer allows users to search, download, and order data held in USGS archives. To access the USGS data, you are required to create an account through [EROS Registeration System (ERS)](https://ers.cr.usgs.gov/login?redirectUrl=https://ers.cr.usgs.gov/). 
 
 through many query options
 **Interface**

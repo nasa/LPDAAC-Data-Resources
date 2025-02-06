@@ -14,7 +14,7 @@ Content include in this repository are listed below.
 | **[bulk_download_using_curl.md](/guides/bulk_download_using_curl.md)** | Markdown | Demonstrates how to bulk download LP DAAC data using Curl from command line |
 | **[bulk_download_using_wget.md](/guides/bulk_download_using_wget.md)** | Markdown | Demonstrates how to bulk download LP DAAC data using Wget from command line |
 | **[DAACDataDownload.py](/python/scripts/daac_data_download_python)** | Python script | Demonstrates how to download LP DAAC data using a command line executable script |
-| **[LP DAAC Data Access Guide](/guides/lp_product_guide.md)** | Markdown | Provides high level overview of tools and resources available for land data collections |
+| **[Land Product Guide](/guides/lp_product_guide.md)** | Markdown | Cheat sheet including a high level overview of tools, resources, and URLs available for land data collections (including Landsat data)|
 
 The other guides, tutorials, how-tos and scripts can be accessed in our mission specific repositories. 
 
