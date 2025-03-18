@@ -8,7 +8,7 @@ Content include in this repository are listed below.
 | Resource | Type | Summary |
 |----|-----|----|
 | **[LP DAAC Data Access Guide](/guides/NASA_LPDAAC_Data_Access_Guide.md)** | Markdown | Provides an overview of available data access methods and services that can be used to find and access LP DAAC data |
-| **[Data_Discovery_CMR_API_Request.ipynb](/python/tutorials/Data_Discovery_CMR_API_Request.ipynb)** | Jupyter Notebook | Demonstrates how to search for Earthdata data collections and granules using CMR API and `Request` Python package|
+| **[data_discovery_CMR_API_requests.ipynb](/python/tutorials/data_discovery_CMR_API_requests.ipynb)** | Jupyter Notebook | Demonstrates how to search for Earthdata data collections and granules using CMR API and `Request` Python package|
 | **[earthaccess_introduction.ipynb](/python/tutorials/earthaccess_introduction.ipynb)** | Jupyter Notebook | Demonstrates how to search for Earthdata data collections and granules using CMR API and `earthaccess` Python package|
 | **[Data_Discovery_CMR_API_Bulk_Query.ipynb](/python/tutorials/Data_Discovery_CMR_API_Bulk_Query.ipynb)** | Jupyter Notebook | Demonstrates how to search and extract data URLs for an entire collection using Python's `asyncio` package|
 | **[create_netrc_file.md](/guides/create_netrc_file.md)** | Markdown | Demonstrates how to create a .netrc file in your home directory |
