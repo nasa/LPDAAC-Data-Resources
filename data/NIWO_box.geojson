@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "NIWO_box",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "domain": "D13", "domainName": "Southern Rockies & Colorado Plateau", "siteName": "Niwot Ridge NEON", "siteID": "NIWO", "siteType": "Core", "sampleType": "Terrestrial", "priority": 1, "version": 2, "flightbxID": "D13_NIWO_C1_P1_v2" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ -105.489075810133556, 40.072924307486971 ], [ -105.489121800012924, 39.982862477198182 ], [ -105.606252785163122, 39.982897848701725 ], [ -105.606231565498604, 40.024322976715609 ], [ -105.647395200155586, 40.024100318177716 ], [ -105.64788824641289, 40.072759398452718 ], [ -105.606206651391119, 40.072959743742217 ], [ -105.489075810133556, 40.072924307486971 ] ] ] ] } }
+]
+}
