@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 _________________________________________________________________________
-## 2025-05-02
+## 2025-03-24
+>
+> ADDED: [finding_data_cmr-stac_api.ipynb](/python/tutorials/finding_data_cmr-stac_api.ipynb) tutorial
+
+## 2025-02-05
 >
 > Update the LP DAAC Product Guide(/guides/LP_Product _Guide.md) 
 
