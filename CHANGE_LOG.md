@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 _________________________________________________________________________
+## 2025-04-17
+
+>
+> ADDED: New recommended python environment with python 3.12 - [environment.yml](/setup/environment.yml)
+> UPDATED: [setup_instructions_python.md](/setup/setup_instructions_python.md)
+> REMOVED: Old python environments
+
 ## 2025-03-24
 >
 > ADDED: [finding_data_cmr-stac_api.ipynb](/python/tutorials/finding_data_cmr-stac_api.ipynb) tutorial
