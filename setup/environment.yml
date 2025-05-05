@@ -1,4 +1,4 @@
-name: lpdaac_vitals
+name: lpdaac
 channels:
   - conda-forge
 dependencies:

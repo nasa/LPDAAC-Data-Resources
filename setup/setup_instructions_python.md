@@ -27,14 +27,16 @@ mamba env create -f setup/environment.yml
 Alternatively, if you would prefer to have build the environment by listing out packages, the list below can be used.
 
 ```
-mamba create -n lpdaac_vitals -c conda-forge --yes python=3.12 gdal fiona hvplot geoviews rioxarray rasterio jupyter geopandas earthaccess jupyter_bokeh h5py h5netcdf spectral scikit-image jupyterlab seaborn dask ray-default pystac-client odc-stac pyresample libgdal-hdf4 harmony-py
+mamba create -n lpdaac -c conda-forge --yes python=3.12 gdal fiona hvplot geoviews rioxarray rasterio jupyter geopandas earthaccess jupyter_bokeh h5py h5netcdf spectral scikit-image jupyterlab seaborn dask ray-default pystac-client odc-stac pyresample libgdal-hdf4 harmony-py
 ```
 
 Next, activate the environment.
 
 ```
-mamba activate lpdaac_vitals
+mamba activate lpdaac
 ```
+
+To setup a Python environment to work with resources in the Cloud (AWS `use-west-2` region) follow the [Cloud Environment Setup instruction](https://nasa-openscapes.github.io/earthdata-cloud-cookbook/environment-setup/).
 
 ## 3. Opening the notebooks
 
@@ -47,7 +49,7 @@ jupyter notebook
 If returning to an already created but inactive environment, using your preferred command line interface (command prompt, terminal, cmder, etc.) navigate to your local copy of the repository, then type the following to activate the Python Environment:
 
 ```
-mamba activate lpdaac_vitals
+mamba activate lpdaac
 ```
 
 Now you can launch Jupyter Notebook to open the notebooks included.
