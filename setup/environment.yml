@@ -1,0 +1,28 @@
+name: lpdaac
+channels:
+  - conda-forge
+dependencies:
+  - dask
+  - earthaccess
+  - fiona
+  - gdal
+  - geopandas
+  - geoviews
+  - h5netcdf
+  - h5py
+  - harmony-py
+  - hvplot
+  - jupyter
+  - jupyter_bokeh
+  - jupyterlab
+  - libgdal-hdf4
+  - odc-stac
+  - pyresample
+  - pystac-client
+  - python=3.12
+  - rasterio
+  - ray-default
+  - rioxarray
+  - scikit-image
+  - seaborn
+  - spectral
