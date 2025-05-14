@@ -12,6 +12,7 @@ Content include in this repository are listed below.
 | **[earthaccess_introduction.ipynb](/python/tutorials/earthaccess_introduction.ipynb)** | Jupyter Notebook | Demonstrates how to search for Earthdata data collections and granules using CMR API and `earthaccess` Python package|
 | **[finding_data_cmr-stac_api.ipynb](/python/tutorials/finding_data_cmr-stac_api.ipynb)** | Jupyter Notebook | Demonstrates how to search for Earthdata data collections and granules using CMR-STAC API and `pystac_client` Python package|
 | **[Data_Discovery_CMR_API_Bulk_Query.ipynb](/python/tutorials/Data_Discovery_CMR_API_Bulk_Query.ipynb)** | Jupyter Notebook | Demonstrates how to search and extract data URLs for an entire collection using Python's `asyncio` package|
+| **[glance_access.ipynb](/python/tutorials/glance_access.ipynb)** | Jupyter Notebook | Demonstrates how to search for process and visualize GLanCE30 Land Cover Data using Python|
 | **[create_netrc_file.md](/guides/create_netrc_file.md)** | Markdown | Demonstrates how to create a .netrc file in your home directory |
 | **[bulk_download_using_curl.md](/guides/bulk_download_using_curl.md)** | Markdown | Demonstrates how to bulk download LP DAAC data using Curl from command line |
 | **[bulk_download_using_wget.md](/guides/bulk_download_using_wget.md)** | Markdown | Demonstrates how to bulk download LP DAAC data using Wget from command line |
