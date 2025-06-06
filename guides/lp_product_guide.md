@@ -2,15 +2,15 @@
 
 ## General Tools and Applications
 
-### [LP DAAC Website](https://lpdaac.usgs.gov/)
+### [LP DAAC Website](https://www.earthdata.nasa.gov/centers/lp-daac)
 
 ---
 
 #### Quick Links
 
-- **Data Catalog**: <https://lpdaac.usgs.gov/product_search/?status=Operational>
-- **News**: <https://lpdaac.usgs.gov/news/>
-- **Help**: <https://lpdaac.usgs.gov/lpdaac-contact-us/>
+- **Data Catalog**: <https://www.earthdata.nasa.gov/data/catalog> (All NASA Earthdata)
+- **News**: <https://www.earthdata.nasa.gov/centers/lp-daac/news>
+- **Help**: <https://www.earthdata.nasa.gov/centers/lp-daac/contact>
 
 
 ### NASA [Earthdata Search](https://search.earthdata.nasa.gov/search)
@@ -81,7 +81,7 @@ through many query options
 View the previous webinar on [exploring EarthExplorer](https://www.youtube.com/watch?v=lkbzQunkT_s&list=PL6df2u6b8WNZnAuUHyC23xLFIYrsgZz6b&index=5) to learn more.
 
 
-> **NOTE**: NASA LP DAAC data products were removed from USGS’s EarthExplorer and Machine-to-Machine (M2M) API on **August 30, 2024** ([News Announcement](https://lpdaac.usgs.gov/news/nasa-lp-daac-products-removed-from-usgs-earthexplorer-and-machine-to-machine-api-on-august-30-2024/)). Users are encouraged to use NASA’s [Earthdata Search](https://search.earthdata.nasa.gov/search) and/or [AppEEARS](https://appeears.earthdatacloud.nasa.gov/) to discover and download [LP DAAC data products](https://lpdaac.usgs.gov/product_search/?status=Operational). For those who used M2M for programmatic search and access, please explore the [AppEEARS API](https://appeears.earthdatacloud.nasa.gov/api/), the [CMR API](https://cmr.earthdata.nasa.gov/search/site/docs/search/api.html), or the [`earthaccess`](https://earthaccess.readthedocs.io/en/latest/) Python package
+> **NOTE**: NASA LP DAAC data products were removed from USGS’s EarthExplorer and Machine-to-Machine (M2M) API on **August 30, 2024** ([News Announcement](https://www.earthdata.nasa.gov/news/lp-daac-product-removal-from-usgs-earthexplorer-m2m-api)). Users are encouraged to use NASA’s [Earthdata Search](https://search.earthdata.nasa.gov/search) and/or [AppEEARS](https://appeears.earthdatacloud.nasa.gov/) to discover and download [LP DAAC data products](https://www.earthdata.nasa.gov/data/catalog). For those who used M2M for programmatic search and access, please explore the [AppEEARS API](https://appeears.earthdatacloud.nasa.gov/api/), the [CMR API](https://cmr.earthdata.nasa.gov/search/site/docs/search/api.html), or the [`earthaccess`](https://earthaccess.readthedocs.io/en/latest/) Python package
 
 ## Data Collection Resources
 
@@ -111,8 +111,7 @@ View the previous webinar on [exploring EarthExplorer](https://www.youtube.com/w
 
 ### Product Landing Pages
 
-- [ECOSTRESS v2.0 Products](https://lpdaac.usgs.gov/product_search/?collections=ECOSTRESS&collection_version_id=2&status=Operational&view=cards&sort=title) - All Available Products
-- [ECOSTRESS v1.0 Products](https://lpdaac.usgs.gov/product_search/?collections=ECOSTRESS&collection_version_id=1&status=Operational&view=cards&sort=title)
+- [ECOSTRESS v2.0 Products](https://www.earthdata.nasa.gov/data/catalog?keyword=ECOSTRESS) - All Available Products
 
 ### Resources
 
@@ -134,7 +133,7 @@ View the previous webinar on [exploring EarthExplorer](https://www.youtube.com/w
 
 ### Product Landing Pages
 
-- [GEDI v2.0 Products](https://lpdaac.usgs.gov/product_search/?collections=GEDI&status=Operational&view=cards&sort=title)
+- [GEDI v2.0 Products](https://www.earthdata.nasa.gov/data/catalog?keyword=GEDI) - All Available Products
 
 ### Resources
 
@@ -145,6 +144,7 @@ View the previous webinar on [exploring EarthExplorer](https://www.youtube.com/w
 #### Tutorials and Scripts
 
 - [GEDI Data Resources](https://github.com/nasa/GEDI-Data-Resources) GitHub Repository
+- [ORNL GEDI Tutorials](https://github.com/ornldaac/gedi_tutorials) GitHub Repository for L3/L4 Gridded GEDI Products
 
 ### Earth Surface Mineral Dust Source Investigation (EMIT)
 
@@ -152,7 +152,7 @@ View the previous webinar on [exploring EarthExplorer](https://www.youtube.com/w
 
 ### Product Landing Pages
 
-- [EMIT v1.0 Products](https://lpdaac.usgs.gov/product_search/?collections=EMIT&status=Operational&view=cards&sort=title) - All Available Products
+- [EMIT Products](https://www.earthdata.nasa.gov/data/catalog?keyword=EMIT) - All Available Products
 - [EMIT L2A Estimated Surface Reflectance (EMITL2ARFL.001)](https://doi.org/10.5067/EMIT/EMITL2ARFL.001)
 
 ### Resources
@@ -186,6 +186,26 @@ View the previous webinar on [exploring EarthExplorer](https://www.youtube.com/w
 
 - <https://code.usgs.gov/eros-user-services/>
 
+### MODIS and VIIRS
+
+---
+
+### Product Landing Pages
+
+- [MODIS Products](https://www.earthdata.nasa.gov/data/catalog?keyword=MODIS)
+- [VIIRS Products](https://www.earthdata.nasa.gov/data/catalog?keyword=VIIRS)
+
+### Resources
+
+#### Graphical User Interfaces / Applications
+
+- [**Earthdata Search**](https://search.earthdata.nasa.gov/search)
+- [**AppEEARS**](https://appeears.earthdatacloud.nasa.gov/)
+
+#### Tutorials and Scripts
+
+- [MODIS-VIIRS Data Resources](https://github.com/nasa/MODIS-VIIRS-Data-Resources)
+
 ## Additional Resources
 
 ### `earthaccess` - Python package for simplifying authentication and querying NASA data collections and assets
@@ -203,7 +223,6 @@ View the previous webinar on [exploring EarthExplorer](https://www.youtube.com/w
 Email: <LPDAAC@usgs.gov>  
 Voice: +1-866-573-3222  
 Organization: Land Processes Distributed Active Archive Center (LP DAAC)¹  
-Website: <https://lpdaac.usgs.gov/>  
-Date last modified: 09-23-2024  
+Website: <https://www.earthdata.nasa.gov/centers/lp-daac>  
 
 ¹Work performed under USGS contract 140G0121D0001 for NASA contract NNG14HH33I.
