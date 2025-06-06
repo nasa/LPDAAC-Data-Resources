@@ -2,7 +2,7 @@
 
 <img src="img/lpdaac-logo-black.png" width="50%" height="50%">  
 
-This repository is a place to find data user resources that demonstrate how to use [LP DAAC](https://lpdaac.usgs.gov/) tools, services, and data.
+This repository is a place to find data user resources that demonstrate how to use [LP DAAC](https://www.earthdata.nasa.gov/centers/lp-daac) tools, services, and data.
 
 Content include in this repository are listed below.
 | Resource | Type | Summary |
@@ -35,6 +35,6 @@ The other guides, tutorials, how-tos and scripts can be accessed in our mission 
 Email: <LPDAAC@usgs.gov>  
 Voice: +1-866-573-3222  
 Organization: Land Processes Distributed Active Archive Center (LP DAAC)¹  
-Website: <https://lpdaac.usgs.gov/>  
+Website: <https://www.earthdata.nasa.gov/centers/lp-daac>  
 
 ¹Work performed under USGS contract G15PD00467 for NASA contract NNG14HH33I. 
