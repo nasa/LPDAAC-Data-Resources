@@ -23,10 +23,11 @@ The other guides, tutorials, how-tos and scripts can be accessed in our mission 
 | Resource Repository | Summary | Services and Tools |
 |----|-----|----|
 |[AppEEARS Data Resources](https://github.com/nasa/AppEEARS-Data-Resources) |How to use the Application for Extracting and Exploring Analysis Ready Samples (AppEEARS) |Tutorials, AppEEARS API, Direct S3 Access |
+|[ECOSTRESS Data](https://github.com/nasa/ECOSTRESS-Data-Resources)|How to find, access, and work with ECOSTRESS data (The ECOsystem Spaceborne Thermal Radiometer Experiment on Space Station)|Tutorials, Scripts, Direct S3 Access|
 |[EMIT Data](https://github.com/nasa/EMIT-Data-Resources) |How to find, access, and work with EMIT data (Earth Surface Mineral Dust Source Investigation)|Tutorials, Scripts, Direct S3 Access |
 |[GEDI Data](https://github.com/nasa/GEDI-Data-Resources) |How to find, access, and work with GEDI data (Global Ecosystem Dynamics Investigation)|Tutorials |
 |[HLS Data](https://github.com/nasa/HLS-Data-Resources)|How to find, access, and work with HLS data (Harmonized Landsat Sentinel-2)|Tutorials, Scripts, Direct S3 Access|
-|[ECOSTRESS Data](https://github.com/nasa/ECOSTRESS-Data-Resources)|How to find, access, and work with ECOSTRESS data (The ECOsystem Spaceborne Thermal Radiometer Experiment on Space Station)|Tutorials, Scripts, Direct S3 Access|
+|[MODIS-VIIRS Data](https://github.com/nasa/MODIS-VIIRS-Data-Resources)|How to find, access, and work with MODIS and VIIRS data|Tutorials|
 |[VITALS](https://github.com/nasa/VITALS)|How to find and work with EMIT and ECOSTRESS data together |Tutorials|
 
 ## Contact Info  
