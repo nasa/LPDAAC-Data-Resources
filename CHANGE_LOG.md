@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 _________________________________________________________________________
+## 2025-08-12
+
+>
+> UPDATED: [earthaccess_introduction.ipynb](earthaccess_introduction.ipynb)
+>
+
 ## 2025-04-17
 
 >
