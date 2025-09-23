@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 _________________________________________________________________________
+## 2025-09-23
+
+>
+> UPDATED: [NASA_LPDAAC_Data_Access_Guide.md](/guides/NASA_LPDAAC_Data_Access_Guide.md) to include AppEEARS webinar link.
+>
+
 ## 2025-08-12
 
 >
