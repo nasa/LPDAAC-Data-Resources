@@ -12,7 +12,7 @@ This guide summarizes the various ways to find and access NASA data hosted at La
 
 ### AppEEARS  
 
-The [Application for Extracting and Exploring Analysis Ready Samples (AppEEARS)](https://appeears.earthdatacloud.nasa.gov/) offers a streamlined way to access, subset, transform, and visualize geospatial data from NASA's Earthdata Cloud and other federal data archives. AppEEARS provides an intuitive graphical user interface (GUI) and a powerful application programming interface (API), allowing users to extract data from multiple collections and return results in a common projection and analysis-ready file format. By using AppEEARS, users can save time by reducing preprocessing needs, receive results in their selected formats with quality information, and minimize data download requirements. To get started, visit the [Available Products](https://appeears.earthdatacloud.nasa.gov/products) page for a complete list of accessible data, explore the [AppEEARS documantation](https://appeears.earthdatacloud.nasa.gov/help) for a step-by-step guide, and check out the [AppEEARS Data Resources](https://github.com/nasa/AppEEARS-Data-Resources) in GitHub for additional guides, tutorials, and resources.
+The [Application for Extracting and Exploring Analysis Ready Samples (AppEEARS)](https://appeears.earthdatacloud.nasa.gov/) offers a streamlined way to access, subset, transform, and visualize geospatial data from NASA's Earthdata Cloud and other federal data archives. AppEEARS provides an intuitive graphical user interface (GUI) and a powerful application programming interface (API), allowing users to extract data from multiple collections and return results in a common projection and analysis-ready file format. By using AppEEARS, users can save time by reducing preprocessing needs, receive results in their selected formats with quality information, and minimize data download requirements. To get started, visit the [Available Products](https://appeears.earthdatacloud.nasa.gov/products) page for a complete list of accessible data, explore the [AppEEARS documantation](https://appeears.earthdatacloud.nasa.gov/help) for a step-by-step guide, and check out the [AppEEARS Data Resources](https://github.com/nasa/AppEEARS-Data-Resources) in GitHub for additional guides, tutorials, and resources. There is also a [webinar](https://www.usgs.gov/media/videos/simplifying-geospatial-data-workflows-nasas-appeears) available from the United States Geological Survey (USGS) Earth Resources Observation and Science (EROS) Center that showcases how to use AppEEARS.
 
 ## Programmatic Access
 
@@ -24,7 +24,7 @@ Visit the tutorials available in [LPDAAC-Data-Resources](https://github.com/nasa
 
 ### AppEEARS API
 
-The [AppEEARS API](https://lpdaacsvc.cr.usgs.gov/appeears/api/) is a RESTful API that allows users to access the same functionality as the AppEEARS web application. The API provides users with the ability to subset, reformat, and visualize data from a variety of federal data archives. The API documentation can be found [here](https://lpdaacsvc.cr.usgs.gov/appeears/api/) and provides step by step instructions on how to work with AppEEARS web application and API. Additionally, [AppEEARS Data Resources Gilthub](https://github.com/nasa/AppEEARS-Data-Resources) includes guides and tutorials on how to utilize AppEEARS.  
+The [AppEEARS API](https://appeears.earthdatacloud.nasa.gov/api/) is a RESTful API that allows users to access the same functionality as the AppEEARS web application. The API provides users with the ability to subset, reformat, and visualize data from a variety of federal data archives. The API documentation can be found [here](https://appeears.earthdatacloud.nasa.gov/api/) and provides step by step instructions on how to work with AppEEARS web application and API. Additionally, [AppEEARS Data Resources GitHub](https://github.com/nasa/AppEEARS-Data-Resources) includes guides and tutorials on how to utilize AppEEARS.  
 
 ### `earthaccess` Python Library  
 
@@ -46,6 +46,6 @@ Email: <LPDAAC@usgs.gov>
 Voice: +1-866-573-3222  
 Organization: Land Processes Distributed Active Archive Center (LP DAAC)¹  
 Website: <https://lpdaac.usgs.gov/>  
-Date last modified: 07-11-2023  
+Date last modified: 09-23-2025  
 
 ¹Work performed under USGS contract G15PD00467 for NASA contract NNG14HH33I.  
