@@ -24,7 +24,7 @@ Visit the tutorials available in [LPDAAC-Data-Resources](https://github.com/nasa
 
 ### AppEEARS API
 
-The [AppEEARS API](https://lpdaacsvc.cr.usgs.gov/appeears/api/) is a RESTful API that allows users to access the same functionality as the AppEEARS web application. The API provides users with the ability to subset, reformat, and visualize data from a variety of federal data archives. The API documentation can be found [here](https://lpdaacsvc.cr.usgs.gov/appeears/api/) and provides step by step instructions on how to work with AppEEARS web application and API. Additionally, [AppEEARS Data Resources GitHub](https://github.com/nasa/AppEEARS-Data-Resources) includes guides and tutorials on how to utilize AppEEARS.  
+The [AppEEARS API](https://appeears.earthdatacloud.nasa.gov/api/) is a RESTful API that allows users to access the same functionality as the AppEEARS web application. The API provides users with the ability to subset, reformat, and visualize data from a variety of federal data archives. The API documentation can be found [here](https://appeears.earthdatacloud.nasa.gov/api/) and provides step by step instructions on how to work with AppEEARS web application and API. Additionally, [AppEEARS Data Resources GitHub](https://github.com/nasa/AppEEARS-Data-Resources) includes guides and tutorials on how to utilize AppEEARS.  
 
 ### `earthaccess` Python Library  
 
