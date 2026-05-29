@@ -28,7 +28,7 @@ files = args.files        # Define file(s) to download from the LP DAAC Data Poo
 # Create a list of files to download based on input type of files above
 if files.endswith('.txt') or files.endswith('.csv'):
     with open(files, 'r') as f:
-        fileList = f.read().splitlines() # If input is text/csv file with file URLs
+     fileList = [line.strip() for line in f.read().splitlines() if line.strip()] # If input is text/csv file with file URLs
     
     # fileList = open(files, 'r').readlines().splitlines()  
 elif isinstance(files, str):
