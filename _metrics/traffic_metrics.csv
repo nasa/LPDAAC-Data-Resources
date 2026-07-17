@@ -2971,3 +2971,17 @@ date,repository,views,unique views,clones,unique clones
 2026-07-12,nasa/VITALS,1,1,4,3
 2026-07-13,nasa/VITALS,22,5,16,7
 2026-07-14,nasa/VITALS,72,7,58,25
+2026-07-15,nasa/AppEEARS-Data-Resources,6,4,11,9
+2026-07-16,nasa/AppEEARS-Data-Resources,14,4,6,4
+2026-07-15,nasa/ECOSTRESS-Data-Resources,14,9,4,4
+2026-07-16,nasa/ECOSTRESS-Data-Resources,2,2,4,3
+2026-07-15,nasa/EMIT-Data-Resources,43,16,8,7
+2026-07-16,nasa/EMIT-Data-Resources,19,15,6,5
+2026-07-15,nasa/GEDI-Data-Resources,16,4,4,4
+2026-07-16,nasa/GEDI-Data-Resources,27,6,3,2
+2026-07-15,nasa/HLS-Data-Resources,8,7,5,5
+2026-07-16,nasa/HLS-Data-Resources,7,6,4,3
+2026-07-15,nasa/LPDAAC-Data-Resources,28,7,9,7
+2026-07-16,nasa/LPDAAC-Data-Resources,24,7,12,7
+2026-07-15,nasa/VITALS,26,3,11,10
+2026-07-16,nasa/VITALS,37,16,5,4
