@@ -27,7 +27,7 @@ mamba env create -f setup/environment.yml
 Alternatively, if you would prefer to have build the environment by listing out packages, the list below can be used.
 
 ```
-mamba create -n lpdaac -c conda-forge --yes python=3.12 gdal fiona hvplot geoviews rioxarray rasterio jupyter geopandas earthaccess jupyter_bokeh h5py h5netcdf spectral scikit-image jupyterlab seaborn dask ray-default pystac-client odc-stac pyresample libgdal-hdf4 harmony-py
+mamba create -n lpdaac -c conda-forge --yes python=3.12 gdal fiona hvplot geoviews rioxarray rasterio jupyter geopandas earthaccess jupyter_bokeh h5py h5netcdf spectral scikit-image jupyterlab seaborn dask ray-default pystac-client odc-stac pyresample libgdal-hdf4 harmony-py cartopy<0.26
 ```
 
 Next, activate the environment.

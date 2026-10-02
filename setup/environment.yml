@@ -26,3 +26,4 @@ dependencies:
   - scikit-image
   - seaborn
   - spectral
+  - cartopy<0.26
